@@ -2,7 +2,23 @@
 
 
 class Base {
+	
+	public function __construct($obj = null)
+	{ 
+		if($obj){
 
+			foreach ($this->fields as $key => $value) {		
+			$this->{$key} = $obj->{$key};
+
+			}
+		}else{
+			$this->{$this->id}= null;
+		}
+		
+
+
+
+	}
 
 	public function getSQL(){
 		$idKey= $this->id;

@@ -24,36 +24,14 @@ public $deleted;
 
 	public function getContents(){
 
-		return $this->get();
-		// global $DB;
-		// 	$sql= "SELECT * FROM contents";
-		// $DB->execute($sql);
-		// if($DB->getNumRows() == null){
-		// 	return null;
-		// }
-		// $array=array();
-		// while($obj = $DB->getNextObject()){
-		// 	$array[]=new Content($obj);
-		// }
-		// return $array;
+		return $this->get();		
 
 	}
 
 	public function getContentById($id){
 
 		return $this->getById($id);
-		// global $DB;
-		// 	$sql= "SELECT * FROM contents";
-		// $DB->execute($sql);
-		// if($DB->getNumRows() == null){
-		// 	return null;
-		// }
-		// $array=array();
-		// while($obj = $DB->getNextObject()){
-		// 	$array[]=new Content($obj);
-		// }
-		// return $array;
-
+		
 	}
 
 
@@ -61,16 +39,16 @@ public $deleted;
 
 	public function __construct($obj = null)
 	{
+		 parent::__construct();
 
-
-		if($obj){
-				$this->content_id = $obj->content_id;
-				$this->content_key = $obj->content_key;
-				$this->content_value = $obj->content_value;	
-				$this->deleted = $obj->deleted;
-		}else{
-			$this->content_id = null;
-		}
+		// if($obj){
+		// 		$this->content_id = $obj->content_id;
+		// 		$this->content_key = $obj->content_key;
+		// 		$this->content_value = $obj->content_value;	
+		// 		$this->deleted = $obj->deleted;
+		// }else{
+		// 	$this->content_id = null;
+		// }
 
 	}//__construct
 
