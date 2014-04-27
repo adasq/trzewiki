@@ -14,7 +14,7 @@ class DataBase{
 // Host:    localhost 
 // Nazwa użytkownika:    szmitas_trzewiki 
 // Hasło:    trzewiki123
-
+//testowo
 
 	private $transactionError=false;
 
