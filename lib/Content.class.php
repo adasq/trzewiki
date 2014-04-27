@@ -8,10 +8,10 @@ class Content extends Base
 public $id = "content_id";
 public $table= "contents";
 public $fields = array(
-"content_id" => "int",
-"content_key" => "string",
-"content_value" => "string",
-"deleted" => "int" 
+	"content_id" => "int",
+	"content_key" => "string",
+	"content_value" => "string",
+	"deleted" => "int" 
 );
 
 
@@ -22,25 +22,39 @@ public $deleted;
 
 
 
-	public static function getContents(){
+	public function getContents(){
 
-	
-
-		global $DB;
-			$sql= "SELECT * FROM contents";
-		$DB->execute($sql);
-		if($DB->getNumRows() == null){
-			return null;
-		}
-		$array=array();
-		while($obj = $DB->getNextObject()){
-			$array[]=new Content($obj);
-		}
-		return $array;
+		return $this->get();
+		// global $DB;
+		// 	$sql= "SELECT * FROM contents";
+		// $DB->execute($sql);
+		// if($DB->getNumRows() == null){
+		// 	return null;
+		// }
+		// $array=array();
+		// while($obj = $DB->getNextObject()){
+		// 	$array[]=new Content($obj);
+		// }
+		// return $array;
 
 	}
 
+	public function getContentById($id){
 
+		return $this->getById($id);
+		// global $DB;
+		// 	$sql= "SELECT * FROM contents";
+		// $DB->execute($sql);
+		// if($DB->getNumRows() == null){
+		// 	return null;
+		// }
+		// $array=array();
+		// while($obj = $DB->getNextObject()){
+		// 	$array[]=new Content($obj);
+		// }
+		// return $array;
+
+	}
 
 
 	//----------------------------------------------------------------------------------------------------------------------

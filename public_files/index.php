@@ -48,12 +48,19 @@ if(strpos( $_SERVER['REQUEST_URI'] , 'index.php')){
 //echo $content[0]->toString();
  //$content[0]->save();
 
+// $content = new Content();
+// $content->content_key = "key heh";
+// $content->content_value = "val heh";
+// $content->deleted = 0;
+// $content->save();
+ 
 $content = new Content();
-$content->content_key = "key heh";
-$content->content_value = "val heh";
-$content->deleted = 0;
-$content->save();
-
+$content= $content->getContentById(8);
+if($content){
+	print_r($content->toString());
+}else{
+	echo "lipa";
+}
 	$template->assign('CONTENT','home');
 	$template->assign('PAGE_TITLE','Strona Główna');
 	

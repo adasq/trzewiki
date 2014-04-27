@@ -54,12 +54,33 @@ class Base {
 
 	}
 
+	public function get($where = ""){
+		 
+		global $DB;
+		echo $sql = "SELECT * FROM ".$this->table." ".$where;
+		$DB->execute($sql);
+		if($DB->getNumRows() == null){
+			return null;
+		}
+		$array=array();
+		$className = get_called_class();
+		while($obj = $DB->getNextObject()){
+			$array[]=new $className($obj);
+		}
 
+		return $array;
+	}
+
+	public function getById($id){		 
+		 $item=  $this->get("WHERE ".$this->id." = ".$id);
+		 if($item){
+		 	return $item[0];
+		 }
+	}
 
 
 	public function toString(){
- 
-			
+ 	
 	   $className = get_called_class();
 
 	   $fields = array();
