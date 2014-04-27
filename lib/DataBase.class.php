@@ -18,8 +18,7 @@ class DataBase{
 
 	private $transactionError=false;
 
-	function __construct() {
-		echo "cipa!";
+	function __construct() {	 
 		$this->db = mysql_connect($this->host,$this->login,$this->password);// or die("Błąd podczas połączenia z bazą danych.");
 		mysql_select_db($this->dbname,$this->db);// or die('Błąd podczas wybierania bazy danych.');
 		$this->lastResult=null;

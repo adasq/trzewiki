@@ -44,9 +44,16 @@ if(strpos( $_SERVER['REQUEST_URI'] , 'index.php')){
 
 
 
-$content = Content::getContents();
-echo $content[0]->toString();
- 
+//$content = Content::getContents();
+//echo $content[0]->toString();
+ //$content[0]->save();
+
+$content = new Content();
+$content->content_key = "key heh";
+$content->content_value = "val heh";
+$content->deleted = 0;
+$content->save();
+
 	$template->assign('CONTENT','home');
 	$template->assign('PAGE_TITLE','Strona Główna');
 	

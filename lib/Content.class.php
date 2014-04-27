@@ -5,6 +5,16 @@
 class Content extends Base
 {
 
+public $id = "content_id";
+public $table= "contents";
+public $fields = array(
+"content_id" => "int",
+"content_key" => "string",
+"content_value" => "string",
+"deleted" => "int" 
+);
+
+
 public $content_id;
 public $content_key;
 public $content_value;	
@@ -14,13 +24,11 @@ public $deleted;
 
 	public static function getContents(){
 
+	
+
 		global $DB;
-
 			$sql= "SELECT * FROM contents";
-		
-
 		$DB->execute($sql);
-
 		if($DB->getNumRows() == null){
 			return null;
 		}
@@ -28,7 +36,6 @@ public $deleted;
 		while($obj = $DB->getNextObject()){
 			$array[]=new Content($obj);
 		}
-
 		return $array;
 
 	}
@@ -40,11 +47,15 @@ public $deleted;
 
 	public function __construct($obj = null)
 	{
+
+
 		if($obj){
 				$this->content_id = $obj->content_id;
 				$this->content_key = $obj->content_key;
 				$this->content_value = $obj->content_value;	
 				$this->deleted = $obj->deleted;
+		}else{
+			$this->content_id = null;
 		}
 
 	}//__construct
@@ -679,25 +690,6 @@ public $deleted;
 
 	}
 
-	public function save(){
-
-		global $DB;
-		if($this->user_id){
-			$sql= "UPDATE USERS SET username='".$this->username."', mail='".$this->mail."', avatar= '".$this->avatar."', password='".$this->password."', is_active= '".$this->is_active."' where user_id=".$this->user_id." ";
-			$DB->execute($sql);
-		}else{
-			$sql= "INSERT INTO USERS VALUES (null,'".$this->username."', '".$this->mail."', '".$this->password."', '".$this->avatar."' , '".$this->reg_date."', '".$this->is_active."' )";
-			$DB->execute($sql);
-			$this->user_id= $DB->getLastId();
-				
-			$hash=getPasswordHash($this->username.generateRandomString(5));
-				
-			$sql= "INSERT INTO users_config VALUES (null, ".$this->user_id." ,'".$hash."', null ,'".$this->reg_date."' )";
-			$DB->execute($sql);
-		}
-
-
-	}//save
 
 
 	public function setUserAsInactive()
