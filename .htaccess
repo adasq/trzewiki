@@ -1,0 +1,11 @@
+Options FollowSymLinks
+RewriteEngine On
+
+RewriteRule ^home$ public_files/index.php [NC]
+RewriteRule ^about$ public_files/about.php [NC]
+RewriteRule ^buy$ public_files/buy.php [NC]
+
+ErrorDocument 404 "http://localhost/testy/home"
+ 
+ 
+ 
