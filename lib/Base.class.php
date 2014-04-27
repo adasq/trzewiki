@@ -4,20 +4,13 @@
 class Base {
 	
 	public function __construct($obj = null)
-	{ 
-		if($obj){
-
+	{ 		if($obj){
 			foreach ($this->fields as $key => $value) {		
 			$this->{$key} = $obj->{$key};
-
 			}
 		}else{
 			$this->{$this->id}= null;
 		}
-		
-
-
-
 	}
 
 	public function getSQL(){
@@ -58,11 +51,11 @@ class Base {
 		$update = $sqls["update"];
 		 
 		if($this->{$this->id}){
-			echo $update;
+			//echo $update;
 			$DB->execute($update);
 
 		}else{
-			echo $insert;
+			//echo $insert;
 			$DB->execute($insert);
 
 		}
@@ -80,7 +73,7 @@ class Base {
 		}
 		$array=array();
 		$className = get_called_class();
-		while($obj = $DB->getNextObject()){
+		while($obj = $DB->getNextObject()){			
 			$array[]=new $className($obj);
 		}
 
@@ -98,17 +91,14 @@ class Base {
 	public function toString(){
  	
 	   $className = get_called_class();
-
 	   $fields = array();
-	   foreach($this as $key => $value) {
-	   		if($key != "fields"){
-	   			 $fields[] = "<b>$key</b>: $value";
-	   		}
-           
+	   foreach($this->fields as $key => $value) {
+	   			 $val = $this->{$key};
+	   			 $fields[] = "<b>$key</b>: $val";
        }
        $fieldsString = join(" ",$fields);
 
-       return "<b>$className</b>: [$fieldsString];<br>";
+       return "<br/><b>$className</b>: [$fieldsString];<br>";
 
 	}
 }

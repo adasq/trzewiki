@@ -5,20 +5,19 @@
 class Content extends Base
 {
 
-public $id = "content_id";
-public $table= "contents";
-public $fields = array(
-	"content_id" => "int",
-	"content_key" => "string",
-	"content_value" => "string",
-	"deleted" => "int" 
-);
+	public $id = "content_id";
+	public $table= "contents";
+	public $fields = array(
+		"content_id" => "int",
+		"content_key" => "string",
+		"content_value" => "string",
+		"deleted" => "int" 
+	);
 
-
-public $content_id;
-public $content_key;
-public $content_value;	
-public $deleted;
+	public $content_id;
+	public $content_key;
+	public $content_value;	
+	public $deleted;
 
 
 
@@ -35,25 +34,16 @@ public $deleted;
 	}
 
 
-	//----------------------------------------------------------------------------------------------------------------------
+	
 
 	public function __construct($obj = null)
 	{
-		 parent::__construct();
+		 parent::__construct($obj);
 
-		// if($obj){
-		// 		$this->content_id = $obj->content_id;
-		// 		$this->content_key = $obj->content_key;
-		// 		$this->content_value = $obj->content_value;	
-		// 		$this->deleted = $obj->deleted;
-		// }else{
-		// 	$this->content_id = null;
-		// }
+	}
 
-	}//__construct
-
-	//----------------------------------------------------------------------------------------------------------------------
-
+//----------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------
 	public function last_activity($date = null){
 		global $DB;
 		if(!$date){
