@@ -22,10 +22,12 @@ include(LIB_DIR.'Validator.class.php');
 include(LIB_DIR.'recaptchalib.php');
 include(CONFIG_DIR.'config.php');
 require LIB_DIR.'Benchmark/Timer.php';
+
+
 //=======================================================================================================
 
 $template= new Template();
- 
+
 $template->configLoad('lang.conf', null); 
 
 if(strpos( $_SERVER['REQUEST_URI'] , 'index.php')){

@@ -21,12 +21,18 @@ include(LIB_DIR.'Template.class.php');
 include(LIB_DIR.'Validator.class.php');
 include(LIB_DIR.'recaptchalib.php');
 include(CONFIG_DIR.'config.php');
-require LIB_DIR.'Benchmark/Timer.php';
+require LIB_DIR.'Benchmark/Timer.php'; 
+
+
+include(LIB_DIR.'Base.class.php');
+include(LIB_DIR.'Content.class.php');
+
 //=======================================================================================================
+$DB = new DataBase();
+
 
 $template= new Template();
  
-
 $template->configLoad('lang.conf', null); 
 
 
@@ -36,6 +42,11 @@ if(strpos( $_SERVER['REQUEST_URI'] , 'index.php')){
 }
 
 
+
+
+$content = Content::getContents();
+echo $content[0]->toString();
+ 
 	$template->assign('CONTENT','home');
 	$template->assign('PAGE_TITLE','Strona Główna');
 	

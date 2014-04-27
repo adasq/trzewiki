@@ -3,18 +3,25 @@
 
 class DataBase{
 
-	private $host='localhost';
-	private $login='root';
-	private $password='';
-	private $dbname='asher';
+	private $host='ubuntu-pomoc.org';
+	private $login='szmitas_trzewiki@ubuntu-pomoc.org';
+	private $password='trzewiki123';
+	private $dbname='szmitas_trzewiki';
 	private $db;
 	private $lastResult;
+ 
+//  Baza danych:    szmitas_trzewiki 
+// Host:    localhost 
+// Nazwa użytkownika:    szmitas_trzewiki 
+// Hasło:    trzewiki123
+
 
 	private $transactionError=false;
 
 	function __construct() {
-		$this->db = mysql_connect("localhost","root","") or die("Błąd podczas połączenia z bazą danych.");
-		mysql_select_db($this->dbname,$this->db) or die('Błąd podczas wybierania bazy danych.');
+		echo "cipa!";
+		$this->db = mysql_connect($this->host,$this->login,$this->password);// or die("Błąd podczas połączenia z bazą danych.");
+		mysql_select_db($this->dbname,$this->db);// or die('Błąd podczas wybierania bazy danych.');
 		$this->lastResult=null;
 	}
 
