@@ -1,0 +1,49 @@
+<?php
+/**
+ * USER
+ */
+class Media extends Base
+{
+
+	public $id = "media_id";
+	public $table= "media";
+	public $fields = array(
+		"media_id" => "int", 
+		"product_id" => "int",		
+		"file_path" => "string", 
+		"type" => "string", 
+		"deleted" => "int"
+	);
+	
+public $product_id;
+public $media_id; 
+public $file_path; 
+public $type; 
+public $deleted;
+
+
+
+	public function getMedia(){
+
+		return $this->get();		
+
+	}
+
+	public function getMediaById($id){
+
+		return $this->getById($id);
+		
+	}
+
+
+	
+
+	public function __construct($obj = null)
+	{
+		 parent::__construct($obj);
+
+	}
+	
+	//----------------------------------------------------------------------------------------------------------------------
+}//class
+?>

@@ -3,9 +3,12 @@
 
 class DataBase{
 
-	private $host='ubuntu-pomoc.org';
-	private $login='szmitas_trzewiki@ubuntu-pomoc.org';
-	private $password='trzewiki123';
+	// private $host='ubuntu-pomoc.org';
+	// private $login='szmitas_trzewiki@ubuntu-pomoc.org';
+	// private $password='trzewiki123';
+	private $host='localhost';
+	private $login='root';
+	private $password='';
 	private $dbname='szmitas_trzewiki';
 	private $db;
 	private $lastResult;
@@ -19,8 +22,8 @@ class DataBase{
 	private $transactionError=false;
 
 	function __construct() {	 
-		$this->db = mysql_connect($this->host,$this->login,$this->password);// or die("Błąd podczas połączenia z bazą danych.");
-		mysql_select_db($this->dbname,$this->db);// or die('Błąd podczas wybierania bazy danych.');
+		$this->db = mysql_connect($this->host,$this->login,$this->password) or die("Błąd podczas połączenia z bazą danych.");
+		mysql_select_db($this->dbname,$this->db) or die('Błąd podczas wybierania bazy danych.');
 		$this->lastResult=null;
 	}
 

@@ -63,10 +63,24 @@ class Base {
 
 	}
 
-	public function get($where = ""){
+	public function get($where = null){
 		 
-		global $DB;
-		echo $sql = "SELECT * FROM ".$this->table." ".$where;
+		global $DB; 
+
+		if($where){
+			if(substr($where, 0, 5) == "WHERE"){
+				$where.= " AND deleted = 0";
+			}else{
+				$where.= " WHERE deleted = 0";
+			}
+
+		}else{
+			$where="";
+		}
+
+
+		$sql = "SELECT * FROM ".$this->table." ".$where;
+
 		$DB->execute($sql);
 		if($DB->getNumRows() == null){
 			return null;
@@ -85,6 +99,38 @@ class Base {
 		 if($item){
 		 	return $item[0];
 		 }
+	}
+
+
+	public function getByColumn($column, $val){		
+		if(!array_key_exists($column, $this->fields)){
+			return null; 
+		}
+		$val = ($this->fields[$column] === "string")?("'".$val."'"):$val;
+		$sql= "WHERE ".$column." = ".$val;
+		 $item=  $this->get($sql);
+		 if($item){
+		 	return $item[0];
+		 }
+	}
+	public function getByColumna($column, $val){		
+		if(!array_key_exists($column, $this->fields)){
+			return null; 
+		}
+		$val = ($this->fields[$column] === "string")?("'".$val."'"):$val;
+		$sql= "WHERE ".$column." = ".$val;
+		 $item=  $this->get($sql);	
+		 	return $item;
+	
+	}
+	public function setData($post){
+		foreach($this->fields as $key => $value) {	
+	 
+			 if($key === $this->id || !isset($post[$key])){
+			 	continue;
+			 }
+	   		 $this->{$key} = $post[$key];	   			
+       }
 	}
 
 
