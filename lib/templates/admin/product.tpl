@@ -1,3 +1,14 @@
+<div class="page-header">
+  <h1>Produkty <small>
+   {if $product->product_id}
+      Edytuj dane produktu
+   {else}
+   Dodaj nowy produkt
+     {/if}
+  </small></h1>
+</div>
+
+
 {if isset($alert)}
 <div class="alert alert-{$alert->type} alert-dismissable">
   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
