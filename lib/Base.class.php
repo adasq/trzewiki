@@ -9,13 +9,20 @@ class Base {
 			$this->{$key} = $obj->{$key};
 			}
 		}else{
-			$this->{$this->id}= null;
+			if($this->id){
+					$this->{$this->id}= null;
+			}
+			
 		}
 	}
 
 	public function getSQL(){
 		$idKey= $this->id;
-		$idVal= $this->{ $this->id };
+		if($idKey){
+		$idVal= $this->{$this->id};
+		}else{
+			$idVal=null;
+		}
 		$table = $this->table;
 		$subInsert = "";
 		$subUpdate = "";
@@ -37,30 +44,40 @@ class Base {
 		  $subInsert= substr( $subInsert, 0, -2);
 		  $subUpdate= substr( $subUpdate, 1, -2);
 		  $insert = "INSERT INTO $table VALUES ($subInsert);";
-		  $update = "UPDATE $table SET $subUpdate WHERE $idKey = $idVal";
+
+		  $update = ($idVal)?"UPDATE $table SET $subUpdate WHERE $idKey = $idVal":"";
 
 		  return array("insert" => $insert, "update" => $update);
 	}
 
 
 	public function save(){
-		global $DB;
-			
+		global $DB;		
 		$sqls = $this->getSQL();		
 		$insert = $sqls["insert"];
 		$update = $sqls["update"];
 		 
-		if($this->{$this->id}){
-			echo $update;
-			$DB->execute($update);
 
+		if($this->id){
+			if($this->{$this->id}){
+				echo $update;
+				$DB->execute($update);
+
+			}else{
+				echo $insert;
+				$DB->execute($insert);
+			}
 		}else{
-			echo $insert;
-			$DB->execute($insert);
-
+			
 		}
 
 
+	}
+
+
+	public function delete(){
+		$this->deleted = 1;
+		$this->save();
 	}
 
 	public function get($where = null){

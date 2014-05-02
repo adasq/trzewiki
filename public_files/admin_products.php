@@ -5,17 +5,18 @@ include(LIB_DIR.'Alert.class.php');
 include(LIB_DIR.'Product.class.php');
 include(LIB_DIR.'Manufacturer.class.php');
 include(LIB_DIR.'Media.class.php');
+include(LIB_DIR.'ProductType.class.php');
+include(LIB_DIR.'Type.class.php');
 
 function edit(){
 
 	global $template;
 
-
 	$manufacturer = new Manufacturer();
 	$manufacturers= $manufacturer->getManufacturers();
 
-
- 
+	$type = new Type();
+	$types= $type->getTypes();
 
 	if(isset($_GET["id"])){
 		$id = $_GET["id"];
@@ -26,6 +27,9 @@ function edit(){
 			$product= new Product();  
 			$product= $product->getProductById($id);
 			if($product){
+
+			$pt = new ProductType();
+			$pt = $pt->getByColumna("product_id", $product->product_id);
 
 			if( isset($_POST["product_id"]) ){
 
@@ -39,6 +43,8 @@ function edit(){
 			}
 			
 			$template->assign('manufacturers', $manufacturers);
+			$template->assign('productTypes', $pt);
+			$template->assign('types', $types);
 			$template->assign('medias', $medias);
 			$template->assign('product', $product);
 			$template->assign('CONTENT','admin/product');

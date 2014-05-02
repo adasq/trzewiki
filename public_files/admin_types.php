@@ -3,6 +3,8 @@
 include('../lib/init.php');
 include(LIB_DIR.'Alert.class.php');
 include(LIB_DIR.'Type.class.php');
+include(LIB_DIR.'Product.class.php');
+include(LIB_DIR.'ProductType.class.php');
 
 
 function edit(){
@@ -60,15 +62,61 @@ function neww(){
 	
 }//edit
 function home(){
-
 	global $template; 
 	$type= new Type();   
 	$template->assign('types', $type->getTypes());
 	$template->assign('CONTENT','admin/types');
 
+}
+function add(){
+	global $template; 
+
+	$productId = $_GET["pid"];
+	$typeId = $_GET["tid"];
+ 	
+	// $pt = new ProductType();
+	// $pt = $pt->getByColumna("product_id", $productId);
+	// print_r($pt);
+
+	// exit(1);
+ 	$pt = new ProductType();
+ 	$pt->deleted = 0;
+	$pt->type_id= $typeId;
+	$pt->product_id= $productId;
+	$pt->save();
+	header('Location: '.$_SERVER["HTTP_REFERER"]);
+
+	// $type= new Type();   
+	// $template->assign('types', $type->getTypes());
+	// $template->assign('CONTENT','admin/types');
 
 }
+function remove(){
+	global $template; 
 
+	$productId = $_GET["pid"];
+	$typeId = $_GET["tid"];
+ 	
+	$pt = new ProductType();
+	$pt = $pt->getByColumna("product_id", $productId);
+	if($pt){
+			foreach ($pt as $productType) {
+					 echo $productType->toString();
+					 if($typeId === $productType->type_id){
+					 	$productType->delete();
+					 }
+				} 
+	}else{
+		echo ':D';
+	}
+	
+
+	header('Location: '.$_SERVER["HTTP_REFERER"]);
+	// $type= new Type();   
+	// $template->assign('types', $type->getTypes());
+	// $template->assign('CONTENT','admin/types');
+
+}
 //=======================================================================================================
 	global $template;
 	$template->assign("current", "types");
@@ -81,7 +129,13 @@ function home(){
 	break;	
 	case "new":
 		neww();
-	break;	
+	break;
+	case "add":
+		add();
+		break;	
+	case "remove":
+		remove();		
+	break;		
 	};
 	$template->assign('PAGE_TITLE','admin');
 	$template->display('admin_template.tpl');

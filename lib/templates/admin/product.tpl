@@ -68,14 +68,12 @@
 </div></div>
 
   {if $product->product_id}
-<div class="panel panel-default">
-  <div class="panel-body">
-  <form  method="GET" action="{#BASE_URL#}/admin/media/new/{$product->product_id}">
-    <button type="submit" class="btn btn-success">Dodaj media </button>
-</form> 
-  </div>
-</div>
 
+<div class="panel panel-default">
+  <div class="panel-heading">
+Media:
+  </div>
+  <div class="panel-body">
 <div class="panel panel-default">
   <div class="panel-body">
   {foreach $medias as $media}  
@@ -93,15 +91,75 @@
   </div>
 </div>
   {/foreach}
-
-
   </div>
 </div>
+  </div></div>
+
+<!-- ======================================================== -->
+  <div class="panel panel-default">
+  <div class="panel-body">
+  <form  method="GET" action="{#BASE_URL#}/admin/media/new/{$product->product_id}">
+    <button type="submit" class="pull-right btn btn-success">Dodaj media </button>
+</form> 
+  </div>
+</div>
+<!-- ======================================================== -->
+
+
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+Cechy:
+  </div>
+  <div class="panel-body">
+  <ul class="list-group">
+  {foreach $productTypes as $pt} 
+{foreach $types as $type}  
+  {if $pt->type_id eq $type->type_id}
+   <li class="list-group-item"> 
+  <form  method="GET" action="{#BASE_URL#}/public_files/admin_types.php">
+
+    <input type="hidden" name="pid" value="{$product->product_id}">
+     <input type="hidden" name="action" value="remove">
+       <input type="hidden" name="tid" value="{$type->type_id}">
+    <div class="form-group">   
+    <label> {$type->type_name} </label>  
+    <button type="submit" class="pull-right btn btn-danger">Usuń</button>
+      </div>
+</form> 
+</li>
+  {/if}{/foreach}{/foreach}
+
+  </ul>
+  </div>
+</div>
+<!-- ======================================================== -->
+
+<div class="panel panel-default">
+  <div class="panel-body">
+  <form  method="GET" action="{#BASE_URL#}/public_files/admin_types.php">
+  <div class="form-group">
+    <label>Dodaj typ:</label>
+    <input type="hidden" name="pid" value="{$product->product_id}">
+     <input type="hidden" name="action" value="add">
+<select class="form-control" name="tid" >
+  {foreach $types as $type} 
+    <option value="{$type->type_id}">{$type->type_name}</option>
+  {/foreach}
+</select>
+  </div>
+    <button type="submit" class="pull-right btn btn-success">Dodaj typ </button>
+</form> 
+  </div>
+</div>
+
+
+
+
+
+
+
 {/if}
-
-
-
-
 </div>
 
 
