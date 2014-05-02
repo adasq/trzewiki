@@ -44,6 +44,12 @@
     <li class="{if $current eq 'sizes'}active{/if}"><a href="{#BASE_URL#}/admin/sizes">
       <span class="glyphicon glyphicon-fullscreen"></span> Rozmiary
     </a></li>  
+        <li class="{if $current eq 'items'}active{/if}"><a href="{#BASE_URL#}/admin/items">
+      <span class="glyphicon glyphicon-plane"></span> Buty
+    </a></li>  
+        <li class="{if $current eq 'types'}active{/if}"><a href="{#BASE_URL#}/admin/types">
+      <span class="glyphicon glyphicon-plane"></span> Typy
+    </a></li>      
 </ul> 
  
 

@@ -33,8 +33,7 @@ function edit(){
 			}//!content
 		}//GET id
 	$template->assign('CONTENT','admin/manufacturer');
-	$template->assign('PAGE_TITLE','admin');
-	$template->display('admin_template.tpl');
+ 
 	
 }//edit
 function neww(){
@@ -61,8 +60,7 @@ function neww(){
 
 
 	$template->assign('CONTENT','admin/manufacturer');
-	$template->assign('PAGE_TITLE','admin');
-	$template->display('admin_template.tpl');
+ 
 	
 }//edit
 function home(){
@@ -71,12 +69,12 @@ function home(){
 	$manufacturer= new Manufacturer();  
 	$template->assign('manufacturers', $manufacturer->getManufacturers());
 	$template->assign('CONTENT','admin/manufacturers');
-	$template->assign('PAGE_TITLE','admin');
-	$template->display('admin_template.tpl');
+
 
 }
 
 //=======================================================================================================
+	global $template;
 	$template->assign("current", "manufacturers");
 	switch($_GET['action']){
 	case "edit":
@@ -89,7 +87,8 @@ function home(){
 		neww();
 	break;	
 	};
-
+	$template->assign('PAGE_TITLE','admin');
+	$template->display('admin_template.tpl');
 
 
 ?>

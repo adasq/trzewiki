@@ -51,11 +51,11 @@ class Base {
 		$update = $sqls["update"];
 		 
 		if($this->{$this->id}){
-			//echo $update;
+			echo $update;
 			$DB->execute($update);
 
 		}else{
-			//echo $insert;
+			echo $insert;
 			$DB->execute($insert);
 
 		}

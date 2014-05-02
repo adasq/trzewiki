@@ -59,7 +59,7 @@ global $template, $DB;
 					$size->setData($_POST);	
 					$size->size_id=null;
 					$size->deleted=0;	
-					echo $size->toString();		 
+					//echo $size->toString();		 
 					$size->save();
 
 			$template->assign('alert', new Alert("success", "Pomyślnie dodano rozmiar. Kliknij 
