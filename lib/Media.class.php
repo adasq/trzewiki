@@ -1,49 +1,50 @@
 <?php
+
 /**
  * USER
  */
-class Media extends Base
-{
+class Media extends Base {
 
-	public $id = "media_id";
-	public $table= "media";
-	public $fields = array(
-		"media_id" => "int", 
-		"product_id" => "int",		
-		"file_path" => "string", 
-		"type" => "string", 
-		"deleted" => "int"
-	);
-	
-public $product_id;
-public $media_id; 
-public $file_path; 
-public $type; 
-public $deleted;
+    public $id = "media_id";
+    public $table = "media";
+    public $fields = array(
+        "media_id" => "int",
+        "product_id" => "int",
+        "file_path" => "string",
+        "type" => "string",
+        "deleted" => "int"
+    );
+    public $product_id;
+    public $media_id;
+    public $file_path;
+    public $type;
+    public $deleted;
 
+    public function getMedia() {
 
+        return $this->get();
+    }
 
-	public function getMedia(){
+    public function getMediaById($id) {
 
-		return $this->get();		
+        return $this->getById($id);
+    }
 
-	}
+    public function __construct($obj = null) {
+        parent::__construct($obj);
+    }
 
-	public function getMediaById($id){
+    /*     * **** Z POZDROWIENIAMI DLA ADAMA ***** */
 
-		return $this->getById($id);
-		
-	}
+    public static function finder() {
+        return new self ();
+    }
 
+    public function findByProductID($product_id) {
+        return parent::find("product_id = :product_id", array(":product_id" => $product_id));
+    }
 
-	
+}
 
-	public function __construct($obj = null)
-	{
-		 parent::__construct($obj);
-
-	}
-	
-	//----------------------------------------------------------------------------------------------------------------------
-}//class
+//class
 ?>

@@ -50,5 +50,4 @@ RewriteRule ^admin/login$ public_files/admin_login.php [NC]
 RewriteRule ^admin/logout$ public_files/admin_login.php?logout [NC]
 
 
-ErrorDocument 404 "http://localhost/trzewiki/home"
   
