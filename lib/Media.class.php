@@ -41,7 +41,11 @@ class Media extends Base {
     }
 
     public function findByProductID($product_id) {
-        return parent::find("product_id = :product_id", array(":product_id" => $product_id));
+        return parent::find("product_id = :product_id AND deleted = 0", array(":product_id" => $product_id));
+    }
+
+    public function findAllByProductID($product_id) {
+        return parent::findAll("product_id = :product_id AND deleted = 0", array(":product_id" => $product_id));
     }
 
 }

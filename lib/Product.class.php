@@ -4,7 +4,7 @@
  * USER
  */
 class Product extends Base {
-
+    
     public $id = "product_id";
     public $table = "products";
     public $fields = array(
@@ -13,6 +13,7 @@ class Product extends Base {
         "product_no" => "string",
         "name" => "string",
         "description" => "string",
+        "status" => "string",
         "deleted" => "int"
     );
     public $product_id;
@@ -20,7 +21,13 @@ class Product extends Base {
     public $product_no;
     public $name;
     public $description;
+    public $status;
     public $deleted;
+    
+    const STATUS_NEW = 'new';
+    const STATUS_RECOMMENDED = 'recommended';
+    const STATUS_SALE = 'sale';
+    const STATUS_PROMOTION = 'promotion';
 
     public function getProducts() {
 

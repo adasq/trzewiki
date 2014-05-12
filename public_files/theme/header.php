@@ -9,14 +9,11 @@ require_once 'config.php';
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <title>ProSzius.pl - Strona główna</title> 
 
-        <script type="text/javascript" src="./lib/jquery/jquery-1.10.2.min.js"></script> 
-        <link rel="stylesheet" href="./lib/bootstrap/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="./lib/bootstrap/css/bootstrap-theme.min.css" />
-        <link rel="stylesheet" href="./public_files/theme/style.css" />
-        <script src="./lib/bootstrap/js/bootstrap.min.js"></script>
-
-        <link type='text/css' rel="stylesheet" href="{#BASE_URL#}/public_files/css/main.css" />
-        <script type="text/javascript" src="{#BASE_URL#}/public_files/js/main.js"></script>
+        <script type="text/javascript" src="http://localhost/trzewiki/lib/jquery/jquery-1.10.2.min.js"></script> 
+        <link rel="stylesheet" href="http://localhost/trzewiki/lib/bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="http://localhost/trzewiki/lib/bootstrap/css/bootstrap-theme.min.css" />
+        <link rel="stylesheet" href="http://localhost/trzewiki/public_files/theme/style.css" />
+        <script src="http://localhost/trzewiki/lib/bootstrap/js/bootstrap.min.js"></script>
     </head>
     <body>
         <div class="container">
@@ -24,7 +21,7 @@ require_once 'config.php';
                 <div class="container-fluid">
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="#">[LOGO] ProSius.pl</a>
+                        <a class="navbar-brand" href="http://localhost/trzewiki/home">[LOGO] ProSius.pl</a>
                     </div>
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="right-menu">

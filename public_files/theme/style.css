@@ -40,3 +40,16 @@ a.latest-product:hover .panel-footer {
     background-color: #428bca;
     color: #fff;
 }
+
+.product-description {
+    text-align: justify;
+    padding: 4% 5%;
+}
+
+div.image_primary {
+    height: 200px;
+}
+
+.del {
+    text-decoration: line-through;
+}

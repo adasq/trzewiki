@@ -167,6 +167,10 @@ class Base {
 
     /*     * **** Z POZDROWIENIAMI DLA ADAMA ***** */
 
+    public function findByPk($id) {
+        return $this->find("$this->id = :$this->id", array(":$this->id" => $id));
+    }
+
     public function find($condition = null, $parameters = null) {
         $query = "SELECT * FROM " . $this->table;
 
@@ -185,8 +189,12 @@ class Base {
         if ($st->execute()) {
             $result = $st->fetchAll(PDO::FETCH_CLASS);
 
-            $className = get_called_class();
-            return new $className($result[0]);
+            if (count($result) > 0) {
+                $className = get_called_class();
+                return new $className($result[0]);
+            } else {
+                return null;
+            }
         } else {
             print_r($st->errorInfo());
         }
@@ -215,6 +223,34 @@ class Base {
             $className = get_called_class();
             foreach ($results as $result) {
                 $results_class[] = new $className($result);
+            }
+            return $results_class;
+        } else {
+            print_r($st->errorInfo());
+        }
+    }
+
+    public function findBySql($query, $parameters = null) {
+        $st = PDODataBase::get()->prepare($query);
+
+        if ($parameters !== null) {
+            foreach ($parameters as $key => $value) {
+                $st->bindParam($key, $value, PDO::PARAM_STR | PDO::PARAM_INT);
+            }
+        }
+
+        if ($st->execute()) {
+            $results = $st->fetchAll(PDO::FETCH_CLASS);
+
+            $results_class = array();
+
+            $className = get_called_class();
+            foreach ($results as $result) {
+                $result_class = new stdClass();
+                foreach ($result as $key => $value) {
+                    $result_class->$key = $value;
+                }
+                $results_class[] = $result_class;
             }
             return $results_class;
         } else {
