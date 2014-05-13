@@ -37,6 +37,9 @@ RewriteRule ^admin/types$ public_files/admin_types.php?action=home [NC]
 RewriteRule ^admin/sizes/edit/([0-9]{1,3})$ public_files/admin_sizes.php?action=edit&id=$1 [NC]
 RewriteRule ^admin/sizes/new$ public_files/admin_sizes.php?action=new [NC]
 RewriteRule ^admin/sizes$ public_files/admin_sizes.php?action=home [NC]
+RewriteRule ^admin/sizes/manufacturer/([0-9]{1,3})$ public_files/admin_sizes.php?action=home&manu=$1 [NC]
+
+
 
 
 RewriteRule ^admin/media/edit/([0-9]{1,3})$ public_files/admin_media.php?action=edit&id=$1 [NC]

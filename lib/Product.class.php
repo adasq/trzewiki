@@ -24,6 +24,8 @@ class Product extends Base {
     public $status;
     public $deleted;
     
+public $url = "";
+
     const STATUS_NEW = 'new';
     const STATUS_RECOMMENDED = 'recommended';
     const STATUS_SALE = 'sale';

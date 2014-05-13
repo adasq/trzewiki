@@ -9,24 +9,31 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <title>{$PAGE_TITLE} | trzewiki</title> 
 
- <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script> 
-<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
- 
+ <script type="text/javascript" src="{#BASE_URL#}/public_files/js/jquery-1.11.1.min.js"></script> 
+
+
+<link rel="stylesheet" href="{#BASE_URL#}/public_files/css/bootstrap.min.css">
+<link rel="stylesheet" href="{#BASE_URL#}/public_files/css/bootstrap-theme.min.css">
+ <script src="{#BASE_URL#}/public_files/js/bootstrap.min.js"></script>
+
+
+
   <link type='text/css' rel="stylesheet" href="{#BASE_URL#}/public_files/css/main.css" />
 	  <script type="text/javascript" src="{#BASE_URL#}/public_files/js/main.js"></script>
 
+<script type="text/javascript" src="{#BASE_URL#}/public_files/tinymce/tinymce.min.js"></script>
 
 
 </head>
 
 
 <body>
+
 <div class="container">
 {include file="admin_nav.tpl" nocache}
 
 <div class="row">
+
   <div class="col-md-2"> 
   	 
 <ul class="nav nav-pills nav-stacked">
@@ -78,3 +85,14 @@
 
 
 
+<script type="text/javascript">
+tinymce.init({
+    selector: "textarea",
+    plugins: [
+        "advlist autolink lists link image charmap print preview anchor",
+        "searchreplace visualblocks code fullscreen",
+        "insertdatetime media table contextmenu paste"
+    ],
+    toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+});
+</script>

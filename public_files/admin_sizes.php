@@ -6,6 +6,7 @@ include(LIB_DIR.'Product.class.php');
 include(LIB_DIR.'Manufacturer.class.php');
 include(LIB_DIR.'Size.class.php');
 
+
 function edit(){
 
 	global $template;
@@ -59,7 +60,7 @@ global $template, $DB;
 					$size->setData($_POST);	
 					$size->size_id=null;
 					$size->deleted=0;	
-					//echo $size->toString();		 
+
 					$size->save();
 
 			$template->assign('alert', new Alert("success", "Pomyślnie dodano rozmiar. Kliknij 
@@ -79,15 +80,42 @@ global $template, $DB;
 }//edit
 function home(){
 
+
 	global $template; 
 
 	$size= new Size();  
-	$template->assign('sizes', $size->getSizes());
+
+$manufacturer = new Manufacturer();
+$manufacturers= $manufacturer->getManufacturers();
+
+$sizes = $size->getSizes();
+
+	$template->assign('sizes', $sizes);
+	$template->assign('manufacturers', $manufacturers);
+
 	$template->assign('CONTENT','admin/sizes');
+
+if(isset($_GET['manu'])){
+
+	$manufacturer2 = $manufacturer->getManufacturerById($_GET['manu']);
+	if($manufacturer2){
+		//echo $manufacturer2->toString();
+		$template->assign('currentManufacturer', $manufacturer2);
+	}else{
+		echo 'Brak producenta';
+	}	
+}else{
+	$template->assign('currentManufacturer', null);
+}
+
+
+
 }
 //=========================================================================================
 	global $template;
 	$template->assign("current", "sizes");
+
+
 	switch($_GET['action']){
 	case "edit":
 		edit();
