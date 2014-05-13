@@ -12,12 +12,9 @@ include(LIB_DIR . 'Template.class.php');
 include(LIB_DIR . 'Base.class.php');
 include(LIB_DIR . 'functions.php');
 
-if (GATE == 'customer') {
-    
-} else {
+
     include(LIB_DIR . 'Admin.class.php');
     $DB = new DataBase();
     $template = new Template();
     $template->configLoad('lang.conf', null);
     authorize();
-}

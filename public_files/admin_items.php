@@ -7,6 +7,8 @@ include(LIB_DIR.'Item.class.php');
 include(LIB_DIR.'Manufacturer.class.php');
 include(LIB_DIR.'Size.class.php');
 
+include(LIB_DIR.'Media.class.php');
+
 function edit(){
 
 	global $template, $DB;
@@ -98,7 +100,24 @@ function home(){
 	global $template; 
 
 	$item= new Item();  
-	$template->assign('items', $item->getItems());
+	$product = new Product();
+	$media = new Media();
+	$size = new Size();
+
+	$products = $product->getProducts();
+	$items= $item->getItems();	
+	$sizes = $size->getSizes();
+
+	foreach($products as $product) {			
+			$medias = $media->getByColumna("product_id", $product->product_id);
+			$product->url = isset($medias[0]->file_path)?$medias[0]->file_path:"";
+	}
+
+
+	
+ 	$template->assign('sizes', $sizes);
+	$template->assign('items', $items);
+	$template->assign('products', $products);
 	$template->assign('CONTENT','admin/items');
 }
 //=========================================================================================

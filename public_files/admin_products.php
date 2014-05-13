@@ -36,12 +36,53 @@ function edit(){
 					$product->setData($_POST);				 
 					$product->save();
 					$product= $product->getProductById($id);
+
+//==========================================
+
+
+
+
+
+if (! empty ( $_FILES )) {
+	
+	$tempFile = $_FILES ['file'] ['tmp_name'];	
+	$targetPath =  $template->getConfigVariable('BASE_URL_IMAGES')."/products/";	
+	$targetFile = $targetPath . $_FILES ['file'] ['name'];
+	
+	$file = $targetFile;
+	$i = 1;
+	while ( is_file ( $file ) ) {
+		$file = substr ( $targetFile, 0, strripos ( $targetFile, "." ) ) . "(" . $i . ")" . substr ( $targetFile, strripos ( $targetFile, "." ) );
+		$i ++;
+	}
+	if (move_uploaded_file ( $tempFile, $file )) {
+		$fileName = substr ( $file, strripos ( $file, "/" ) + 1 );
+		$st = DB::get ()->prepare ( "INSERT INTO " . T_MEDIA . " (`ID` ,`nazwa`, `status`) VALUES (NULL, ?, 'aktywny')" );
+		$st->bindParam ( 1, $fileName, PDO::PARAM_STR );
+		if ($st->execute ()) {
+			// TODO dodanie sie powiodlo
+		}
+	} else {
+		// TODO nie powiodło sie dodanie
+	}
+}
+
+
+
+
+
+
+
+
+
+//==============================================
 					$template->assign('alert', new Alert("success", "Pomyślnie zaktualizowano dane"));
 
 			}else{
 
 			}
 			
+
 			$template->assign('manufacturers', $manufacturers);
 			$template->assign('productTypes', $pt);
 			$template->assign('types', $types);

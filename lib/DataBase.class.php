@@ -8,7 +8,7 @@ class DataBase{
 	// private $password='trzewiki123';
 	private $host='localhost';
 	private $login='root';
-	private $password='root';
+	private $password='';
 	private $dbname='szmitas_trzewiki';
 	private $db;
 	private $lastResult;
@@ -23,6 +23,7 @@ class DataBase{
 
 	function __construct() {	 
 		$this->db = mysql_connect($this->host,$this->login,$this->password) or die("Błąd podczas połączenia z bazą danych.");
+		mysql_set_charset("utf8", $this->db);
 		mysql_select_db($this->dbname,$this->db) or die('Błąd podczas wybierania bazy danych.');
 		$this->lastResult=null;
 	}

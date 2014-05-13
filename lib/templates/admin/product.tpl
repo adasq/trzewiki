@@ -61,8 +61,11 @@
 
 	  <div class="form-group">
     <label>description</label>
-    <input  value="{$product->description}" name="description" type="text" class="form-control" placeholder="description">
+    <textarea rows="20" name="description" class="form-control" placeholder="description">
+      {$product->description}
+    </textarea>
   </div>
+
 
 
     <div class="form-group">
@@ -89,16 +92,19 @@ Media:
   <div class="panel-body">
   {foreach $medias as $media}  
 <div class="media">
-  <a class="pull-left" href="#">
-    <img class="media-object" src="{$media->file_path}" alt="...">
+  <div class="">
+      <a class="pull-left" href="#">
+    <img class="media-object" style="width: 150px; height: auto;" class="img-thumbnail" src="{#BASE_URL_IMAGES#}/products/{$media->file_path}" alt="">
   </a>
+  </div>
+
   <div class="media-body">
     <h4 class="media-heading">{$media->type} 
     <form style="float: right;" method="GET" action="{#BASE_URL#}/admin/media/delete/{$media->media_id}">
     <button type="submit" class="btn btn-danger">Delete</button>
     </form>
     </h4>
-  <a href="{$media->file_path}">{$media->file_path|truncate:60:'...'}</a>  
+  <a href="{#BASE_URL_IMAGES#}/products/{$media->file_path}">{$media->file_path|truncate:60:'...'}</a>  
   </div>
 </div>
   {/foreach}

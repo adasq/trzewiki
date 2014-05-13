@@ -47,10 +47,7 @@
     <label>price2</label>
     <input  value="{$item->price2}" name="price2" type="text" class="form-control" placeholder="price2">
   </div>
-    <div class="form-group">
-    <label>status</label>
-    <input  value="{$item->status}" name="status" type="text" class="form-control" placeholder="status">
-  </div>
+
 
 
  

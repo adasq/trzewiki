@@ -47,10 +47,50 @@ function neww(){
 
 			if( isset($_POST["product_id"]) ){
 
- 					$media->setData($_POST); 				 
+
+
+
+
+if (! empty ( $_FILES )) {
+
+	
+	$tempFile = $_FILES ['file'] ['tmp_name'];	
+	//$template->getConfigVariable('BASE_URL_IMAGES')
+	$targetPath = "./images/products/";	
+	$targetFile = $targetPath . $_FILES ['file'] ['name'];
+	
+	$file = $targetFile;
+	$i = 1;
+	while ( is_file ( $file ) ) {
+		$file = substr ( $targetFile, 0, strripos ( $targetFile, "." ) ) . "(" . $i . ")" . substr ( $targetFile, strripos ( $targetFile, "." ) );
+		$i ++;
+	}
+	if (move_uploaded_file ( $tempFile, $file )) {
+		$fileName = substr ( $file, strripos ( $file, "/" ) + 1 );
+		// $st = DB::get ()->prepare ( "INSERT INTO " . T_MEDIA . " (`ID` ,`nazwa`, `status`) VALUES (NULL, ?, 'aktywny')" );
+		// $st->bindParam ( 1, $fileName, PDO::PARAM_STR );
+		// if ($st->execute ()) {
+		// 	// TODO dodanie sie powiodlo
+		// }
+
+		 			$media->setData($_POST); 				 
  					$media->media_id = null;
+ 					$media->file_path = $fileName ; 					
  					$media->deleted = 0; 
 					$media->save();
+
+
+	} else {
+		// TODO nie powiodło sie dodanie
+	}
+}else{
+}
+
+
+
+
+
+
 
 					$template->assign('alert', new Alert("success", "Pomyślnie dodano media do produktu ".$product->name.". Kliknij
 						<a href=\"".$template->getConfigVariable('BASE_URL')."/admin/products/edit/".$product->product_id."\">tutaj</a>,
