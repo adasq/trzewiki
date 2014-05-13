@@ -6,8 +6,11 @@ function renderSidebar($sex) {
     $lis = array();
 
     foreach ($manufacturer_rec as $manufacturer) {
-        $product_rec = Product::finder()->findAllByManufacturerID($manufacturer->manufacturer_id);
-        $lis[] = '<li><a href="" title="Wyświetl produkty marki ' . $manufacturer->name . '">' . $manufacturer->name . '<span class="badge">' . count($product_rec) . '</span></a></li>';
+        $product_rec = Product::finder()->findAllByManufacturerID($manufacturer->manufacturer_id, $sex);
+
+        $lis[] = '  <li' . ((isset($_GET['manufacturer_id']) && $_GET['manufacturer_id'] == $manufacturer->manufacturer_id && isset($_GET['sex']) && $_GET['sex'] == $sex) ? ' class="active"' : '') . '>'
+                . '     <a href="' .HOST .'manufacturer/' . $manufacturer->manufacturer_id . '/sex/' . $sex . '" title="Wyświetl produkty marki ' . $manufacturer->name . '">' . $manufacturer->name . '<span class="badge">' . count($product_rec) . '</span></a>'
+                . ' </li>';
     }
 
     foreach ($lis as $li) {

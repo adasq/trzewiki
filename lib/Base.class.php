@@ -181,7 +181,7 @@ class Base {
         $st = PDODataBase::get()->prepare($query);
 
         if ($parameters !== null) {
-            foreach ($parameters as $key => $value) {
+            foreach ($parameters as $key => &$value) {
                 $st->bindParam($key, $value, PDO::PARAM_STR | PDO::PARAM_INT);
             }
         }
@@ -210,7 +210,7 @@ class Base {
         $st = PDODataBase::get()->prepare($query);
 
         if ($parameters !== null) {
-            foreach ($parameters as $key => $value) {
+            foreach ($parameters as $key => &$value) {
                 $st->bindParam($key, $value, PDO::PARAM_STR | PDO::PARAM_INT);
             }
         }
@@ -234,13 +234,13 @@ class Base {
         $st = PDODataBase::get()->prepare($query);
 
         if ($parameters !== null) {
-            foreach ($parameters as $key => $value) {
+            foreach ($parameters as $key => &$value) {
                 $st->bindParam($key, $value, PDO::PARAM_STR | PDO::PARAM_INT);
             }
         }
-
+        
         if ($st->execute()) {
-            $results = $st->fetchAll(PDO::FETCH_CLASS);
+            $results = $st->fetchAll();
 
             $results_class = array();
 

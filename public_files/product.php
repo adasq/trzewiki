@@ -3,10 +3,59 @@ require_once 'theme/header.php';
 ?>
 
 <?php
-if (isset($_GET['id'])) {
-    $product_rec = Product::finder()->findByPk($_GET['id']);
+if (isset($_GET['product_id'])) {
+    $product_rec = Product::finder()->findByPk($_GET['product_id']);
+    if ($product_rec !== null) {
+        $size_rec = Size::finder()->find("size_id IN (SELECT size_id FROM items WHERE product_id = :product_id AND deleted = 0) AND deleted = 0", array(":product_id" => $product_rec->product_id));
+        if ($size_rec !== null) {
+            $_GET['sex'] = $size_rec->sex;
+        } else {
+            $product_rec = NULL;
+        }
+    } else {
+        $product_rec = NULL;
+    }
 } else {
-    $product_rec == NULL;
+    $product_rec = NULL;
+}
+
+function renderSpecification($product_id) {
+    $type_rec = Type::finder()->findAllByProductID($product_id);
+
+    echo '  <div class="row">'
+    . '         Typ stopy:';
+    foreach ($type_rec as $type) {
+        if ($type->type_name == Type::FOOT_NEUTRAL) {
+            echo '  <span class="label label-success">' . Dict::getValue($type->type_name, "FootTypeArray") . '</span>';
+        } else if ($type->type_name == Type::FOOT_SUPINATION) {
+            echo '  <span class="label label-warning">' . Dict::getValue($type->type_name, "FootTypeArray") . '</span>';
+        } else if ($type->type_name == Type::FOOT_PRONATION) {
+            echo '  <span class="label label-danger">' . Dict::getValue($type->type_name, "FootTypeArray") . '</span>';
+        }
+    }
+    echo '  </div>';
+
+    echo '  <div class="row">'
+    . '         Rodzaj nawierzchni:';
+    foreach ($type_rec as $type) {
+        if ($type->type_name == Type::SHOE_ROAD) {
+            echo '  <span class="label label-default">' . $type->type_name . '</span>';
+        } else if ($type->type_name == Type::SHOE_TERRAIN) {
+            echo '  <span class="label label-primary">' . $type->type_name . '</span>';
+        }
+    }
+    echo '  </div>';
+
+    echo '  <div class="row">'
+    . '         Przeznaczenie:';
+    foreach ($type_rec as $type) {
+        if ($type->type_name == Type::SHOE_RACE) {
+            echo '  <span class="label label-success">' . $type->type_name . '</span>';
+        } else if ($type->type_name == Type::SHOE_TRAINING) {
+            echo '  <span class="label label-danger">' . $type->type_name . '</span>';
+        }
+    }
+    echo '  </div>';
 }
 
 function renderGallery($product_id) {
@@ -30,7 +79,8 @@ function renderGallery($product_id) {
     }
 }
 
-function renderAvailableSize($product_id) {
+function renderAvailableSize(
+$product_id) {
     $item_rec = Item::finder()->findAllSizes($product_id);
     if (count($item_rec) == 0) {
         showAlert('danger', 'Produkt jest chwilowo niedostepny');
@@ -48,7 +98,8 @@ function renderAvailableSize($product_id) {
     }
 }
 
-function renderPrices($product_id) {
+function renderPrices(
+$product_id) {
     $item_rec = Item::finder()->findAll("deleted = 0 AND product_id = :product_id", array(":product_id" => $product_id));
 
     if (count($item_rec) == 1) {
@@ -65,15 +116,16 @@ function renderPrices($product_id) {
             if ($item->price2 > 0) {
                 if ($min_price > $item->price2) {
                     $min_price = $item->price2;
-                } else if ($max_price < $item->price2) {
+                }
+                if ($max_price < $item->price2) {
                     $max_price = $item->price2;
                 }
-            } else {
-                if ($min_price > $item->price) {
-                    $min_price = $item->price;
-                } else if ($max_price < $item->price) {
-                    $max_price = $item->price;
-                }
+            }
+            if ($min_price > $item->price) {
+                $min_price = $item->price;
+            }
+            if ($max_price < $item->price) {
+                $max_price = $item->price;
             }
         }
         echo '  <h3>Cena: ' . $min_price . ' - ' . $max_price . ' PLN</h3>';
@@ -86,7 +138,7 @@ function renderPrices($product_id) {
 </div>
 <div class="col-md-9">
     <?php
-    if (!isset($_GET['id']) || $product_rec == NULL) {
+    if (!isset($_GET['product_id']) || $product_rec == NULL) {
         showAlert('danger', 'Wybrany produkt nie istnieje');
     } else {
         ?>
@@ -112,6 +164,9 @@ function renderPrices($product_id) {
                 ?>
             </div>
             <div class="col-md-7">
+                <div class="form-inline">
+                    <?php renderSpecification($product_rec->product_id); ?>
+                </div>
                 <div class="form-inline">
                     <?php renderPrices($product_rec->product_id); ?>
                 </div>

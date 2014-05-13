@@ -49,8 +49,8 @@ class Product extends Base {
         return new self ();
     }
 
-    public function findAllByManufacturerID($manufacturer_id) {
-        return parent::findAll("manufacturer_id = :manufacturer_id", array(":manufacturer_id" => $manufacturer_id));
+    public function findAllByManufacturerID($manufacturer_id, $sex) {
+        return parent::findBySql("SELECT * FROM products WHERE manufacturer_id = :manufacturer_id AND EXISTS (SELECT * FROM items WHERE size_id IN (SELECT size_id FROM sizes WHERE sex = :sex AND deleted = 0) AND deleted = 0) AND deleted = 0", array(":manufacturer_id" => $manufacturer_id, ":sex" => $sex));
     }
 
     public function findLatestProducts($limit = null) {
