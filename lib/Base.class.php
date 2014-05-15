@@ -84,7 +84,7 @@ class Base {
                 $where.= " WHERE deleted = 0";
             }
         } else {
-            $where = "";
+            $where = " WHERE deleted = 0";
         }
 
 

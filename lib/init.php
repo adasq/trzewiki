@@ -18,3 +18,14 @@ include(LIB_DIR . 'functions.php');
     $template = new Template();
     $template->configLoad('lang.conf', null);
     authorize();
+
+ 
+
+
+
+
+
+
+
+
+protectMyData();

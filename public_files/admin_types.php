@@ -29,7 +29,7 @@ function edit(){
 			$template->assign('type', $type);		
 
 			}else{
-				$template->assign('alert', new Alert("danger", "Taki typ nie istnieje"));
+				goHomePage();
 
 			}//!content
 		}//GET id
@@ -74,21 +74,13 @@ function add(){
 	$productId = $_GET["pid"];
 	$typeId = $_GET["tid"];
  	
-	// $pt = new ProductType();
-	// $pt = $pt->getByColumna("product_id", $productId);
-	// print_r($pt);
 
-	// exit(1);
  	$pt = new ProductType();
  	$pt->deleted = 0;
 	$pt->type_id= $typeId;
 	$pt->product_id= $productId;
 	$pt->save();
 	header('Location: '.$_SERVER["HTTP_REFERER"]);
-
-	// $type= new Type();   
-	// $template->assign('types', $type->getTypes());
-	// $template->assign('CONTENT','admin/types');
 
 }
 function remove(){
@@ -107,14 +99,10 @@ function remove(){
 					 }
 				} 
 	}else{
-		echo ':D';
+		goHomePage();
 	}
-	
 
 	header('Location: '.$_SERVER["HTTP_REFERER"]);
-	// $type= new Type();   
-	// $template->assign('types', $type->getTypes());
-	// $template->assign('CONTENT','admin/types');
 
 }
 //=======================================================================================================
