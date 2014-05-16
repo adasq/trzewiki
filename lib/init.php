@@ -13,8 +13,8 @@ include(LIB_DIR . 'Base.class.php');
 include(LIB_DIR . 'functions.php');
 
 
-    include(LIB_DIR . 'Admin.class.php');
-    $DB = new DataBase();
-    $template = new Template();
-    $template->configLoad('lang.conf', null);
-    authorize();
+include(LIB_DIR . 'Admin.class.php');
+$DB = new DataBase();
+$template = new Template();
+$template->configLoad('lang.conf', null);
+authorize();

@@ -52,7 +52,7 @@ public $url = "";
     }
 
     public function findAllByManufacturerID($manufacturer_id, $sex) {
-        return parent::findBySql("SELECT * FROM products WHERE manufacturer_id = :manufacturer_id AND EXISTS (SELECT * FROM items WHERE size_id IN (SELECT size_id FROM sizes WHERE sex = :sex AND deleted = 0) AND deleted = 0) AND deleted = 0", array(":manufacturer_id" => $manufacturer_id, ":sex" => $sex));
+        return parent::findBySql("SELECT * FROM products p JOIN items i ON p.product_id = i.product_id AND i.deleted = 0 JOIN sizes s ON s.size_id = i.size_id AND s.sex = :sex AND s.deleted = 0 WHERE p.manufacturer_id = :manufacturer_id AND p.deleted = 0 GROUP BY p.product_id", array(":manufacturer_id" => $manufacturer_id, ":sex" => $sex));
     }
 
     public function findLatestProducts($limit = null) {

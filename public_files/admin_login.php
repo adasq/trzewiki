@@ -1,5 +1,4 @@
 <?php
-
 include('../lib/init.php');
 include(LIB_DIR . 'Alert.class.php');
 
@@ -25,4 +24,5 @@ if (isset($_POST["login"]) && isset($_POST["password"]) && strlen($_POST["login"
 }
 
 $template->display('admin/login.tpl');
+
 ?>

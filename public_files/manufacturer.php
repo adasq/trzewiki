@@ -30,7 +30,7 @@ function renderProducts($products) {
         . $product->name
         . '                     </h5>'
         . '                     <div class="text-right">';
-        renderPrices($product->product_id);
+        renderPrices($product->product_id, $product->status);
         echo '                  </div>'
         . '                 </div>'
         . '             </div>'
@@ -43,37 +43,40 @@ function renderProducts($products) {
     }
 }
 
-function renderPrices($product_id) {
+function renderPrices($product_id, $status) {
     $item_rec = Item::finder()->findAll("deleted = 0 AND product_id = :product_id", array(":product_id" => $product_id));
 
-    if (count($item_rec) == 1) {
-        if ($item_rec[0]->price2 > 0) {
-            echo '  <span class="del label label-danger">Stara cena: ' . $item_rec[0]->price . ' PLN</span><br />'
-            . '     <span class="label label-success">Nowa cena: ' . $item_rec[0]->price2 . ' PLN</span>';
-        } else {
-            echo '  <span class="label label-success">Cena: ' . $item_rec[0]->price . ' PLN</span>';
-        }
-    } else {
-        $min_price = 99999;
-        $max_price = 0;
-        foreach ($item_rec as $item) {
-            if ($item->price2 > 0) {
-                if ($min_price > $item->price2) {
-                    $min_price = $item->price2;
-                }
-                if ($max_price < $item->price2) {
-                    $max_price = $item->price2;
-                }
-            } else {
-                if ($min_price > $item->price) {
-                    $min_price = $item->price;
-                }
-                if ($max_price < $item->price) {
-                    $max_price = $item->price;
-                }
+    $min_price = 99999;
+    $max_price = 0;
+    $diff_prices = 0;
+    foreach ($item_rec as $item) {
+        if ($item->price2 > 0) {
+            if ($min_price > $item->price2) {
+                $min_price = $item->price2;
+                $diff_prices++;
+            } else if ($max_price < $item->price2) {
+                $max_price = $item->price2;
+                $diff_prices++;
             }
         }
-        echo '  <span class="label label-success">Cena: ' . $min_price . ' - ' . $max_price . ' PLN</span>';
+        if ($min_price > $item->price) {
+            $min_price = $item->price;
+            $diff_prices++;
+        } else
+        if ($max_price < $item->price) {
+            $max_price = $item->price;
+            $diff_prices++;
+        }
+    }
+    if ($status == Product::STATUS_PROMOTION && $diff_prices = 2) {
+        echo '  <span class="del label label-danger">Stara cena: ' . $max_price . ' PLN</span><br />'
+        . '     <span class="label label-success">Nowa cena: ' . $min_price . ' PLN</span>';
+    } else {
+        if ($min_price != $max_price && $max_price != 0) {
+            echo '  <span class="label label-success">Cena: ' . $min_price . ' - ' . $max_price . ' PLN</span>';
+        } else {
+            echo '  <span class="label label-success">Cena: ' . $min_price . ' PLN</span>';
+        }
     }
 }
 ?>

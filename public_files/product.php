@@ -39,9 +39,9 @@ function renderSpecification($product_id) {
     . '         Rodzaj nawierzchni:';
     foreach ($type_rec as $type) {
         if ($type->type_name == Type::SHOE_ROAD) {
-            echo '  <span class="label label-default">' . $type->type_name . '</span>';
+            echo '  <span class="label label-default">' . Dict::getValue($type->type_name, "ShoeGroundTypeArray") . '</span>';
         } else if ($type->type_name == Type::SHOE_TERRAIN) {
-            echo '  <span class="label label-primary">' . $type->type_name . '</span>';
+            echo '  <span class="label label-primary">' . Dict::getValue($type->type_name, "ShoeGroundTypeArray") . '</span>';
         }
     }
     echo '  </div>';
@@ -50,9 +50,9 @@ function renderSpecification($product_id) {
     . '         Przeznaczenie:';
     foreach ($type_rec as $type) {
         if ($type->type_name == Type::SHOE_RACE) {
-            echo '  <span class="label label-success">' . $type->type_name . '</span>';
+            echo '  <span class="label label-success">' . Dict::getValue($type->type_name, "ShoeDestinationArray") . '</span>';
         } else if ($type->type_name == Type::SHOE_TRAINING) {
-            echo '  <span class="label label-danger">' . $type->type_name . '</span>';
+            echo '  <span class="label label-danger">' . Dict::getValue($type->type_name, "ShoeDestinationArray") . '</span>';
         }
     }
     echo '  </div>';
@@ -72,7 +72,7 @@ function renderGallery($product_id) {
     }
     if (count($media_rec) > 1) {
         for ($i = 0; $i < count($media_rec); $i++) {
-            echo '  <div class="col-xs-6">'
+            echo '  <div class="col-xs-4 gallery-item">'
             . '         <a href="#" class="image_secondary" title="Kliknij, aby zobaczyć"><img src="' . IMAGES_PATH . $media_rec[$i]->file_path . '" class="img-responsive center-block" /></a>'
             . '     </div>';
         }
@@ -98,37 +98,40 @@ $product_id) {
     }
 }
 
-function renderPrices(
-$product_id) {
+function renderPrices($product_id, $status) {
     $item_rec = Item::finder()->findAll("deleted = 0 AND product_id = :product_id", array(":product_id" => $product_id));
 
-    if (count($item_rec) == 1) {
-        if ($item_rec[0]->price2 !== null) {
-            echo '  <h5 class="del">Stara cena: ' . $item_rec[0]->price . ' PLN</h5>'
-            . '     <h3>Nowa cena: ' . $item_rec[0]->price2 . ' PLN</h3>';
-        } else {
-            echo '  <h3>Cena: ' . $item_rec[0]->price . ' PLN</h3>';
+    $min_price = 99999;
+    $max_price = 0;
+    $diff_prices = 0;
+    foreach ($item_rec as $item) {
+        if ($item->price2 > 0) {
+            if ($min_price > $item->price2) {
+                $min_price = $item->price2;
+                $diff_prices++;
+            } else if ($max_price < $item->price2) {
+                $max_price = $item->price2;
+                $diff_prices++;
+            }
         }
+        if ($min_price > $item->price) {
+            $min_price = $item->price;
+            $diff_prices++;
+        } else
+        if ($max_price < $item->price) {
+            $max_price = $item->price;
+            $diff_prices++;
+        }
+    }
+    if ($status == Product::STATUS_PROMOTION && $diff_prices = 2) {
+        echo '  <h4 class="del">Stara cena: ' . $max_price . ' PLN</h4>'
+        . '     <h3>Nowa cena: ' . $min_price . ' PLN</h3>';
     } else {
-        $min_price = 99999;
-        $max_price = 0;
-        foreach ($item_rec as $item) {
-            if ($item->price2 > 0) {
-                if ($min_price > $item->price2) {
-                    $min_price = $item->price2;
-                }
-                if ($max_price < $item->price2) {
-                    $max_price = $item->price2;
-                }
-            }
-            if ($min_price > $item->price) {
-                $min_price = $item->price;
-            }
-            if ($max_price < $item->price) {
-                $max_price = $item->price;
-            }
+        if ($min_price != $max_price && $max_price != 0) {
+            echo '  <h3>Cena: ' . $min_price . ' - ' . $max_price . ' PLN</h3>';
+        } else {
+            echo '  <h3">Cena: ' . $min_price . ' PLN</h3>';
         }
-        echo '  <h3>Cena: ' . $min_price . ' - ' . $max_price . ' PLN</h3>';
     }
 }
 ?>
@@ -168,7 +171,7 @@ $product_id) {
                     <?php renderSpecification($product_rec->product_id); ?>
                 </div>
                 <div class="form-inline">
-                    <?php renderPrices($product_rec->product_id); ?>
+                    <?php renderPrices($product_rec->product_id, $product_rec->status); ?>
                 </div>
                 <div class="form-inline">
                     <?php renderAvailableSize($product_rec->product_id) ?>

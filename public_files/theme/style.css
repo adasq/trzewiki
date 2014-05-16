@@ -50,6 +50,11 @@ div.image_primary {
     height: 200px;
 }
 
+div.gallery-item {
+    height: 100px;
+    overflow: auto;
+}
+
 .del {
     text-decoration: line-through;
 }
