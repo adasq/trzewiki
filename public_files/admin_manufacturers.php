@@ -28,7 +28,7 @@ function edit(){
 			$template->assign('manufacturer', $manufacturer);		
 
 			}else{
-				$template->assign('alert', new Alert("danger", "Taki producent nie istnieje"));
+				goHomePage();
 
 			}//!content
 		}//GET id

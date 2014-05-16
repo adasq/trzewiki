@@ -22,7 +22,7 @@ global $template, $DB;
 
 
 		}else{
-			//no media
+			goHomePage();
 		}
 	}else{
 		//no ID
@@ -43,7 +43,6 @@ function neww(){
 		$media= new Media();  
 		$product= $product->getProductById($id);
 		if($product){
-			//echo $product->toString();
 
 			if( isset($_POST["product_id"]) ){
 
@@ -55,7 +54,6 @@ if (! empty ( $_FILES )) {
 
 	
 	$tempFile = $_FILES ['file'] ['tmp_name'];	
-	//$template->getConfigVariable('BASE_URL_IMAGES')
 	$targetPath = "./images/products/";	
 	$targetFile = $targetPath . $_FILES ['file'] ['name'];
 	
@@ -63,15 +61,10 @@ if (! empty ( $_FILES )) {
 	$i = 1;
 	while ( is_file ( $file ) ) {
 		$file = substr ( $targetFile, 0, strripos ( $targetFile, "." ) ) . "(" . $i . ")" . substr ( $targetFile, strripos ( $targetFile, "." ) );
-		$i ++;
+		$i++;
 	}
 	if (move_uploaded_file ( $tempFile, $file )) {
 		$fileName = substr ( $file, strripos ( $file, "/" ) + 1 );
-		// $st = DB::get ()->prepare ( "INSERT INTO " . T_MEDIA . " (`ID` ,`nazwa`, `status`) VALUES (NULL, ?, 'aktywny')" );
-		// $st->bindParam ( 1, $fileName, PDO::PARAM_STR );
-		// if ($st->execute ()) {
-		// 	// TODO dodanie sie powiodlo
-		// }
 
 		 			$media->setData($_POST); 				 
  					$media->media_id = null;
@@ -85,11 +78,6 @@ if (! empty ( $_FILES )) {
 	}
 }else{
 }
-
-
-
-
-
 
 
 					$template->assign('alert', new Alert("success", "Pomyślnie dodano media do produktu ".$product->name.". Kliknij

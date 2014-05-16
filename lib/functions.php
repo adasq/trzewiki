@@ -33,12 +33,6 @@ function formatDate($date) {
     return $out . ' temu.';
 }
 
-function compare($a, $b) {
-    if ($a["last_activity"] == $b["last_activity"]) {
-        return 0;
-    }
-    return ($a["last_activity"] > $b["last_activity"]) ? -1 : 1;
-}
 
 function authorize() {
     global $template, $DB;
@@ -88,20 +82,6 @@ function logout() {
     session_destroy();
 }
 
-function convertChars($input) {
-    $input = strtolower($input);
-    $input = str_replace("ą", "&#261;", $input);
-    $input = str_replace("ę", "&#281;", $input);
-    $input = str_replace("ó", "&#243;", $input);
-    $input = str_replace("ć", "&#263;", $input);
-    $input = str_replace("ł", "&#322;", $input);
-    $input = str_replace("ń", "&#324;", $input);
-    $input = str_replace("ś", "&#347;", $input);
-    $input = str_replace("ź", "&#378;", $input);
-    $input = str_replace("ż", "&#380;", $input);
-    return $input;
-}
-
 function getPasswordHash($input) {
     //return md5($input);
     $salt = "hai";
@@ -111,4 +91,26 @@ function getPasswordHash($input) {
 
 function datetime() {
     return date("Y-m-d H:i:s");
+}
+
+
+function goHomePage(){
+    global $template;
+    header('Location: '.$template->getConfigVariable('BASE_URL').'/admin');       
+}
+
+function protectMyData(){
+    if(!empty($_FILES)) {
+        echo $_FILES ['file'] ['name'];
+        $_FILES ['file'] ['name']= str_replace("'","+",$_FILES ['file'] ['name']);
+        $_FILES ['file'] ['name']= str_replace('"',"+",$_FILES ['file'] ['name']);
+         $_FILES ['file'] ['name']= htmlspecialchars(    mysql_real_escape_string( $_FILES ['file'] ['name'])    ); 
+        echo $_FILES ['file'] ['name'];
+    }
+    foreach ($_POST as $key => $value) {
+    $_POST[$key]= htmlspecialchars(    mysql_real_escape_string($_POST[$key])    ); 
+    }
+    foreach ($_GET as $key => $value) {
+        $_GET[$key]= htmlspecialchars(    mysql_real_escape_string($_GET[$key])    );   
+    }
 }

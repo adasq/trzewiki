@@ -53,10 +53,12 @@ function edit(){
 			$template->assign('CONTENT','admin/item');
 
 			}else{
-				echo "lipa";
+				goHomePage();
 			}//!content
 
-		}//GET id
+		}else{
+			goHomePage();
+		}
 
 }//edit
 function neww(){

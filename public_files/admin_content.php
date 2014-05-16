@@ -28,22 +28,16 @@ function edit(){
 
 
 			}else{
-
+				goHomePage();
 			}
 
 			$template->assign('content', $content);
 			$template->assign('CONTENT','admin/content');
 
 			}else{
-				echo "lipa";
-			}//!content
-
-
-
-		}//GET id
-
- 
-	
+				goHomePage();
+			}
+	}//GET id	
 }//edit
 function neww(){
 
@@ -53,18 +47,16 @@ function neww(){
 
  					$content->setData($_POST); 				 
  					$content->content_id = null;
- 					$content->deleted = 0;
- 					echo $content->toString();
+ 					$content->deleted = 0; 					
 					$content->save(); 
-					//header('Location: '.$template->getConfigVariable('BASE_URL').'/admin');			
-				
+						
 						
 					$template->assign('alert', new Alert("success", "Pomyślnie dodano treść. Kliknij 
 						<a href=\"".$template->getConfigVariable('BASE_URL')."/admin/content/edit/".$DB->getLastId()."\">tutaj</a>,
 						 aby przejść do edycji..."));
 
 			}else{
-
+				goHomePage();
 			}
 			$template->assign('content', $content);		
 

@@ -39,7 +39,7 @@ function edit(){
 			$template->assign('CONTENT','admin/size');
 
 			}else{
-				echo "lipa";
+				goHomePage();
 			}//!content
 
 		}//GET id
