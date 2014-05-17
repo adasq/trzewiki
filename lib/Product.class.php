@@ -56,7 +56,7 @@ class Product extends Base {
 
     public function findAllByName($name) {
         $name = strtolower('%' . $name . '%');
-        return parent::findBySql("SELECT * FROM products p JOIN items i ON p.product_id = i.product_id AND i.deleted = 0 JOIN sizes s ON s.size_id = i.size_id AND s.deleted = 0 WHERE LOWER(p.name) like :name AND p.deleted = 0 GROUP BY p.product_id ORDER BY COALESCE(i.price2, i.price) ASC", array(":name" => $name));
+        return parent::findBySql("SELECT * FROM products p JOIN items i ON p.product_id = i.product_id AND i.deleted = 0 JOIN sizes s ON s.size_id = i.size_id AND s.deleted = 0 WHERE REPLACE(LOWER(p.name), '-', ' ') like :name AND p.deleted = 0 GROUP BY p.product_id ORDER BY COALESCE(i.price2, i.price) ASC", array(":name" => $name));
     }
 
     public function findLatestProducts($limit = null) {

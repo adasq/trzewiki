@@ -27,7 +27,7 @@ require_once __DIR__ .'/config.php';
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="right-menu">
                         <div class="col-md-3 pull-right">
-                            <form class="navbar-form navbar-right" role="search">
+                            <div class="navbar-form navbar-right" role="search">
                                 <input type="hidden" id="search_host" value="<? echo HOST ?>">
                                 <div class="input-group">
                                     <input value="<? echo ((isset($_GET['phrase']) ? $_GET['phrase'] : '' )); ?>" ID="search_phrase" type="text" class="form-control input-sm" placeholder="Szukaj w sklepie"> <span class="input-group-btn">
@@ -36,7 +36,7 @@ require_once __DIR__ .'/config.php';
                                             </button>
                                         </span>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="#">Kontakt</a></li>
