@@ -18,6 +18,7 @@ define('DB_COLLATE', 'utf8_polish_ci');
 
 define('HOST', 'http://localhost/trzewiki/');
 define('IMAGES_PATH', HOST . 'public_files/images/products/');
+define('THEME_PATH', HOST . 'public_files/theme/images/');
 
 require_once dirname(__DIR__).'/../lib/PDODataBase.class.php';
 require_once dirname(__DIR__).'/../lib/Base.class.php';

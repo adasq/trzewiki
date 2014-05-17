@@ -4,7 +4,7 @@
  * USER
  */
 class Product extends Base {
-    
+
     public $id = "product_id";
     public $table = "products";
     public $fields = array(
@@ -23,8 +23,7 @@ class Product extends Base {
     public $description;
     public $status;
     public $deleted;
-    
-public $url = "";
+    public $url = "";
 
     const STATUS_NEW = 'new';
     const STATUS_RECOMMENDED = 'recommended';
@@ -52,7 +51,12 @@ public $url = "";
     }
 
     public function findAllByManufacturerID($manufacturer_id, $sex) {
-        return parent::findBySql("SELECT * FROM products p JOIN items i ON p.product_id = i.product_id AND i.deleted = 0 JOIN sizes s ON s.size_id = i.size_id AND s.sex = :sex AND s.deleted = 0 WHERE p.manufacturer_id = :manufacturer_id AND p.deleted = 0 GROUP BY p.product_id", array(":manufacturer_id" => $manufacturer_id, ":sex" => $sex));
+        return parent::findBySql("SELECT * FROM products p JOIN items i ON p.product_id = i.product_id AND i.deleted = 0 JOIN sizes s ON s.size_id = i.size_id AND s.sex = :sex AND s.deleted = 0 WHERE p.manufacturer_id = :manufacturer_id AND p.deleted = 0 GROUP BY p.product_id ORDER BY COALESCE(i.price2, i.price) ASC", array(":manufacturer_id" => $manufacturer_id, ":sex" => $sex));
+    }
+
+    public function findAllByName($name) {
+        $name = strtolower('%' . $name . '%');
+        return parent::findBySql("SELECT * FROM products p JOIN items i ON p.product_id = i.product_id AND i.deleted = 0 JOIN sizes s ON s.size_id = i.size_id AND s.deleted = 0 WHERE LOWER(p.name) like :name AND p.deleted = 0 GROUP BY p.product_id ORDER BY COALESCE(i.price2, i.price) ASC", array(":name" => $name));
     }
 
     public function findLatestProducts($limit = null) {

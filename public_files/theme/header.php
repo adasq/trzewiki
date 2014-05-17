@@ -9,11 +9,12 @@ require_once __DIR__ .'/config.php';
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <title>ProSzius.pl - Strona główna</title> 
 
-        <script type="text/javascript" src="http://localhost/trzewiki/lib/jquery/jquery-1.10.2.min.js"></script> 
-        <link rel="stylesheet" href="http://localhost/trzewiki/lib/bootstrap/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="http://localhost/trzewiki/lib/bootstrap/css/bootstrap-theme.min.css" />
-        <link rel="stylesheet" href="http://localhost/trzewiki/public_files/theme/style.css" />
-        <script src="http://localhost/trzewiki/lib/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="<? echo HOST ?>lib/jquery/jquery-1.10.2.min.js"></script> 
+        <link rel="stylesheet" href="<? echo HOST ?>lib/bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="<? echo HOST ?>lib/bootstrap/css/bootstrap-theme.min.css" />
+        <link rel="stylesheet" href="<? echo HOST ?>public_files/theme/style.css" />
+        <script src="<? echo HOST ?>lib/bootstrap/js/bootstrap.min.js"></script>
+        <script src="<? echo HOST ?>public_files/js/search.js"></script>
     </head>
     <body>
         <div class="container">
@@ -21,15 +22,16 @@ require_once __DIR__ .'/config.php';
                 <div class="container-fluid">
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="http://localhost/trzewiki/home">[LOGO] ProSius.pl</a>
+                        <a class="navbar-brand" href="http://localhost/trzewiki/home"><img src='<? echo THEME_PATH ?>logo.png' alt='ProSius.pl' class='img-responsive pull-left' style='height: 25px;' /> ProSius.pl</a>
                     </div>
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="right-menu">
                         <div class="col-md-3 pull-right">
                             <form class="navbar-form navbar-right" role="search">
+                                <input type="hidden" id="search_host" value="<? echo HOST ?>">
                                 <div class="input-group">
-                                    <input type="text" class="form-control input-sm" placeholder="Szukaj w sklepie"> <span class="input-group-btn">
-                                            <button class="btn btn-primary" type="button">
+                                    <input value="<? echo ((isset($_GET['phrase']) ? $_GET['phrase'] : '' )); ?>" ID="search_phrase" type="text" class="form-control input-sm" placeholder="Szukaj w sklepie"> <span class="input-group-btn">
+                                            <button class="btn btn-primary btn-sm" type="button" id="search_button">
                                                 <span class="glyphicon glyphicon-search"></span>
                                             </button>
                                         </span>

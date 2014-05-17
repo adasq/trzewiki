@@ -35,9 +35,13 @@ class Manufacturer extends Base {
     public static function finder() {
         return new self ();
     }
-    
+
     public function findAll($condition = null, $parameters = null) {
         return parent::findAll($condition, $parameters);
+    }
+
+    public function findAllByName($name) {
+        return parent::findAll("name like '%:name%'", array(":name" => $name));
     }
 
 }
