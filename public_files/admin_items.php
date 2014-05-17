@@ -40,6 +40,7 @@ function edit(){
 					$item->save();
 					$item= $item->getItemById($id);
 					$product = $product->getProductById($item->product_id);
+		
 					$template->assign('alert', new Alert("success", "Pomyślnie zaktualizowano dane"));
 
 			}else{
@@ -77,8 +78,7 @@ function neww(){
 			
 					$item->setData($_POST);	
 					$item->item_id=null;
-					$item->deleted=0;	
-					//echo $item->toString();		 
+					$item->deleted=0;		 
 					$item->save();
 
 			$template->assign('alert', new Alert("success", "Pomyślnie dodano. Kliknij 
@@ -115,10 +115,21 @@ function home(){
 			$product->url = isset($medias[0]->file_path)?$medias[0]->file_path:"";
 	}
 
+	$items2 = array();
+	if(isset($_GET['product'])){
+		$pid = $_GET['product'];		
+		foreach ($items as $key => $value) {			
+			if($value->product_id === $pid){
+				$items2[] = $value;
+			}
+			//$items2[] = 
+		}
+
+	}
 
 	
  	$template->assign('sizes', $sizes);
-	$template->assign('items', $items);
+	$template->assign('items', $items2);
 	$template->assign('products', $products);
 	$template->assign('CONTENT','admin/items');
 }

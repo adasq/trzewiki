@@ -55,7 +55,7 @@
       <span class="glyphicon glyphicon-plane"></span> Buty
     </a></li>  
         <li class="{if $current eq 'types'}active{/if}"><a href="{#BASE_URL#}/admin/types">
-      <span class="glyphicon glyphicon-plane"></span> Typy
+      <span class="glyphicon glyphicon-tasks"></span> Atrybuty
     </a></li>      
 </ul> 
  

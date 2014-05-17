@@ -28,6 +28,9 @@ RewriteRule ^admin/items/edit/([0-9]{1,3})$ public_files/admin_items.php?action=
 RewriteRule ^admin/items/new$ public_files/admin_items.php?action=new [NC]
 RewriteRule ^admin/items$ public_files/admin_items.php?action=home [NC]
 
+RewriteRule ^admin/items/product/([0-9]{1,3})$ public_files/admin_items.php?action=home&product=$1 [NC]
+
+
 RewriteRule ^admin/types/edit/([0-9]{1,3})$ public_files/admin_types.php?action=edit&id=$1 [NC]
 RewriteRule ^admin/types/new$ public_files/admin_types.php?action=new [NC]
 RewriteRule ^admin/types/add/([0-9]{1,3})/([0-9]{1,3})$ public_files/admin_types.php?action=add&tid=$1&pid=$2 [NC]
@@ -39,7 +42,6 @@ RewriteRule ^admin/sizes/edit/([0-9]{1,3})$ public_files/admin_sizes.php?action=
 RewriteRule ^admin/sizes/new$ public_files/admin_sizes.php?action=new [NC]
 RewriteRule ^admin/sizes$ public_files/admin_sizes.php?action=home [NC]
 RewriteRule ^admin/sizes/manufacturer/([0-9]{1,3})$ public_files/admin_sizes.php?action=home&manu=$1 [NC]
-
 
 
 

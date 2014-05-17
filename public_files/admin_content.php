@@ -17,18 +17,16 @@ function edit(){
 
 			if(isset($_POST["content_key"]) && isset($_POST["content_value"])){
 
-					$content_key= $_POST["content_key"];
-					$content_value= $_POST["content_value"];
-
-					$content->content_key = $content_key;
-					$content->content_value = $content_value;
+					$content->setData($_POST);
 					$content->save();
 					$content= $content->getContentById($id);
+					if(!$content){
+						goHomePage();
+					}
 					$template->assign('alert', new Alert("success", "Pomyślnie zaktualizowano dane"));
 
-
 			}else{
-				goHomePage();
+
 			}
 
 			$template->assign('content', $content);
@@ -49,14 +47,13 @@ function neww(){
  					$content->content_id = null;
  					$content->deleted = 0; 					
 					$content->save(); 
-						
-						
+												
 					$template->assign('alert', new Alert("success", "Pomyślnie dodano treść. Kliknij 
 						<a href=\"".$template->getConfigVariable('BASE_URL')."/admin/content/edit/".$DB->getLastId()."\">tutaj</a>,
 						 aby przejść do edycji..."));
 
 			}else{
-				goHomePage();
+				 
 			}
 			$template->assign('content', $content);		
 

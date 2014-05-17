@@ -60,18 +60,26 @@
     <input value="{$customer->city}" name="city"  type="text" class="form-control" placeholder="city">
   </div>
 
-      <div class="form-group">
-    <label>status</label>
-    <input value="{$customer->status}" name="status"  type="text" class="form-control" placeholder="status">
+    
+
+    <div class="form-group">
+    <label>Status:</label>
+<select class="form-control"  value="{$product->manufacturer_id}" name="status" >
+{foreach from=$states key=k item=v}
+    <option  {if $v eq $customer->status} selected {/if}    value="{$v}">{$k}</option>
+  {/foreach}
+</select>
   </div>
 
 
+   <div class="form-group">
   <div class="checkbox">
     <label>
-      <input checked type="checkbox"> Deleted
+      <input name="deleted" {if $customer->deleted eq 1 } checked {/if} type="checkbox"> Oznacz jako usunięty
     </label>
-  </div>
+  </div>  </div>
 
+ 
   <button type="submit" class="btn pull-right btn-success">Zapisz</button>
 </form>
 

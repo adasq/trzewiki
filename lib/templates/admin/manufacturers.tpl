@@ -1,4 +1,6 @@
-﻿
+﻿<div class="page-header">
+  <h1>Producenci <small>Zarządzaj producentami sprzedawanych produktów!</small></h1>
+</div>
 
 <div class="panel panel-default">
   <div class="panel-body">
@@ -29,9 +31,6 @@
 	<form style="float: left;" method="GET" action="manufacturers/edit/{$manufacturer->manufacturer_id}">
 		<button type="submit" class="btn btn-default">Edycja</button>
 	</form>
-	<form  style="float: left;"  method="GET" action="manufacturers/edit/1">
-	 	<button type="submit" class="btn btn-danger">Usuń</button>
-	</form>  
  
 </div>
 

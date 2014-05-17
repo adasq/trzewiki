@@ -1,11 +1,18 @@
 <div class="page-header">
-  <h1>Produkty <small>
+  <h1>Produkty 
+
+{if isset($product->product_id)}
+
+    <small>
    {if $product->product_id}
       Edytuj dane produktu
    {else}
    Dodaj nowy produkt
      {/if}
-  </small></h1>
+  </small>
+{/if}
+
+</h1>
 </div>
 
 
@@ -67,6 +74,14 @@
   </div>
 
 
+   <div class="form-group">
+    <div class="checkbox">
+    <label>
+      <input name="deleted" {if $product->deleted eq 1 } checked {/if} type="checkbox"> Oznacz jako usunięty
+    </label>
+  </div>
+    </div>
+
 
     <div class="form-group">
 
@@ -123,6 +138,7 @@ Media:
 <!-- ======================================================== -->
 
 
+{if isset($productTypes)}
 
 <div class="panel panel-default">
   <div class="panel-heading">
@@ -150,6 +166,8 @@ Cechy:
   </ul>
   </div>
 </div>
+
+{/if}
 <!-- ======================================================== -->
 
 <div class="panel panel-default">

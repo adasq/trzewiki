@@ -44,14 +44,24 @@
     <label>euro</label>
     <input  value="{$size->euro}" name="euro" type="text" class="form-control" placeholder="euro">
   </div>
-  	
 
   	 <div class="form-group">
     <label>Płeć</label>
-<select class="form-control" name="sex" >
+<select class="form-control" name="sex">
     <option  {if $size->sex eq 0} selected {/if}   value="0">Kobieta</option>
      <option  {if $size->sex eq 1} selected {/if}   value="1">Mężczyzna</option>
-</select>  </div>
+</select></div>
+
+
+   <div class="form-group">
+    <div class="checkbox">
+    <label>
+      <input name="deleted" {if $size->deleted eq 1 } checked {/if} type="checkbox"> Oznacz jako usunięty
+    </label>
+  </div>
+    </div>
+
+
 
   <button type="submit" class="btn pull-right btn-success">Zapisz</button>
 </form>

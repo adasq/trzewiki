@@ -26,6 +26,7 @@ function edit(){
 
 			$product= new Product();  
 			$product= $product->getProductById($id);
+			$pt = null;
 			if($product){
 
 			$pt = new ProductType();
@@ -84,14 +85,17 @@ if (! empty ( $_FILES )) {
 			
 
 			$template->assign('manufacturers', $manufacturers);
-			$template->assign('productTypes', $pt);
+			
+			if($pt){
+				$template->assign('productTypes', $pt);
+			}
 			$template->assign('types', $types);
 			$template->assign('medias', $medias);
 			$template->assign('product', $product);
 			$template->assign('CONTENT','admin/product');
 
 			}else{
-				echo "lipa";
+				goHomePage();
 			}//!content
 
 		}//GET id

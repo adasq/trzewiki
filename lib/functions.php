@@ -107,8 +107,14 @@ function protectMyData(){
          $_FILES ['file'] ['name']= htmlspecialchars(    mysql_real_escape_string( $_FILES ['file'] ['name'])    ); 
         echo $_FILES ['file'] ['name'];
     }
-    foreach ($_POST as $key => $value) {
-    $_POST[$key]= htmlspecialchars(    mysql_real_escape_string($_POST[$key])    ); 
+    foreach ($_POST as $key => $value) { 
+        if( $key === "deleted"){
+            $_POST[$key] = ($_POST[$key] == "on")?1:0; 
+        }
+        if( $key !== "password"){
+            $_POST[$key]= htmlspecialchars(    mysql_real_escape_string($_POST[$key])    ); 
+        }
+    
     }
     foreach ($_GET as $key => $value) {
         $_GET[$key]= htmlspecialchars(    mysql_real_escape_string($_GET[$key])    );   

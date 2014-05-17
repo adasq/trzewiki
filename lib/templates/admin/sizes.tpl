@@ -1,8 +1,10 @@
-﻿
+﻿<div class="page-header">
+  <h1>Rozmiary <small>Zarządzaj rozmiarami butów!</small></h1>
+</div>
 
 <div class="panel panel-default">
   <div class="panel-body">
-  <form  method="GET" action="sizes/new">
+  <form  method="GET" action="{#BASE_URL#}/admin/sizes/new">
 	 	<button type="submit" class="btn btn-success">Dodaj nowy</button>
 </form> 
   </div>
@@ -76,12 +78,10 @@ deleted -->
 
 	<td>
 <div class="btn-group">
-	<form style="float: left;" method="GET" action="sizes/edit/{$size->size_id}">
+	<form style="float: left;" method="GET" action="{#BASE_URL#}/admin/sizes/edit/{$size->size_id}">
 		<button type="submit" class="btn btn-default">Edycja</button>
 	</form>
-	<form  style="float: left;"  method="GET" action="sizes/edit/1">
-	 	<button type="submit" class="btn btn-danger">Usuń</button>
-	</form>  
+
 
 </div></td></tr>
  {/if}  
@@ -110,13 +110,9 @@ deleted -->
 
 	<td>
 <div class="btn-group">
-	<form style="float: left;" method="GET" action="sizes/edit/{$size->size_id}">
+	<form style="float: left;" method="GET" action="{#BASE_URL#}/admin/sizes/edit/{$size->size_id}">
 		<button type="submit" class="btn btn-default">Edycja</button>
 	</form>
-	<form  style="float: left;"  method="GET" action="sizes/edit/1">
-	 	<button type="submit" class="btn btn-danger">Usuń</button>
-	</form>  
-
 </div></td></tr>
  {/if}  
 {/foreach}

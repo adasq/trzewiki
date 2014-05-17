@@ -32,9 +32,6 @@
 	<form style="float: left;" method="GET" action="products/edit/{$product->product_id}">
 		<button type="submit" class="btn btn-default">Edycja</button>
 	</form>
-	<form  style="float: left;"  method="GET" action="products/edit/1">
-	 	<button type="submit" class="btn btn-danger">Usuń</button>
-	</form>  
  
 </div>
 

@@ -23,6 +23,11 @@
     <input  value="{$type->type_name}" name="type_name" type="text" class="form-control" placeholder="name">
   </div>
 
+  <div class="checkbox">
+    <label>
+      <input name="deleted" {if $type->deleted eq 1 } checked {/if} type="checkbox"> Oznacz jako usunięty
+    </label>
+  </div>
   
 
   <button type="submit" class="btn pull-right btn-success">Zapisz</button>

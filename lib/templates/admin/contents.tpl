@@ -1,4 +1,10 @@
-﻿<div class="panel panel-default">
+﻿
+
+<div class="page-header">
+  <h1>Treści <small>Zarządzaj treścią statyczną sklepu!</small></h1>
+</div>
+
+<div class="panel panel-default">
   <div class="panel-body">
   <form  method="GET" action="content/new">
 	 	<button type="submit" class="btn btn-success">Dodaj nowego</button>
@@ -23,10 +29,6 @@
 	<form style="float: left;" method="GET" action="content/edit/{$content->content_id}">
 		<button type="submit" class="btn btn-default">Edycja</button>
 	</form>
-	<form  style="float: left;"  method="GET" action="content/edit/1">
-	 	<button type="submit" class="btn btn-danger">Usuń</button>
-	</form>  
- 
 </div>
 
 	</td>  	</tr>

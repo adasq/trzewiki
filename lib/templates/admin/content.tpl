@@ -21,6 +21,15 @@
   		  <textarea rows=20 name="content_value" type="text" class="form-control" placeholder="treść">{$content->content_value}</textarea>
 </div>
 
+  <div class="form-group">
+    <div class="checkbox">
+    <label>
+      <input name="deleted" {if $content->deleted eq 1 } checked {/if} type="checkbox"> Oznacz jako usunięty
+    </label>
+  </div>
+    </div>
+
+
   <div class="form-group pull-right">  			
 	 <button type="submit" class="btn pull-right btn-success">Zapisz</button>
 

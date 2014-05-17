@@ -1,9 +1,11 @@
-﻿
+﻿<div class="page-header">
+  <h1>Cechy obuwia <small>Zarządzaj chechami / atrybutami obuwia!</small></h1>
+</div>
 
 <div class="panel panel-default">
   <div class="panel-body">
   <form  method="GET" action="types/new">
-	 	<button type="submit" class="btn btn-success">Dodaj nowy</button>
+	 	<button type="submit" class="btn btn-success">Dodaj atrybut</button>
 </form> 
   </div>
 </div>
@@ -12,7 +14,7 @@
 {if isset($types)}
  
 <div class="panel panel-default">
-  <div class="panel-heading">Typy
+  <div class="panel-heading">Atrybuty
  
   </div>
   <div class="panel-body">
@@ -28,14 +30,11 @@
 <div class="btn-group">
 	<form style="float: left;" method="GET" action="types/edit/{$type->type_id}">
 		<button type="submit" class="btn btn-default">Edycja</button>
-	</form>
-	<form  style="float: left;"  method="GET" action="types/edit/1">
-	 	<button type="submit" class="btn btn-danger">Usuń</button>
-	</form>  
+	</form> 
  
 </div>
 
-	</td>  	</tr>
+	</td></tr>
 	{/foreach}
 
 </table>
