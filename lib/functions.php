@@ -101,11 +101,10 @@ function goHomePage(){
 
 function protectMyData(){
     if(!empty($_FILES)) {
-        echo $_FILES ['file'] ['name'];
         $_FILES ['file'] ['name']= str_replace("'","+",$_FILES ['file'] ['name']);
         $_FILES ['file'] ['name']= str_replace('"',"+",$_FILES ['file'] ['name']);
          $_FILES ['file'] ['name']= htmlspecialchars(    mysql_real_escape_string( $_FILES ['file'] ['name'])    ); 
-        echo $_FILES ['file'] ['name'];
+    
     }
     foreach ($_POST as $key => $value) { 
         if( $key === "deleted"){

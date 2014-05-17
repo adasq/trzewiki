@@ -11,7 +11,17 @@
  <div class="col-md-10 col-md-offset-1">
 
 <div class="panel panel-default">
-  <div class="panel-heading">Edytuj dane producenta</div>
+  <div class="panel-heading">
+
+ {if $manufacturer->manufacturer_id}
+      Edytuj dane producenta
+   {else}
+   Dodaj nowego producenta
+     {/if}
+
+
+
+  </div>
   <div class="panel-body">
 
 
@@ -19,8 +29,8 @@
 <input type="hidden" name="manufacturer_id" value="{$manufacturer->manufacturer_id}">
   
   <div class="form-group">
-    <label>name</label>
-    <input  value="{$manufacturer->name}" name="name" type="text" class="form-control" placeholder="name">
+    <label>Nazwa</label>
+    <input  value="{$manufacturer->name}" name="name" type="text" class="form-control" placeholder="">
   </div>
 
    <div class="form-group">

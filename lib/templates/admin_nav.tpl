@@ -20,7 +20,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
        <ul class="nav navbar-nav">
-       <li><a href="{#BASE_URL#}/admin/login"> <span class="glyphicon glyphicon-shopping-cart" ></span> Sklepu</a></li>
+       <li><a href="{#BASE_URL#}/home"> <span class="glyphicon glyphicon-shopping-cart" ></span>Sklep</a></li>
       <!--  <li ><a href="{#BASE_URL#}/admin/logout">Logout</a></li>
         <li ><a href="{#BASE_URL#}/about">O nas</a></li>
         <li><a href="{#BASE_URL#}/buy">Kup</a></li> -->
@@ -47,7 +47,7 @@
 
           <ul class="dropdown-menu">
            <!--  <li><a href="#">Opcje</a></li> {$authorized->admin_id} -->
-            <li><a href="{#BASE_URL#}"><span class="glyphicon glyphicon-cog"></span> Profil</a></li>
+            <li><a href="{#BASE_URL#}/admin/profile"><span class="glyphicon glyphicon-cog"></span> Profil</a></li>
             <li class="divider"></li>
             <li><a href="{#BASE_URL#}/admin/logout"><span class="glyphicon glyphicon-off"></span> Wyloguj się</a></li>
           </ul>

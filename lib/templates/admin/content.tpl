@@ -8,7 +8,13 @@
 <form role="form" class="form" action="" method="POST">
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title"> Edytuj treść...
+    <h3 class="panel-title"> 
+
+       {if $content->content_id}
+      Edytuj dane dotyczące treści
+   {else}
+   Dodaj nową treść
+     {/if}
     </h3>
   </div>
   <div class="panel-body">

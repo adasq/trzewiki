@@ -8,14 +8,24 @@
 
 {if isset($item)}
 
-
 {include file="admin/product_view.tpl" nocache}
  <div class="col-md-10 col-md-offset-1">
 
 
 
 <div class="panel panel-default">
-  <div class="panel-heading">Wypełnij formularz</div>
+  <div class="panel-heading">
+
+ {if $item->item_id}
+      Edytuj dane egzemplarzu
+   {else}
+   Dodaj nowy egzemplarz
+     {/if}
+
+
+
+
+  </div>
   <div class="panel-body">
 
 <form role="form" class="form" action="" method="POST">

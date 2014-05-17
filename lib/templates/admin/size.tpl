@@ -11,7 +11,15 @@
  <div class="col-md-10 col-md-offset-1">
 
 <div class="panel panel-default">
-  <div class="panel-heading">Edytuj dane </div>
+  <div class="panel-heading"> 
+
+ {if $size->size_id}
+      Edytuj dane rozmiaru
+   {else}
+   Dodaj nowy rozmiar
+     {/if}
+
+  </div>
   <div class="panel-body">
 
 
@@ -29,19 +37,19 @@
   </div>
 
     <div class="form-group">
-    <label>us</label>
+    <label>US:</label>
     <input  value="{$size->us}" name="us" type="text" class="form-control" placeholder="us">
   </div>
     <div class="form-group">
-    <label>uk</label>
+    <label>UK:</label>
     <input  value="{$size->uk}" name="uk" type="text" class="form-control" placeholder="uk">
   </div>
     <div class="form-group">
-    <label>cm</label>
+    <label>CM:</label>
     <input  value="{$size->cm}" name="cm" type="text" class="form-control" placeholder="cm">
   </div>
     <div class="form-group">
-    <label>euro</label>
+    <label>Euro:</label>
     <input  value="{$size->euro}" name="euro" type="text" class="form-control" placeholder="euro">
   </div>
 

@@ -11,15 +11,16 @@ if (isset($_POST["login"]) && isset($_POST["password"]) && strlen($_POST["login"
     $password = $_POST["password"];
 
     $admin = $admin->getByColumn("login", $login);
-    if ($admin && $admin->password === $password) {
-        echo "OKEJ!";
+
+    if ($admin && $admin->password === getPasswordHash($password)) {
+    
         $_SESSION['access'] = TRUE;
         $_SESSION['userId'] = $admin->admin_id;
         $_SESSION['username'] = $admin->login;
         setcookie("username", $admin->login);
         header('Location: ' . $template->getConfigVariable('BASE_URL') . '/admin');
     } else {
-        $template->assign("alert", new Alert("danger", "Nieprawidłowy login / hasło ;("));
+        $template->assign("alert", new Alert("danger", "Nieprawidłowy login / hasło"));
     }
 }
 

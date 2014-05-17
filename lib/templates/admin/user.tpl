@@ -18,53 +18,53 @@
 <form role="form" class="form" action="" method="POST">
 <input type="hidden" name="customer_id" value="{$customer->customer_id}">
   <div class="form-group">
-    <label>login</label>
-    <input  value="{$customer->login}" name="login" type="text" class="form-control" placeholder="login">
+    <label>Login:</label>
+    <input  value="{$customer->login}" name="login" type="text" class="form-control" placeholder="">
   </div>
 
   <div class="form-group">
-    <label>Password</label>
-    <input value="{$customer->password}" name="password"  type="password" class="form-control" placeholder="Password">
+    <label>Hasło:</label>
+    <input value="{$customer->password}" name="password"  type="password" class="form-control" placeholder="">
   </div>
   <div class="form-group">
-    <label>email</label>
-    <input value="{$customer->email}" name="email"  type="text" class="form-control" placeholder="email">
+    <label>Adres e-mail:</label>
+    <input value="{$customer->email}" name="email"  type="text" class="form-control" placeholder="">
   </div>
 
   <div class="form-group">
-    <label>first_name</label>
-    <input value="{$customer->first_name}" name="first_name"  type="text" class="form-control" placeholder="first_name">
+    <label>Imię:</label>
+    <input value="{$customer->first_name}" name="first_name"  type="text" class="form-control" placeholder="">
   </div>
   <div class="form-group">
-    <label>last_name</label>
-    <input value="{$customer->last_name}" name="last_name"  type="text" class="form-control" placeholder="last_name">
+    <label>Nazwisko:</label>
+    <input value="{$customer->last_name}" name="last_name"  type="text" class="form-control" placeholder="">
   </div>
     <div class="form-group">
-    <label>street</label>
-    <input value="{$customer->street}" name="street"  type="text" class="form-control" placeholder="street">
-  </div>
-
-    <div class="form-group">
-    <label>street_additional</label>
-    <input value="{$customer->street_additional}" name="street_additional"  type="text" class="form-control" placeholder="street_additional">
+    <label>Ulica</label>
+    <input value="{$customer->street}" name="street"  type="text" class="form-control" placeholder="">
   </div>
 
     <div class="form-group">
-    <label>zip_code</label>
-    <input value="{$customer->zip_code}" name="zip_code"  type="text" class="form-control" placeholder="zip_code">
+    <label>Ulica cd.</label>
+    <input value="{$customer->street_additional}" name="street_additional"  type="text" class="form-control" placeholder="">
+  </div>
+
+    <div class="form-group">
+    <label>Kod pocztowy</label>
+    <input value="{$customer->zip_code}" name="zip_code"  type="text" class="form-control" placeholder="">
   </div>
 
 
       <div class="form-group">
-    <label>city</label>
-    <input value="{$customer->city}" name="city"  type="text" class="form-control" placeholder="city">
+    <label>Miasto</label>
+    <input value="{$customer->city}" name="city"  type="text" class="form-control" placeholder="">
   </div>
 
     
 
     <div class="form-group">
     <label>Status:</label>
-<select class="form-control"  value="{$product->manufacturer_id}" name="status" >
+<select class="form-control" name="status" >
 {foreach from=$states key=k item=v}
     <option  {if $v eq $customer->status} selected {/if}    value="{$v}">{$k}</option>
   {/foreach}

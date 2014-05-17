@@ -62,7 +62,7 @@
 
      <div class="form-group">
     <label>product_no</label>
-    <input  value="{$product->product_no}" name="product_no" type="text" class="form-control" placeholder="product_no">
+    <input  value="{$product->product_no}" name="product_no" type="text" class="form-control" placeholder="">
   </div>
 
 
@@ -142,7 +142,7 @@ Media:
 
 <div class="panel panel-default">
   <div class="panel-heading">
-Cechy:
+Atrybuty:
   </div>
   <div class="panel-body">
   <ul class="list-group">
@@ -174,7 +174,7 @@ Cechy:
   <div class="panel-body">
   <form  method="GET" action="{#BASE_URL#}/public_files/admin_types.php">
   <div class="form-group">
-    <label>Dodaj typ:</label>
+    <label>Dodaj atrybut do produktu:</label>
     <input type="hidden" name="pid" value="{$product->product_id}">
      <input type="hidden" name="action" value="add">
 <select class="form-control" name="tid" >
@@ -183,7 +183,7 @@ Cechy:
   {/foreach}
 </select>
   </div>
-    <button type="submit" class="pull-right btn btn-success">Dodaj typ </button>
+    <button type="submit" class="pull-right btn btn-success">Dodaj atrybut </button>
 </form> 
   </div>
 </div>

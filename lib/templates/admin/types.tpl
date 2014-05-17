@@ -21,7 +21,7 @@
     
 
 <table class="table table-striped">
-<tr>  <td>name</td>		<td></td>  	</tr>
+<tr>  <td>Nazwa</td>		<td></td>  	</tr>
  
 	{foreach $types as $type} 
 	<tr>  <td>{$type->type_name}</td>

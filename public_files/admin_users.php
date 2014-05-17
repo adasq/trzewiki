@@ -36,7 +36,7 @@ function edit(){
 
 		}//GET id
 
-	$template->assign("states", array(	"aktywny"=> "ACTIVE", "nie aktywny"=> "INACTIVE", "aktywny"=> "ACTIVE", "banan"=> "BANNED"	));
+	$template->assign("states", array(	"aktywny"=> "ACTIVE", "nieaktywny"=> "INACTIVE", "aktywny"=> "ACTIVE", "ban"=> "BANNED"	));
 	$template->assign('CONTENT','admin/user');
 	$template->assign('PAGE_TITLE','admin');
 	$template->display('admin_template.tpl');

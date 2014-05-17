@@ -10,6 +10,7 @@ class Admin extends Base {
     public $fields = array(
         "admin_id" => "int",
         "login" => "string",
+        "email" => "string",
         "first_name" => "string",
         "last_name" => "string",
         "password" => "string"

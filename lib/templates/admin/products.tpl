@@ -15,14 +15,14 @@
 {if isset($products)}
  
 <div class="panel panel-default">
-  <div class="panel-heading">Producenci
+  <div class="panel-heading">Produkty
  
   </div>
   <div class="panel-body">
     
 
 <table class="table table-striped">
-<tr>  <td>name</td>		<td></td>  	</tr>
+<tr>  <td>Nazwa</td>		<td></td>  	</tr>
  
 	{foreach $products as $product} 
 	<tr>  <td>{$product->name}</td>

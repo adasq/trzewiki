@@ -7,7 +7,7 @@
 <div class="panel panel-default">
   <div class="panel-body">
   <form  method="GET" action="users/new">
-	 	<button type="submit" class="btn btn-success">Dodaj nowego</button>
+	 	<button type="submit" class="btn btn-success">Dodaj nowego klienta</button>
 </form> 
   </div>
 </div>
@@ -21,10 +21,10 @@
     
 
 <table class="table table-striped">
-<tr>  <td>login</td>		<td>email</td>	 <td>last_name</td>	 <td>status</td>		<td></td>  	</tr>
+<tr>  <td>Login</td>		<td>Adres e-mail</td>	 <td>Nazwisko</td>	 <td>Status</td>		<td></td>  	</tr>
  
 	{foreach $users as $user} 
-	<tr>  <td>{$user->login}</td>		<td>{$user->email}</td>	 <td>{$user->last_name}</td>	 <td>{$user->status}</td>		
+	<tr>  <td>{$user->login}</td>		<td>{$user->email}</td>	 <td>{$user->last_name}</td>	 <td><b>{$user->status}</b></td>		
 	<td>
 <div class="btn-group">
 	<form style="float: left;" method="GET" action="users/edit/{$user->customer_id}">

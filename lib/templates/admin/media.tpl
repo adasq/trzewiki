@@ -19,7 +19,9 @@
  <div class="col-md-10 col-md-offset-1">
 
 <div class="panel panel-default">
-  <div class="panel-heading">Wypełnij formularz</div>
+  <div class="panel-heading">
+    Wypełnij formularz
+  </div>
   <div class="panel-body">
 
 
@@ -28,19 +30,19 @@
 <input type="hidden" name="media_id" value="{$media->media_id}">
  <input type="hidden" name="product_id" value="{$product->product_id}">
   
-  <div class="form-group">
+<!--   <div class="form-group">
     <label>file_path</label>
     <input  value="{$media->file_path}" name="file_path" type="text" class="form-control" placeholder="file_path">
   </div>
   <div class="form-group">
     <label>type</label>
     <input  value="{$media->type}" name="type" type="text" class="form-control" placeholder="type">
-  </div>
+  </div> -->
 
   <div class="form-group">
-    <label for="exampleInputFile">File input</label>
+    <label for="exampleInputFile">Wybierz plik</label>
     <input type="file" name="file">
-    <p class="help-block">Example block-level help text here.</p>
+    <p class="help-block">Wybierz plik graficzny prezentujący wygląd produktu</p>
   </div>
   
 

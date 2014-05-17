@@ -21,12 +21,9 @@
     
 
 
-
-<div class="row">
+ 
 
 <form method="GET" class=" filter_form form-inline" action="" role="form">
-
-
   <div class="form-group">
 <select class="product form-control">
   {foreach $products as $product} 
@@ -47,9 +44,7 @@ function test(){
 </script>
 
 
-
-</div>
-
+ 
 
 <div class="row">
 &nbsp
@@ -66,10 +61,12 @@ function test(){
 
 
 
-
+{if sizeof($items) gt 0}
 <table class="table table-striped">
 <tr> <td>Produkt</td> <td>Rozmiary us/uk/cm/euro</td> <td>Cena / Cena promocyjna</td>	<td></td>  	</tr>
  
+ 
+ <div>
 	{foreach $items as $item} 
 	<tr>   
 
@@ -120,10 +117,6 @@ function test(){
 
 
 
-
-
-
-
 <td>
 {$item->price}zł  / {if $item->price2 gt 0} {$item->price2}zł {else} <i>brak</i>{/if}
 </td>
@@ -138,8 +131,21 @@ function test(){
 </div>
 	</td> 	</tr>
 	{/foreach}
+</div>
+
+
 
 </table>
+{else}
+
+
+{if  isset($smarty.get.product) }
+<h3>  <small>Brak egzemplarzy...</small> </h3>
+
+{/if}
+
+{/if}
+
 
   </div>
 </div>

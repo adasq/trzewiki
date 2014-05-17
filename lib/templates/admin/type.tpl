@@ -11,7 +11,13 @@
  <div class="col-md-10 col-md-offset-1">
 
 <div class="panel panel-default">
-  <div class="panel-heading">Edytuj dane typu</div>
+  <div class="panel-heading">
+
+    Dodaj nowy atrybut
+
+    Edytuj dane atrybutu
+
+  </div>
   <div class="panel-body">
 
 
@@ -19,8 +25,8 @@
 <input type="hidden" name="type_id" value="{$type->type_id}">
   
   <div class="form-group">
-    <label>name</label>
-    <input  value="{$type->type_name}" name="type_name" type="text" class="form-control" placeholder="name">
+    <label>Nazwa</label>
+    <input  value="{$type->type_name}" name="type_name" type="text" class="form-control" placeholder="Nazwa">
   </div>
 
   <div class="checkbox">
