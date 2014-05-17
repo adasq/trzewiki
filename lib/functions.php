@@ -9,6 +9,18 @@ function generateRandomString($length = 10) {
     return $randomString;
 }
 
+function saveLog($ontent){
+        global $authorized;
+        $log = new Log();
+        $log->action = $ontent;
+        if($authorized && $authorized->admin_id){
+             $log->admin_id = $authorized->admin_id;
+        }       
+        $log->create();     
+        
+}
+
+
 function formatDate($date) {
 
     $date1 = new DateTime($date);
@@ -35,7 +47,7 @@ function formatDate($date) {
 
 
 function authorize() {
-    global $template, $DB;
+    global $template, $DB, $authorized;
     $authorized = getUser();
     if ($authorized) {
         if (isset($_GET['logout'])) {

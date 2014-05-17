@@ -60,7 +60,7 @@ class Base {
                // echo $update;
                 $DB->execute($update);
             } else {
-               // echo $insert;
+              // echo $insert;
                 $DB->execute($insert);
             }
         } else {
@@ -86,7 +86,9 @@ class Base {
         } else {
             $where = " WHERE deleted = 0";
         }
-
+        if($this->table === "logs"){
+             $where.= " order by custom3 desc";
+        }
 
         $sql = "SELECT * FROM " . $this->table . " " . $where;
 

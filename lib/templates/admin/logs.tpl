@@ -15,7 +15,7 @@
     
 
 <table class="table table-striped">
-<tr>  <td>Kto</td>		<td>Akcja</td>  	</tr>
+<tr>  <td>Kto</td>		<td>Akcja</td>   <td>Kiedy</td>	</tr>
  
 	{foreach $logs as $log} 
 
@@ -42,7 +42,9 @@
 
 		<td> {$log->action}</td>	
 
-	
+		
+<td> {$log->custom3}</td>
+
 
 	</tr>
 	{/foreach}

@@ -48,7 +48,7 @@
 <form role="form" method="POST">
   <div class="form-group">
     <label>Login:</label>
-    <input name="login" type="text" class="form-control" value="adam" placeholder="login">
+    <input name="login" type="text" class="form-control" value="admin" placeholder="login">
   </div>
  
   <div class="form-group">

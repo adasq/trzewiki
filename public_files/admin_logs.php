@@ -1,8 +1,7 @@
 <?php
 
 include('../lib/init.php');
-include(LIB_DIR.'Alert.class.php');
-include(LIB_DIR.'Log.class.php');
+include(LIB_DIR.'Alert.class.php'); 
 include(LIB_DIR.'Customer.class.php');
 
 
@@ -31,6 +30,10 @@ function home(){
 
 
 //=======================================================================================================
+	
+ 
+    
+    
 	global $template;
 	$template->assign("current", "logs");
 	switch($_GET['action']){

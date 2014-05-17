@@ -14,24 +14,38 @@ class Log extends Base {
     "action" => "string",
     "custom1" => "string",
     "custom2" => "string",
-    "custom3" => "string"
+    "custom3" => "string",
+    "deleted" => "int"
     );
- public $log_id;
-    public $admin_id= null;
-    public $customer_id= null;
-    public $action;
-    public $custom1;
-    public $custom2;
-    public $custom3;
+    public $log_id;
+    public $admin_id= 'null';
+    public $customer_id= 'null';
+    public $action= '';
+    public $custom1= 'custom1';
+    public $custom2= 'custom2';
+    public $custom3=  'custom3';
+    public $deleted= 0;
 
 
     public function __construct($obj = null) {
+
         parent::__construct($obj);
+
+    }
+    public function create(){
+        $this->custom3 = datetime();
+
+        $this->save();
     }
 
-
     public function getLogs() {
-        return $this->get();
+
+    $logs = $this->get();
+    foreach ($logs as $key => $value) {
+        $logs[$key]->custom3 = formatDate($logs[$key]->custom3);
+   }
+
+        return $logs;
     }
 
    
