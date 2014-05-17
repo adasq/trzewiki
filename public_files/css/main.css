@@ -12,9 +12,22 @@ html {
   min-height: 100%;
 }
 body {
-  /* Margin bottom by footer height */
+
   margin-bottom: 60px;
+
+
+
+background-color: #ffffff;
+background-image: url('../images/back-pattern.png');
+/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+
+
+
+
+
 }
+ 
+
 #footer {
   position: absolute;
   bottom: 0;

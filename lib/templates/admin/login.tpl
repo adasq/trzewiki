@@ -17,7 +17,12 @@
   <link type='text/css' rel="stylesheet" href="{#BASE_URL#}/public_files/css/main.css" />
 	  <script type="text/javascript" src="{#BASE_URL#}/public_files/js/main.js"></script>
 
+<style>
 
+
+
+
+</style>
 
 </head>
 
@@ -26,7 +31,7 @@
 <div class="container">
 <div class="row">
 
-  <div class="col-md-6 col-md-offset-3">
+  <div class="col-md-8 col-md-offset-2">
 
 {if isset($alert)}
 <div class="alert alert-{$alert->type} alert-dismissable">
@@ -56,7 +61,7 @@
     </label>
   </div> -->
 
-  <button type="submit" class="pull-right btn btn-success">Zaloguj</button>
+  <button type="submit" class="pull-right btn btn-success">Zaloguj się!</button>
 </form>
   </div>
 </div>

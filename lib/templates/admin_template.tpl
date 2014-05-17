@@ -56,6 +56,9 @@
     </a></li>  
         <li class="{if $current eq 'types'}active{/if}"><a href="{#BASE_URL#}/admin/types">
       <span class="glyphicon glyphicon-tasks"></span> Atrybuty
+    </a></li>    
+            <li class="{if $current eq 'logs'}active{/if}"><a href="{#BASE_URL#}/admin/logs">
+      <span class="glyphicon glyphicon-tasks"></span> Logi
     </a></li>      
 </ul> 
  
