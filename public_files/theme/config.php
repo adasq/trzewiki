@@ -31,6 +31,8 @@ require_once dirname(__DIR__).'/../lib/Log.class.php';
 require_once dirname(__DIR__).'/../lib/Manufacturer.class.php';
 require_once dirname(__DIR__).'/../lib/Product.class.php';
 require_once dirname(__DIR__).'/../lib/Item.class.php';
+require_once dirname(__DIR__).'/../lib/Cart.class.php';
+require_once dirname(__DIR__).'/../lib/CartItem.class.php';
 require_once dirname(__DIR__).'/../lib/Type.class.php';
 require_once dirname(__DIR__).'/../lib/ProductType.class.php';
 require_once dirname(__DIR__).'/../lib/Item.class.php';

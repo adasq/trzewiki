@@ -10,7 +10,7 @@ $(document).ready(function() {
             type: "POST",
             data: $('#login_form').serializeArray(),
             success: function(data) {
-                window.location = 'http://' + data;
+                window.location = data;
             }
         });
     });

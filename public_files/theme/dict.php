@@ -15,6 +15,9 @@ class Dict {
         Type::SHOE_ROAD => 'ulica/szosa',
         Type::SHOE_TERRAIN => 'teren'
     );
+        static $CartStatusArray = array(
+        Cart::STATUS_NEW => 'nowy'
+    );
 
     static function getValue($key, $array) {
         return self::${$array}[$key];

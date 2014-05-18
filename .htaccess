@@ -10,6 +10,7 @@ RewriteRule ^login/(.*)$ public_files/login.php?redirect=$1 [NC]
 RewriteRule ^logout$ public_files/login.php?logout=1 [NC]
 RewriteRule ^add_item$ public_files/add_item.php [NC]
 RewriteRule ^find_minimum_price public_files/find_minimum_price.php [NC]
+RewriteRule ^cart$ public_files/cart.php [NC]
 RewriteRule ^buy$ public_files/buy.php [NC]
 
 RewriteRule ^admin/content/edit/([0-9]{1,3})$ public_files/admin_content.php?action=edit&id=$1 [NC]

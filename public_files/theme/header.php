@@ -1,13 +1,17 @@
 <?php
-require_once __DIR__ .'/config.php';
+require_once __DIR__ . '/config.php';
 ?>
 
 <?php
-    function renderCart() {
-        $customer_id = $_SESSION['customer_id'];
-        
-       // $cart_rec = Cart
-    }
+
+function getCartItemsCount() {
+    $customer_id = $_SESSION['customer_id'];
+
+    $cart_rec = Cart::finder()->findCartByStatus($customer_id, Cart::STATUS_NEW);
+    $cart_item_rec = CartItem::finder()->findAll("cart_id = :cart_id AND deleted = 0", array(":cart_id" => $cart_rec->cart_id));
+
+    return count($cart_item_rec);
+}
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
@@ -37,13 +41,13 @@ require_once __DIR__ .'/config.php';
                         <div class="col-md-3 pull-right">
                             <div class="navbar-form navbar-right" role="search">
                                 <input type="hidden" id="search_host" value="<? echo HOST ?>">
-                                <div class="input-group">
-                                    <input value="<? echo ((isset($_GET['phrase']) ? $_GET['phrase'] : '' )); ?>" ID="search_phrase" type="text" class="form-control input-sm" placeholder="Szukaj w sklepie"> <span class="input-group-btn">
-                                            <button class="btn btn-primary btn-sm" type="button" id="search_button">
-                                                <span class="glyphicon glyphicon-search"></span>
-                                            </button>
-                                        </span>
-                                </div>
+                                    <div class="input-group">
+                                        <input value="<? echo ((isset($_GET['phrase']) ? $_GET['phrase'] : '' )); ?>" ID="search_phrase" type="text" class="form-control input-sm" placeholder="Szukaj w sklepie"> <span class="input-group-btn">
+                                                <button class="btn btn-primary btn-sm" type="button" id="search_button">
+                                                    <span class="glyphicon glyphicon-search"></span>
+                                                </button>
+                                            </span>
+                                    </div>
                             </div>
                         </div>
                         <ul class="nav navbar-nav navbar-right">
@@ -53,7 +57,7 @@ require_once __DIR__ .'/config.php';
                             <li><a href="#">Kontakt</a></li>
                             <li><a href="#">Cennik</a></li>
                             <? } else { ?>
-                            <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Koszyk <span class="badge">0</span></a></li>
+                            <li><a href="<? echo HOST; ?>cart"><span class="glyphicon glyphicon-shopping-cart"></span> Koszyk <span class="badge"><? echo getCartItemsCount(); ?></span></a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Ustawienia</a></li>
                             <li><a href="<? echo HOST; ?>logout">Wyloguj</a></li>
                             <? } ?>
@@ -67,7 +71,7 @@ require_once __DIR__ .'/config.php';
             <div id="top"></div>
 
             <div id="search2" class="form-inline breadcrumb text-center">
-                Szukaj buta <select class="form-control">
+<!--                Szukaj buta <select class="form-control">
                     <option>Płeć</option>
                 </select> <select class="form-control">
                     <option>Producent</option>
@@ -76,5 +80,5 @@ require_once __DIR__ .'/config.php';
                 </select> <select class="form-control">
                     <option>Rozmiar</option>
                 </select>
-                <button class="btn btn-primary">Szukaj</button>
+                <button class="btn btn-primary">Szukaj</button>-->
             </div>

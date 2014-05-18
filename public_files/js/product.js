@@ -25,6 +25,8 @@ $(document).ready(function() {
                     $('#need_login').show();
                 } else if(data == 'retry') {
                     $('#retry').show();
+                } else {
+                    window.location = data;
                 }
             }
         });
