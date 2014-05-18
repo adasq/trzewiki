@@ -16,3 +16,13 @@ function login($login, $password) {
     $customer_rec = Customer::finder()->find("login = :login AND password = :password AND deleted = 0", array(":login" => $login, ":password" => $password));
     return $customer_rec;
 }
+
+function generateSalt() {
+    $chars = "`1234567890-=~!@#$%^&*()_+QWERTYUIOP{}|ASDFGHJKL:ZXCVBNM<>?qwertyuiop[]\asdfghjkl;'zxcvbnm,./";
+
+    $salt = "";
+    for ($i = 0; $i < 25; $i++) {
+        $salt .= $chars[rand(0, strlen($chars) - 1)];
+    }
+    return $salt;
+}

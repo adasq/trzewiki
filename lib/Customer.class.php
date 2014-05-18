@@ -36,6 +36,8 @@ class Customer extends Base {
     public $status;
     public $deleted;
 
+    const STATUS_ACTIVE = 'active';
+
     public function getCustomers() {
 
         return $this->get();

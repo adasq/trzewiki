@@ -1,7 +1,6 @@
 <?php
 if (isset($_POST['login'])) {
     require_once 'theme/config.php';
-    require_once 'theme/functions.php';
 
     $customer_rec = login($_POST['login'], $_POST['password']);
 
@@ -54,14 +53,14 @@ require_once 'theme/header.php';
                     <input type="hidden" name="redirect" value="<? echo ((isset($_GET['redirect'])) ? $_GET['redirect'] : HOST .'home') ?>">
                     <div class="form-group">
                         <div class="input-group">
-                            <span class="input-group-addon">Nazwa użytkownika</span>
                             <input name="login" type="text" class="form-control" placeholder="Nazwa użytkownika" value="customer">
+                            <span class="input-group-addon">Nazwa użytkownika</span>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="input-group">
-                            <span class="input-group-addon">Hasło</span>
                             <input name="password" type="password" class="form-control" placeholder="Hasło" value="customer">
+                            <span class="input-group-addon">Hasło</span>
                         </div>
                     </div>
                     <button ID="sign_in" type="button" class="btn btn-primary pull-right">Zaloguj się</button>
