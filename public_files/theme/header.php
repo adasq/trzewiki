@@ -58,7 +58,7 @@ function getCartItemsCount() {
                             <li><a href="#">Cennik</a></li>
                             <? } else { ?>
                             <li><a href="<? echo HOST; ?>cart"><span class="glyphicon glyphicon-shopping-cart"></span> Koszyk <span class="badge"><? echo getCartItemsCount(); ?></span></a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Ustawienia</a></li>
+                            <li><a href="<? echo HOST; ?>settings"><span class="glyphicon glyphicon-cog"></span> Ustawienia</a></li>
                             <li><a href="<? echo HOST; ?>logout">Wyloguj</a></li>
                             <? } ?>
                         </ul>

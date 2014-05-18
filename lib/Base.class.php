@@ -211,6 +211,7 @@ class Base {
         }
 
         if ($st->execute()) {
+            $this->{$this->id} = PDODataBase::get()->lastInsertId();
             return true;
         } else {
             print_r($st->errorInfo());

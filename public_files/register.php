@@ -8,6 +8,8 @@ if (isset($_POST['login'])) {
 
             if ($customer_rec == null) {
                 if (strlen($_POST['password']) > 4 && ($_POST['password'] === $_POST['repassword'])) {
+                    PDODataBase::get()->beginTransaction();
+
                     $customer_rec = new Customer();
                     $customer_rec->login = $_POST['login'];
                     $customer_rec->email = $_POST['email'];
@@ -15,6 +17,26 @@ if (isset($_POST['login'])) {
                     $customer_rec->status = Customer::STATUS_ACTIVE;
                     $customer_rec->password = hash('sha256', $_POST['password'] . $customer_rec->salt);
                     $customer_rec->saveRecord();
+
+                    $log_rec = new Log();
+                    $log_rec->customer_id = $customer_rec->customer_id;
+                    $log_rec->action = 'customer_register';
+                    $log_rec->custom3 = date('Y-m-d H:m:s');
+                    $log_rec->saveRecord();
+
+                    $cart_rec = new Cart();
+                    $cart_rec->customer_id = $customer_rec->customer_id;
+                    $cart_rec->status = Cart::STATUS_NEW;
+                    $cart_rec->saveRecord();
+
+                    $log_rec = new Log();
+                    $log_rec->customer_id = $customer_rec->customer_id;
+                    $log_rec->action = 'customer_created_new_cart';
+                    $log_rec->custom1 = $cart_rec->cart_id;
+                    $log_rec->custom3 = date('Y-m-d H:m:s');
+                    $log_rec->saveRecord();
+
+                    PDODataBase::get()->commit();
 
                     echo 'success';
                 } else {
@@ -77,8 +99,6 @@ require_once 'theme/header.php';
                 </form>
             </div>
             <div class="panel-footer">
-                <a href="<? echo HOST; ?>register">Rejestracja</a>
-                <a href="#" class="pull-right">Zapomniałem hasło</a>
             </div>
         </div>
     </div>

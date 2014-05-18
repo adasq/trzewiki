@@ -34,7 +34,7 @@ class Customer extends Base {
     public $zip_code;
     public $city;
     public $status;
-    public $deleted;
+    public $deleted = 0;
 
     const STATUS_ACTIVE = 'active';
 

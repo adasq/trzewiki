@@ -18,12 +18,12 @@ class Log extends Base {
         "deleted" => "int"
     );
     public $log_id;
-    public $admin_id = 'null';
-    public $customer_id = 'null';
+    public $admin_id = null;
+    public $customer_id = null;
     public $action = '';
-    public $custom1 = 'custom1';
-    public $custom2 = 'custom2';
-    public $custom3 = 'custom3';
+    public $custom1 = '';
+    public $custom2 = '';
+    public $custom3 = '';
     public $deleted = 0;
 
     public function __construct($obj = null) {

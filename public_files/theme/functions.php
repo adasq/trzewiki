@@ -12,7 +12,6 @@ function login($login, $password) {
     } else {
         return null;
     }
-
     $customer_rec = Customer::finder()->find("login = :login AND password = :password AND deleted = 0", array(":login" => $login, ":password" => $password));
     return $customer_rec;
 }
