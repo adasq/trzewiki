@@ -57,10 +57,10 @@ class Base {
 
         if ($this->id) {
             if ($this->{$this->id}) {
-               // echo $update;
+                // echo $update;
                 $DB->execute($update);
             } else {
-              // echo $insert;
+                // echo $insert;
                 $DB->execute($insert);
             }
         } else {
@@ -86,8 +86,8 @@ class Base {
         } else {
             $where = " WHERE deleted = 0";
         }
-        if($this->table === "logs"){
-             $where.= " order by custom3 desc";
+        if ($this->table === "logs") {
+            $where.= " order by custom3 desc";
         }
 
         $sql = "SELECT * FROM " . $this->table . " " . $where;
@@ -169,6 +169,55 @@ class Base {
 
     /*     * **** Z POZDROWIENIAMI DLA ADAMA ***** */
 
+    public function saveRecord() {
+        $idKey = $this->id;
+        if ($idKey) {
+            $idVal = $this->{$this->id};
+        } else {
+            $idVal = null;
+        }
+        $table = $this->table;
+
+        if ($idVal != null) {
+            $query = "UPDATE " . $table . " SET ";
+
+            foreach ($this->fields as $key => $value) {
+                if ($key != $idKey) {
+                    $query .= " " . $key . " = :" . $key . ",";
+                }
+            }
+
+            $query = substr($query, 0, strlen($query) - 1);
+            $query .= " WHERE " . $idKey . " = :" . $idKey;
+        } else {
+            $query = "INSERT INTO " . $table . "(";
+            $queryValues = ' VALUES(';
+
+            foreach ($this->fields as $key => $value) {
+                $query .= "`" . $key . "`, ";
+                $queryValues .= ":" . $key . ', ';
+            }
+
+            $query = substr($query, 0, strlen($query) - 2);
+            $queryValues = substr($queryValues, 0, strlen($queryValues) - 2);
+
+            $query .= ")" . $queryValues . ")";
+        }
+
+        $st = PDODataBase::get()->prepare($query);
+
+        foreach ($this->fields as $key => $value) {
+            $st->bindParam(":" . $key, $this->{$key}, PDO::PARAM_STR | PDO::PARAM_INT | PDO::PARAM_NULL);
+        }
+
+        if ($st->execute()) {
+            return true;
+        } else {
+            print_r($st->errorInfo());
+            return false;
+        }
+    }
+
     public function findByPk($id) {
         return $this->find("$this->id = :$this->id", array(":$this->id" => $id));
     }
@@ -240,7 +289,7 @@ class Base {
                 $st->bindParam($key, $value, PDO::PARAM_STR | PDO::PARAM_INT);
             }
         }
-        
+
         if ($st->execute()) {
             $results = $st->fetchAll();
 

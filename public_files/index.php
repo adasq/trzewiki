@@ -6,7 +6,7 @@ function renderHotProducts($limit = null) {
     foreach ($product_rec as $product) {
         $media_rec = Media::finder()->findByProductID($product->product_id);
         echo '  <div class="col-xs-' . (12 / $limit) . '">'
-        . '         <a href="' .HOST .'manufacturer/' .$product->manufacturer_id .'/product/' .$product->product_id .'" class="latest-product">'
+        . '         <a href="' . HOST . 'manufacturer/' . $product->manufacturer_id . '/product/' . $product->product_id . '" class="latest-product">'
         . '             <div class="panel">'
         . '                 <div class="panel-body">'
         . '                     <img src="' . IMAGES_PATH . $media_rec->file_path . '" class="img-responsive center-block" />'
@@ -28,7 +28,7 @@ function renderRecommendedProducts($limit = null) {
     foreach ($product_rec as $product) {
         $media_rec = Media::finder()->findByProductID($product->product_id);
         echo '  <div class="col-xs-' . (12 / $limit) . '">'
-        . '         <a href="' .HOST .'manufacturer/' .$product->manufacturer_id .'/product/' .$product->product_id .'" class="latest-product">'
+        . '         <a href="' . HOST . 'manufacturer/' . $product->manufacturer_id . '/product/' . $product->product_id . '" class="latest-product">'
         . '             <div class="panel">'
         . '                 <div class="panel-body">'
         . '                     <img src="' . IMAGES_PATH . $media_rec->file_path . '" class="img-responsive center-block" />'
@@ -88,7 +88,6 @@ function renderRecentlyBoughtProducts($limit = null) {
 //    }
 }
 ?>
-
 
 <?php
 require_once 'theme/header.php';

@@ -85,16 +85,24 @@ $product_id) {
     if (count($item_rec) == 0) {
         showAlert('danger', 'Produkt jest chwilowo niedostepny');
     } else {
-        echo '  <div class="input-group">'
-        . '         <select ID="available_sizes" name="available_sizes" class="form-control">';
+        echo '  <form id="add_item_form" role="form" class="from-inline">'
+        . '         <input type="hidden" id="host" value="' . HOST . '">'
+        . '         <input type="hidden" id="item_id"  name="item_id" value="">'
+        . '         <input type="hidden" name="product_id" value="' . $_GET['product_id'] . '">'
+        . '         <div class="input-group">'
+        . '             <select ID="available_sizes" name="available_sizes" class="form-control">'
+        . '                 <option value="" disabled selected>Wybierz swój rozmiar...</option>';
         foreach ($item_rec as $item) {
-            echo '      <option value="' . $item->size_id . '">' . $item->cm . ' CM / ' . $item->euro . ' EUR / ' . $item->us . ' US / ' . $item->uk . ' UK</option>';
+            echo '          <option value="' . $item->size_id . '">' . $item->cm . ' CM / ' . $item->euro . ' EUR / ' . $item->us . ' US / ' . $item->uk . ' UK</option>';
         }
-        echo '"     </select>'
-        . '         <span class="input-group-btn">'
-        . '             <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart"></span> Do koszyka</button>'
-        . '         </span>'
-        . '     </div>';
+        echo '"         </select>'
+        . '             <span class="input-group-btn">'
+        . '                 <button ID="add_to_cart" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart"></span> Do koszyka</button>'
+        . '             </span>'
+        . '         </div>'
+        . '     </form>'
+        . '     <div ID="need_login" class="alert alert-warning"><a href="' . HOST . 'login/' . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] . '" title="Kliknij, aby przejść do panelu logowania">Zaloguj się</a> i dodaj ponownie przedmiot.</div>'
+        . '     <div ID="retry" class="alert alert-danger">Wybierz ponownie rozmiar lub/i przestań kombinować</div>';
     }
 }
 
@@ -130,7 +138,7 @@ function renderPrices($product_id, $status) {
         if ($min_price != $max_price && $max_price != 0) {
             echo '  <h3>Cena: ' . $min_price . ' - ' . $max_price . ' PLN</h3>';
         } else {
-            echo '  <h3">Cena: ' . $min_price . ' PLN</h3>';
+            echo '  <h3>Cena: ' . $min_price . ' PLN</h3>';
         }
     }
 }
@@ -170,7 +178,7 @@ function renderPrices($product_id, $status) {
                 <div class="form-inline">
                     <?php renderSpecification($product_rec->product_id); ?>
                 </div>
-                <div class="form-inline">
+                <div class="form-inline" id="price">
                     <?php renderPrices($product_rec->product_id, $product_rec->status); ?>
                 </div>
                 <div class="form-inline">
@@ -186,7 +194,7 @@ function renderPrices($product_id, $status) {
 <?php
 require_once 'theme/footer.php';
 ?>
-<link rel="stylesheet" href="http://localhost/trzewiki/public_files/js/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
-<script src="http://localhost/trzewiki/public_files/js/product.js" type="text/javascript"></script>
-<script src="http://localhost/trzewiki/public_files/js/fancybox/jquery.fancybox.pack.js?v=2.1.5" type="text/javascript" ></script>
+<link rel="stylesheet" href="<? echo JS_PATH; ?>fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script src="<? echo JS_PATH; ?>product.js" type="text/javascript"></script>
+<script src="<? echo JS_PATH; ?>fancybox/jquery.fancybox.pack.js?v=2.1.5" type="text/javascript" ></script>
 

@@ -2,6 +2,14 @@
 require_once __DIR__ .'/config.php';
 ?>
 
+<?php
+    function renderCart() {
+        $customer_id = $_SESSION['customer_id'];
+        
+       // $cart_rec = Cart
+    }
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"  xml:lang="en" lang="en"> 
@@ -22,7 +30,7 @@ require_once __DIR__ .'/config.php';
                 <div class="container-fluid">
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="http://localhost/trzewiki/home"><img src='<? echo THEME_PATH ?>logo.png' alt='ProSius.pl' class='img-responsive pull-left' style='height: 25px;' /> ProSius.pl</a>
+                        <a class="navbar-brand" href="<? echo HOST; ?>home"><img src='<? echo THEME_PATH ?>logo.png' alt='ProSius.pl' class='img-responsive pull-left' style='height: 25px;' /> ProSius.pl</a>
                     </div>
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="right-menu">
@@ -39,9 +47,16 @@ require_once __DIR__ .'/config.php';
                             </div>
                         </div>
                         <ul class="nav navbar-nav navbar-right">
+                            <? if(!isset($_SESSION['customer_id'])) { ?>
+                            <li><a href="<? echo HOST; ?>login" title="Zaloguj się">Zaloguj się</a></li>
+                            <li><a href="<? echo HOST; ?>register" title="Zarejestruj się">Rejestracja</a></li>
                             <li><a href="#">Kontakt</a></li>
                             <li><a href="#">Cennik</a></li>
-                            <li><a href="#">Cokolwiek</a></li>
+                            <? } else { ?>
+                            <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Koszyk <span class="badge">0</span></a></li>
+                            <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Ustawienia</a></li>
+                            <li><a href="<? echo HOST; ?>logout">Wyloguj</a></li>
+                            <? } ?>
                         </ul>
                     </div>
                     <!-- /.navbar-collapse -->

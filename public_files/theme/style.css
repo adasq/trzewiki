@@ -47,7 +47,8 @@ a.latest-product:hover .panel-footer {
 }
 
 div.image_primary {
-    height: 200px;
+    height: auto;
+    margin-bottom: 15px;
 }
 
 div.gallery-item {
