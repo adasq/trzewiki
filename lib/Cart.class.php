@@ -22,11 +22,19 @@ class Cart extends Base {
 
     const STATUS_NEW = 'new';
 
+
+       public function getCartById($id) {
+
+        return $this->getById($id);
+    }
+
+
     /*     * **** Z POZDROWIENIAMI DLA ADAMA ***** */
 
     public static function finder() {
         return new self ();
     }
+
 
     public function findCartByStatus($customer_id, $status) {
         return parent::find("customer_id = :customer_id AND status = :status AND deleted = 0", array(":customer_id" => $customer_id, ":status" => $status));

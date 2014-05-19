@@ -89,6 +89,9 @@ class Base {
         if ($this->table === "logs") {
             $where.= " order by custom3 desc";
         }
+        if ($this->table === "transactions") {
+            $where.= " order by custom3 desc";
+        }
 
         $sql = "SELECT * FROM " . $this->table . " " . $where;
 

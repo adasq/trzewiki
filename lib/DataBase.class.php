@@ -7,7 +7,7 @@ class DataBase {
     // private $password='trzewiki123';
     private $host = 'localhost';
     private $login = 'root';
-    private $password = 'root';
+    private $password = '';
     private $dbname = 'szmitas_trzewiki';
     private $db;
     private $lastResult;
