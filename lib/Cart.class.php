@@ -21,6 +21,7 @@ class Cart extends Base {
     public $deleted = 0;
 
     const STATUS_NEW = 'new';
+    const STATUS_ORDERED = 'ordered';
 
 
        public function getCartById($id) {

@@ -37,6 +37,7 @@ require_once dirname(__DIR__).'/../lib/Type.class.php';
 require_once dirname(__DIR__).'/../lib/ProductType.class.php';
 require_once dirname(__DIR__).'/../lib/Item.class.php';
 require_once dirname(__DIR__).'/../lib/Size.class.php';
+require_once dirname(__DIR__).'/../lib/Transaction.class.php';
 
 $DB = PDODataBase::get();
 
