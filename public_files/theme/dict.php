@@ -15,8 +15,13 @@ class Dict {
         Type::SHOE_ROAD => 'ulica/szosa',
         Type::SHOE_TERRAIN => 'teren'
     );
-        static $CartStatusArray = array(
+    static $CartStatusArray = array(
         Cart::STATUS_NEW => 'nowy'
+    );
+    static $TransactionStatusArray = array(
+        Transaction::STATUS_IN_PROGRESS => 'w trakcie realizacji',
+        Transaction::STATUS_FINISHED => 'zakończona',
+        Transaction::STATUS_ABORTED => 'anulowana'
     );
 
     static function getValue($key, $array) {

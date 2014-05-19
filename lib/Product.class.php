@@ -77,6 +77,16 @@ class Product extends Base {
         return parent::findAll($condition);
     }
 
+    public function findRecentlyBoughtProducts($limit) {
+        $query = "product_id IN (SELECT product_id FROM items WHERE item_id IN (SELECT item_id FROM cart_items WHERE cart_id IN (SELECT cart_id FROM transactions WHERE status = 'finished' ORDER BY end_date DESC))) LIMIT " . $limit;
+        return parent::findAll($query);
+    }
+
+    public function findBestsellerProducts($limit) {
+        $query = "select p.*, (select count(*) FROM transactions WHERE status = 'finished' AND cart_id IN (SELECT cart_id FROM cart_items WHERE item_id IN (SELECT item_id FROM items WHERE product_id = p.product_id))) as total from products p join items using(product_id) join cart_items using(item_id) join transactions on transactions.cart_id = cart_items.cart_id AND transactions.status = 'finished' GROUP BY p.product_id ORDER BY total DESC LIMIT " . $limit;
+        return parent::findBySql($query);
+    }
+
     //----------------------------------------------------------------------------------------------------------------------
 }
 

@@ -21,7 +21,7 @@ if (isset($_POST['login'])) {
                     $log_rec = new Log();
                     $log_rec->customer_id = $customer_rec->customer_id;
                     $log_rec->action = 'customer_register';
-                    $log_rec->custom3 = date('Y-m-d H:m:s');
+                    $log_rec->custom3 = date('Y-m-d H:i:s');
                     $log_rec->saveRecord();
 
                     $cart_rec = new Cart();
@@ -33,7 +33,7 @@ if (isset($_POST['login'])) {
                     $log_rec->customer_id = $customer_rec->customer_id;
                     $log_rec->action = 'customer_created_new_cart';
                     $log_rec->custom1 = $cart_rec->cart_id;
-                    $log_rec->custom3 = date('Y-m-d H:m:s');
+                    $log_rec->custom3 = date('Y-m-d H:i:s');
                     $log_rec->saveRecord();
 
                     PDODataBase::get()->commit();
