@@ -805,6 +805,7 @@ CREATE TABLE IF NOT EXISTS `transactions` (
   `address` text COLLATE utf8_polish_ci NOT NULL,
   `start_date` text COLLATE utf8_polish_ci,
   `end_date` text COLLATE utf8_polish_ci,
+    `deleted` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`transaction_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=8 ;
 
@@ -812,11 +813,11 @@ CREATE TABLE IF NOT EXISTS `transactions` (
 -- Zrzut danych tabeli `transactions`
 --
 
-INSERT INTO `transactions` (`transaction_id`, `cart_id`, `payment_method`, `status`, `address`, `start_date`, `end_date`) VALUES
-(4, 4, 'standard', 'finished', 'Jan Kowalski, Klonowa 49/16a,  Poznań', '2014-05-19 19:43:53', '2014-05-19 19:44:53'),
-(5, 10, 'standard', 'in_progress', 'Jan Kowalski, Klonowa 49/16a,  Poznań', '2014-05-19 19:52:11', NULL),
-(6, 1, 'standard', 'finished', 'Marta Nowak, Kozia 14,  Kraków', '2014-05-19 20:10:35', '2014-05-19 20:11:35'),
-(7, 13, 'standard', 'finished', 'Karol Wójcik, Polska 14,  Wrocław', '2014-05-19 20:12:49', '2014-05-19 20:13:49');
+INSERT INTO `transactions` (`transaction_id`, `cart_id`, `payment_method`, `status`, `address`, `start_date`, `end_date`, `deleted`) VALUES
+(4, 4, 'standard', 'finished', 'Jan Kowalski, Klonowa 49/16a,  Poznań', '2014-05-19 19:43:53', '2014-05-19 19:44:53', 0),
+(5, 10, 'standard', 'in_progress', 'Jan Kowalski, Klonowa 49/16a,  Poznań', '2014-05-19 19:52:11', NULL, 0),
+(6, 1, 'standard', 'finished', 'Marta Nowak, Kozia 14,  Kraków', '2014-05-19 20:10:35', '2014-05-19 20:11:35', 0),
+(7, 13, 'standard', 'finished', 'Karol Wójcik, Polska 14,  Wrocław', '2014-05-19 20:12:49', '2014-05-19 20:13:49', 0);
 
 -- --------------------------------------------------------
 
