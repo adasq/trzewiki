@@ -35,6 +35,7 @@ RewriteRule ^admin/manufacturers$ public_files/admin_manufacturers.php?action=ho
 RewriteRule ^admin/logs$ public_files/admin_logs.php?action=home [NC]
 
 RewriteRule ^admin/orders$ public_files/admin_orders.php?action=home [NC]
+RewriteRule ^admin/orders/edit/([0-9]{1,3})$ public_files/admin_orders.php?action=edit&id=$1 [NC]
 
 
 RewriteRule ^admin/profile$ public_files/admin_profile.php?action=home [NC]

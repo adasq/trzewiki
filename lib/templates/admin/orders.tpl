@@ -15,7 +15,7 @@
     
 
 <table class="table table-striped">
-<tr>  <td>Klient</td>		<td>Status</td>   <td>Kiedy</td>	</tr>
+<tr>  <td>Klient</td>		<td>Status</td>   <td>Kiedy</td><td></td>	</tr>
  
 	{foreach $transactions as $transaction} 
 
@@ -23,13 +23,28 @@
 	<tr>  
 
 
-<td> {$transaction->customer->login}	</td>	
+<td> <a href="{#BASE_URL#}/admin/users/edit/{$transaction->customer->customer_id}">{$transaction->customer->first_name} {$transaction->customer->last_name}</a>	</td>	
 
 
-		<td>2	</td>	
+		<td>
+
+{$transaction->status}
+			</td>	
 
 		
-<td>3 </td>
+<td> {$transaction->start_date} </td>
+
+
+<td> 
+
+<div class="btn-group">
+	<form style="float: left;" method="GET" action="orders/edit/{$transaction->transaction_id}">
+		<button type="submit" class="btn btn-default">Więcej</button>
+	</form>
+ 
+</div>
+
+</td>
 
 
 	</tr>

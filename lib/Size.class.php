@@ -14,7 +14,7 @@ class Size extends Base {
         "uk" => "string",
         "cm" => "string",
         "euro" => "string",
-        "sex" => "int",
+        "sex" => "string",
         "deleted" => "int"
     );
     public $size_id;

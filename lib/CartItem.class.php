@@ -18,9 +18,20 @@ class CartItem extends Base {
     public $item_id;
     public $deleted = 0;
 
+     public $item = null;
+
     const STATUS_NEW = 'new';
 
+      public function getCartItemById($id) {
+
+        return $this->getById($id);
+    }
+
     /*     * **** Z POZDROWIENIAMI DLA ADAMA ***** */
+
+
+
+
 
     public static function finder() {
         return new self ();

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Czas wygenerowania: 18 May 2014, 20:37
+-- Czas wygenerowania: 19 May 2014, 20:14
 -- Wersja serwera: 5.5.37
 -- Wersja PHP: 5.3.10-1ubuntu3.11
 
@@ -59,17 +59,22 @@ CREATE TABLE IF NOT EXISTS `carts` (
   `status` text COLLATE utf8_polish_ci NOT NULL,
   `deleted` int(11) DEFAULT '0',
   PRIMARY KEY (`cart_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=15 ;
 
 --
 -- Zrzut danych tabeli `carts`
 --
 
 INSERT INTO `carts` (`cart_id`, `customer_id`, `create_date`, `status`, `deleted`) VALUES
-(1, 4, '2014-05-18 14:33:13', 'new', 0),
+(1, 4, '2014-05-18 14:33:13', 'ordered', 0),
 (2, 11, '2014-05-18 17:46:03', 'new', 0),
 (3, 12, '2014-05-18 17:49:52', 'new', 0),
-(4, 13, '2014-05-18 17:50:25', 'new', 0);
+(4, 13, '2014-05-19 17:42:35', 'ordered', 0),
+(10, 13, '2014-05-19 17:43:53', 'ordered', 0),
+(11, 13, '2014-05-19 17:52:11', 'new', 0),
+(12, 4, '2014-05-19 18:10:35', 'new', 0),
+(13, 14, '2014-05-19 18:12:01', 'ordered', 0),
+(14, 14, '2014-05-19 18:12:49', 'new', 0);
 
 -- --------------------------------------------------------
 
@@ -83,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `cart_items` (
   `item_id` int(11) NOT NULL,
   `deleted` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`cart_item_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=21 ;
 
 --
 -- Zrzut danych tabeli `cart_items`
@@ -95,7 +100,10 @@ INSERT INTO `cart_items` (`cart_item_id`, `cart_id`, `item_id`, `deleted`) VALUE
 (14, 1, 200, 0),
 (15, 1, 120, 0),
 (16, 4, 129, 0),
-(17, 4, 112, 0);
+(17, 4, 112, 0),
+(18, 10, 121, 0),
+(19, 13, 201, 0),
+(20, 13, 34, 0);
 
 -- --------------------------------------------------------
 
@@ -145,15 +153,16 @@ CREATE TABLE IF NOT EXISTS `customers` (
   `status` text COLLATE utf8_polish_ci NOT NULL,
   `deleted` int(11) DEFAULT '0',
   PRIMARY KEY (`customer_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=15 ;
 
 --
 -- Zrzut danych tabeli `customers`
 --
 
 INSERT INTO `customers` (`customer_id`, `login`, `password`, `salt`, `email`, `first_name`, `last_name`, `street`, `street_additional`, `zip_code`, `city`, `status`, `deleted`) VALUES
-(4, 'customer', '9037f08c5e4ceb583d573dd2f56c98afc2c03938d959dd612e40b16d9acbb4ce', 't0j35tr4Nd0/\\/\\0wAsool', 'customer@customer.pl', '', '', '', NULL, '', '', '', 0),
-(13, 'customer2', 'c831641c4edba3ca5d405a4c33280c29d91d5b3719a71ee77dffe36f2b5af411', '!{''#fsV}ll?HdCUY8\\Fz.x_C}', 'customer2@maui.pl', 'Jan', 'Kowalski', 'Klonowa 49/16a', NULL, '61-553', 'Poznań', 'active', 0);
+(4, 'customer', '9037f08c5e4ceb583d573dd2f56c98afc2c03938d959dd612e40b16d9acbb4ce', 't0j35tr4Nd0/\\/\\0wAsool', 'customer@customer.pl', 'Marta', 'Nowak', 'Kozia 14', NULL, '62-055', 'Kraków', '', 0),
+(13, 'customer2', 'c831641c4edba3ca5d405a4c33280c29d91d5b3719a71ee77dffe36f2b5af411', '!{''#fsV}ll?HdCUY8\\Fz.x_C}', 'customer2@maui.pl', 'Jan', 'Kowalski', 'Klonowa 49/16a', NULL, '61-553', 'Poznań', 'active', 0),
+(14, 'customer3', '24c44aeb0b18da19ceceac86470bbfd311c785a2b1a2d69163b3ef120e0e55ca', 'B>ZiX/sdgxx;AN**z@Jj&9JnL', 'customer3@mail.pl', 'Karol', 'Wójcik', 'Polska 14', NULL, '66-666', 'Wrocław', 'active', 0);
 
 -- --------------------------------------------------------
 
@@ -281,7 +290,7 @@ INSERT INTO `items` (`item_id`, `product_id`, `size_id`, `price`, `price2`, `del
 (109, 14, 35, 379, NULL, 0),
 (110, 14, 35, 379, NULL, 0),
 (111, 14, 35, 379, NULL, 0),
-(112, 14, 36, 379, NULL, 0),
+(112, 14, 36, 379, NULL, 1),
 (113, 14, 40, 379, NULL, 0),
 (114, 14, 40, 379, NULL, 0),
 (115, 14, 41, 379, NULL, 0),
@@ -440,14 +449,55 @@ CREATE TABLE IF NOT EXISTS `logs` (
   `custom3` text COLLATE utf8_polish_ci,
   `deleted` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`log_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=48 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=89 ;
 
 --
 -- Zrzut danych tabeli `logs`
 --
 
 INSERT INTO `logs` (`log_id`, `admin_id`, `customer_id`, `action`, `custom1`, `custom2`, `custom3`, `deleted`) VALUES
-(47, NULL, 13, 'customer_log_in', '', '', '2014-05-18 19:05:48', 0);
+(47, NULL, 13, 'customer_log_in', '', '', '2014-05-18 19:05:48', 0),
+(48, NULL, 4, 'customer_log_in', '', '', '2014-05-19 17:05:43', 0),
+(49, NULL, 4, 'customer_log_out', '', '', '2014-05-19 18:05:18', 0),
+(50, NULL, 13, 'customer_log_in', '', '', '2014-05-19 18:05:23', 0),
+(51, NULL, 13, 'new_transaction', '1', '', '2014-05-19 18:05:37', 0),
+(52, NULL, 13, 'customer_created_new_cart', NULL, '', '2014-05-19 18:05:37', 0),
+(53, NULL, 13, 'new_transaction', '2', '', '2014-05-19 18:05:34', 0),
+(54, NULL, 13, 'customer_created_new_cart', '5', '', '2014-05-19 18:05:34', 0),
+(55, NULL, 13, 'customer_log_out', '', '', '2014-05-19 18:05:08', 0),
+(56, NULL, 13, 'customer_log_in', '', '', '2014-05-19 18:05:12', 0),
+(57, NULL, 13, 'customer_log_out', '', '', '2014-05-19 19:05:36', 0),
+(58, NULL, 13, 'customer_log_in', '', '', '2014-05-19 19:05:40', 0),
+(59, NULL, 13, 'new_transaction', '3', '', '2014-05-19 19:32:57', 0),
+(60, NULL, 13, 'customer_created_new_cart', '6', '', '2014-05-19 19:32:57', 0),
+(61, NULL, 13, 'customer_log_out', '', '', '2014-05-19 19:05:24', 0),
+(62, NULL, 13, 'customer_log_in', '', '', '2014-05-19 19:05:29', 0),
+(63, NULL, 13, 'new_transaction', NULL, '', '2014-05-19 19:35:36', 0),
+(64, NULL, 13, 'customer_created_new_cart', '7', '', '2014-05-19 19:35:36', 0),
+(65, NULL, 13, 'customer_log_out', '', '', '2014-05-19 19:05:27', 0),
+(66, NULL, 13, 'customer_log_in', '', '', '2014-05-19 19:05:31', 0),
+(67, NULL, 13, 'new_transaction', NULL, '', '2014-05-19 19:37:45', 0),
+(68, NULL, 13, 'customer_created_new_cart', '8', '', '2014-05-19 19:37:45', 0),
+(69, NULL, 13, 'customer_log_out', '', '', '2014-05-19 19:05:20', 0),
+(70, NULL, 13, 'customer_log_in', '', '', '2014-05-19 19:05:26', 0),
+(71, NULL, 13, 'new_transaction', NULL, '', '2014-05-19 19:39:33', 0),
+(72, NULL, 13, 'customer_created_new_cart', '9', '', '2014-05-19 19:39:33', 0),
+(73, NULL, 13, 'customer_log_out', '', '', '2014-05-19 19:05:22', 0),
+(74, NULL, 13, 'customer_log_in', '', '', '2014-05-19 19:05:47', 0),
+(75, NULL, 13, 'new_transaction', '4', '', '2014-05-19 19:43:53', 0),
+(76, NULL, 13, 'customer_created_new_cart', '10', '', '2014-05-19 19:43:53', 0),
+(77, NULL, 13, 'new_transaction', '5', '', '2014-05-19 19:52:11', 0),
+(78, NULL, 13, 'customer_created_new_cart', '11', '', '2014-05-19 19:52:11', 0),
+(79, NULL, 13, 'customer_log_out', '', '', '2014-05-19 20:05:56', 0),
+(80, NULL, 4, 'customer_log_in', '', '', '2014-05-19 20:05:04', 0),
+(81, NULL, 4, 'new_transaction', '6', '', '2014-05-19 20:10:35', 0),
+(82, NULL, 4, 'customer_created_new_cart', '12', '', '2014-05-19 20:10:35', 0),
+(83, NULL, 4, 'customer_log_out', '', '', '2014-05-19 20:05:44', 0),
+(84, NULL, 14, 'customer_register', '', '', '2014-05-19 20:12:01', 0),
+(85, NULL, 14, 'customer_created_new_cart', '13', '', '2014-05-19 20:12:01', 0),
+(86, NULL, 14, 'customer_log_in', '', '', '2014-05-19 20:05:05', 0),
+(87, NULL, 14, 'new_transaction', '7', '', '2014-05-19 20:12:49', 0),
+(88, NULL, 14, 'customer_created_new_cart', '14', '', '2014-05-19 20:12:49', 0);
 
 -- --------------------------------------------------------
 
@@ -460,7 +510,7 @@ CREATE TABLE IF NOT EXISTS `manufacturers` (
   `name` text COLLATE utf8_polish_ci NOT NULL,
   `deleted` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`manufacturer_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=6 ;
 
 --
 -- Zrzut danych tabeli `manufacturers`
@@ -747,11 +797,24 @@ INSERT INTO `sizes` (`size_id`, `manufacturer_id`, `us`, `uk`, `cm`, `euro`, `se
 CREATE TABLE IF NOT EXISTS `transactions` (
   `transaction_id` int(11) NOT NULL AUTO_INCREMENT,
   `cart_id` int(11) NOT NULL,
-  `payment_method_id` int(11) NOT NULL,
+  `payment_method` text COLLATE utf8_polish_ci NOT NULL,
   `status` text COLLATE utf8_polish_ci NOT NULL,
-  `deleted` tinyint(4) DEFAULT '0',
+  `address` text COLLATE utf8_polish_ci NOT NULL,
+  `start_date` text COLLATE utf8_polish_ci,
+  `end_date` text COLLATE utf8_polish_ci,
+    `deleted` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`transaction_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=8 ;
+
+--
+-- Zrzut danych tabeli `transactions`
+--
+
+INSERT INTO `transactions` (`transaction_id`, `cart_id`, `payment_method`, `status`, `address`, `start_date`, `end_date`, `deleted`) VALUES
+(4, 4, 'standard', 'finished', 'Jan Kowalski, Klonowa 49/16a,  Poznań', '2014-05-19 19:43:53', '2014-05-19 19:44:53', 0),
+(5, 10, 'standard', 'in_progress', 'Jan Kowalski, Klonowa 49/16a,  Poznań', '2014-05-19 19:52:11', NULL, 0),
+(6, 1, 'standard', 'finished', 'Marta Nowak, Kozia 14,  Kraków', '2014-05-19 20:10:35', '2014-05-19 20:11:35', 0),
+(7, 13, 'standard', 'finished', 'Karol Wójcik, Polska 14,  Wrocław', '2014-05-19 20:12:49', '2014-05-19 20:13:49', 0);
 
 -- --------------------------------------------------------
 

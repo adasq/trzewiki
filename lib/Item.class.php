@@ -31,6 +31,10 @@ class Item extends Base {
 
         return $this->getById($id);
     }
+    public function getItemByIdWithDeleted($id) {
+
+        return $this->getById($id, true);
+    }
 
     public function __construct($obj = null) {
         parent::__construct($obj);

@@ -57,7 +57,7 @@ class Base {
 
         if ($this->id) {
             if ($this->{$this->id}) {
-                // echo $update;
+                //echo $update;
                 $DB->execute($update);
             } else {
                 // echo $insert;
@@ -68,30 +68,41 @@ class Base {
         }
     }
 
-    public function delete() {
-        $this->deleted = 1;
+    public function delete() {        
+        global $DB;
+        $table = $this->table;
+         $idKey = $this->id;
+        if ($idKey) {
+            $idVal = $this->{$this->id};
+        } else {
+            $idVal = null;
+        }
+        $sql = "UPDATE $table set deleted = 1 WHERE $idKey = $idVal";
+        $DB->execute($sql);
         $this->save();
     }
 
-    public function get($where = null) {
+    public function get($where = null, $custom= false) {
 
         global $DB;
-
-        if ($where) {
+        if(!$custom){
+                    if ($where) {
             if (substr($where, 0, 5) == "WHERE") {
                 $where.= " AND deleted = 0";
             } else {
                 $where.= " WHERE deleted = 0";
             }
-        } else {
-            $where = " WHERE deleted = 0";
+            } else {
+                $where = " WHERE deleted = 0";
+            }
+            if ($this->table === "logs") {
+                $where.= " order by custom3 desc";
+            }
+            if ($this->table === "transactions") {
+                $where.= " order by start_date desc";
+            }
         }
-        if ($this->table === "logs") {
-            $where.= " order by custom3 desc";
-        }
-        if ($this->table === "transactions") {
-            $where.= " order by custom3 desc";
-        }
+
 
         $sql = "SELECT * FROM " . $this->table . " " . $where;
 
@@ -108,8 +119,8 @@ class Base {
         return $array;
     }
 
-    public function getById($id) {
-        $item = $this->get("WHERE " . $this->id . " = " . $id);
+    public function getById($id, $custom= false) {
+        $item = $this->get("WHERE " . $this->id . " = " . $id, $custom);
         if ($item) {
             return $item[0];
         }

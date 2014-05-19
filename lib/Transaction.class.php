@@ -14,7 +14,8 @@ class Transaction extends Base {
         "status" => "string",
         "address" => "string",
         "start_date" => "string",
-        "end_date" => "string"
+        "end_date" => "string",
+        "deleted" => "int"
     );
     public $transaction_id;
     public $cart_id;
@@ -23,6 +24,7 @@ class Transaction extends Base {
     public $address;
     public $start_date;
     public $end_date;
+    public $deleted = 0;
 
     const STATUS_IN_PROGRESS = 'in_progress';
     const STATUS_FINISHED = 'finished';
@@ -31,6 +33,23 @@ class Transaction extends Base {
     public function __construct($obj = null) {
         parent::__construct($obj);
     }
+
+    public function getTransactions() {
+       
+        $transactions = $this->get();
+        foreach ($transactions as $key => $value) {
+            $transactions[$key]->start_date = formatDate($transactions[$key]->start_date);
+        }
+
+
+        return  $transactions;
+    }
+
+    public function getTransactionById($id){
+
+       return $this->getById($id);
+    }
+
 
     /*     * **** Z POZDROWIENIAMI DLA ADAMA ***** */
 

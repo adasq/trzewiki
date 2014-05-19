@@ -56,8 +56,8 @@
   	 <div class="form-group">
     <label>Płeć</label>
 <select class="form-control" name="sex">
-    <option  {if $size->sex eq 0} selected {/if}   value="0">Kobieta</option>
-     <option  {if $size->sex eq 1} selected {/if}   value="1">Mężczyzna</option>
+    <option  {if $size->sex eq 'female'} selected {/if}   value="female">Kobieta</option>
+     <option  {if $size->sex eq 'male'} selected {/if}   value="male">Mężczyzna</option>
 </select></div>
 
 

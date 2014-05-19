@@ -61,7 +61,7 @@
       <span class="glyphicon glyphicon-list-alt"></span> Logi
     </a></li>    
                 <li class="{if $current eq 'orders'}active{/if}"><a href="{#BASE_URL#}/admin/orders">
-      <span class="glyphicon glyphicon-list-alt"></span> Zamówienia
+      <span class="glyphicon glyphicon-check"></span> Zamówienia
     </a></li>      
 </ul> 
  
