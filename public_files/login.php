@@ -3,8 +3,8 @@ if (isset($_POST['login'])) {
     require_once 'theme/config.php';
 
     $customer_rec = login($_POST['login'], $_POST['password']);
-
     if ($customer_rec == null) {
+    die;
         echo 'login_failed';
         exit();
     } else {
@@ -17,7 +17,6 @@ if (isset($_POST['login'])) {
         $_SESSION['customer_id'] = $customer_rec->customer_id;
         $cart_rec = Cart::finder()->findCartByStatus($customer_rec->customer_id, Cart::STATUS_NEW);
         $_SESSION['cart_id'] = $cart_rec->cart_id;
-
         echo $_POST['redirect'];
         exit();
     }
