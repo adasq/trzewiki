@@ -94,11 +94,17 @@ function logout() {
     session_destroy();
 }
 
-function getPasswordHash($input) {
+function getPasswordHash($input, $salt = null) {
     //return md5($input);
-    $salt = "hai";
-    $toHash = $input . $salt;
+   
+    if(!$salt){
+        $salt = "hai";       
+    }else{
+        
+    }
+     $toHash =  $input.$salt;
     return hash('sha256', $toHash);
+
 }
 
 function datetime() {

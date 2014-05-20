@@ -160,9 +160,9 @@ CREATE TABLE IF NOT EXISTS `customers` (
 --
 
 INSERT INTO `customers` (`customer_id`, `login`, `password`, `salt`, `email`, `first_name`, `last_name`, `street`, `street_additional`, `zip_code`, `city`, `status`, `deleted`) VALUES
-(4, 'customer', '9037f08c5e4ceb583d573dd2f56c98afc2c03938d959dd612e40b16d9acbb4ce', 't0j35tr4Nd0/\\/\\0wAsool', 'customer@customer.pl', 'Marta', 'Nowak', 'Kozia 14', NULL, '62-055', 'Kraków', '', 0),
-(13, 'customer2', 'c831641c4edba3ca5d405a4c33280c29d91d5b3719a71ee77dffe36f2b5af411', '!{''#fsV}ll?HdCUY8\\Fz.x_C}', 'customer2@maui.pl', 'Jan', 'Kowalski', 'Klonowa 49/16a', NULL, '61-553', 'Poznań', 'active', 0),
-(14, 'customer3', '24c44aeb0b18da19ceceac86470bbfd311c785a2b1a2d69163b3ef120e0e55ca', 'B>ZiX/sdgxx;AN**z@Jj&9JnL', 'customer3@mail.pl', 'Karol', 'Wójcik', 'Polska 14', NULL, '66-666', 'Wrocław', 'active', 0);
+(4, 'customer', '9037f08c5e4ceb583d573dd2f56c98afc2c03938d959dd612e40b16d9acbb4ce', 't0j35tr4Nd0/\\/\\0wAsool', 'customer@customer.pl', 'Marta', 'Nowak', 'Kozia 14', NULL, '62-055', 'Kraków', 'ACTIVE', 0),
+(13, 'customer2', 'c831641c4edba3ca5d405a4c33280c29d91d5b3719a71ee77dffe36f2b5af411', '!{''#fsV}ll?HdCUY8\\Fz.x_C}', 'customer2@maui.pl', 'Jan', 'Kowalski', 'Klonowa 49/16a', NULL, '61-553', 'Poznań', 'INACTIVE', 0),
+(14, 'customer3', '24c44aeb0b18da19ceceac86470bbfd311c785a2b1a2d69163b3ef120e0e55ca', 'B>ZiX/sdgxx;AN**z@Jj&9JnL', 'customer3@mail.pl', 'Karol', 'Wójcik', 'Polska 14', NULL, '66-666', 'Wrocław', 'ACTIVE', 0);
 
 -- --------------------------------------------------------
 

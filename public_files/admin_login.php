@@ -11,7 +11,7 @@ if (isset($_POST["login"]) && isset($_POST["password"]) && strlen($_POST["login"
     $password = $_POST["password"];
 
     $admin = $admin->getByColumn("login", $login);
-
+    
     if ($admin && $admin->password === getPasswordHash($password)) {
 
         $_SESSION['access'] = TRUE;

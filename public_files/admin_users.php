@@ -17,8 +17,15 @@ function edit(){
 
 			if( isset($_POST["customer_id"]) ){
 
- 					$customer->setData($_POST);
- 					$customer->password= getPasswordHash($_POST["password"]);
+ 					
+ 					if($_POST["password"] === ""){
+ 							$_POST["password"]= $customer->password;
+ 							$customer->setData($_POST);
+ 					}else{
+ 							$customer->password= getPasswordHash($_POST["password"], $customer->salt);
+ 					}
+ 					
+ 					
 					$customer->save();
 					$customer= $customer->getCustomerById($id);
 					$template->assign('alert', new Alert("success", "Pomyślnie zaktualizowano dane"));
@@ -26,6 +33,7 @@ function edit(){
 			}else{
 
 			}
+			$customer->password = "";
 			$template->assign('customer', $customer);			
 
 			}else{
@@ -59,7 +67,8 @@ function neww(){
 			}else{
 
 			}
-			$template->assign('customer', $customer);		
+			$template->assign('customer', $customer);	
+			$template->assign("states", array(	"aktywny"=> "ACTIVE", "nieaktywny"=> "INACTIVE", "aktywny"=> "ACTIVE", "ban"=> "BANNED"	));	
 	$template->assign('CONTENT','admin/user');
 	$template->assign('PAGE_TITLE','admin');
 	$template->display('admin_template.tpl');
