@@ -52,7 +52,7 @@ require_once 'theme/header.php';
             </div>
             <div class="panel-body">
                 <div class="alert alert-info" id="alert_please_wait">Trwa logowanie, proszę czekać...</div>
-                <div class="alert alert-danger" id="alert_login_failed">Trwa logowanie, proszę czekać...</div>
+                <div class="alert alert-danger" id="alert_login_failed"></div>
                 <form id="login_form" role="form">
                     <input type="hidden" id="host" value="<?php echo HOST ?>">
                     <input type="hidden" name="redirect" value="<?php echo ((isset($_GET['redirect'])) ? 'http://' . $_GET['redirect'] : HOST . 'home') ?>">

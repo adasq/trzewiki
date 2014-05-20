@@ -4,7 +4,6 @@ $(document).ready(function() {
     $('#sign_in').click(function(e) {
         e.preventDefault();
         $('#login_form').hide();
-        $('#alert_login_failed').show();
         $('#alert_please_wait').show();
         host = $('#host').val();
         $.ajax({
