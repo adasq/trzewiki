@@ -24,9 +24,9 @@
   	 <div class="col-sm-6">
   	 	Klient:
   	 	<table class="table">
-  	 		<tr> <td>Imię</td> <td>{$transaction->customer->first_name}</td>  </tr>
-  	 		<tr> <td>Nazwisko</td> <td>{$transaction->customer->last_name}</td>  </tr>
-  	 		<tr> <td>Miasto</td> <td>{$transaction->customer->city}</td>  </tr>
+  	 	<!-- 	<tr> <td>Imię</td> <td>{$transaction->customer->first_name}</td>  </tr>
+  	 		<tr> <td>Nazwisko</td> <td>{$transaction->customer->last_name}</td>  </tr> -->
+  	 		<tr> <td>{$transaction->address}</td>   </tr>
   	 	 
   	 	</table>
   	 </div>
@@ -109,7 +109,7 @@
 <div class="pull-right btn-group">
 	<form method="POST" action=""> 
 		<input name="tid" type="hidden" value="{$item["product"]->product_id}">
-		<button type="submit " class="btn btn-success">Zrealizowano </button>
+		<button type="submit " class="btn btn-success">Zrealizowano</button>
 	</form>
  
 </div>
