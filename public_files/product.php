@@ -194,7 +194,7 @@ function renderPrices($product_id, $status) {
 <?php
 require_once 'theme/footer.php';
 ?>
-<link rel="stylesheet" href="<? echo JS_PATH; ?>fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
-<script src="<? echo JS_PATH; ?>product.js" type="text/javascript"></script>
-<script src="<? echo JS_PATH; ?>fancybox/jquery.fancybox.pack.js?v=2.1.5" type="text/javascript" ></script>
+<link rel="stylesheet" href="<?php echo JS_PATH; ?>fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script src="<?php echo JS_PATH; ?>product.js" type="text/javascript"></script>
+<script src="<?php echo JS_PATH; ?>fancybox/jquery.fancybox.pack.js?v=2.1.5" type="text/javascript" ></script>
 

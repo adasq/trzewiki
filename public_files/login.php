@@ -4,7 +4,7 @@ if (isset($_POST['login'])) {
 
     $customer_rec = login($_POST['login'], $_POST['password']);
     if ($customer_rec == null) {
-    die;
+        die;
         echo 'login_failed';
         exit();
     } else {
@@ -17,7 +17,11 @@ if (isset($_POST['login'])) {
         $_SESSION['customer_id'] = $customer_rec->customer_id;
         $cart_rec = Cart::finder()->findCartByStatus($customer_rec->customer_id, Cart::STATUS_NEW);
         $_SESSION['cart_id'] = $cart_rec->cart_id;
-        echo $_POST['redirect'];
+        if (isset($_POST['redirect'])) {
+            echo $_POST['redirect'];
+        } else {
+            echo HOST . 'home';
+        }
         exit();
     }
     exit();
@@ -50,8 +54,8 @@ require_once 'theme/header.php';
                 <div class="alert alert-info" id="alert_please_wait">Trwa logowanie, proszę czekać...</div>
                 <div class="alert alert-danger" id="alert_login_failed">Trwa logowanie, proszę czekać...</div>
                 <form id="login_form" role="form">
-                    <input type="hidden" id="host" value="<? echo HOST ?>">
-                    <input type="hidden" name="redirect" value="<? echo ((isset($_GET['redirect'])) ? $_GET['redirect'] : HOST .'home') ?>">
+                    <input type="hidden" id="host" value="<?php echo HOST ?>">
+                    <input type="hidden" name="redirect" value="<?php echo ((isset($_GET['redirect'])) ? 'http://' . $_GET['redirect'] : HOST . 'home') ?>">
                     <div class="form-group">
                         <div class="input-group">
                             <input name="login" type="text" class="form-control" placeholder="Nazwa użytkownika" value="customer">
@@ -68,7 +72,7 @@ require_once 'theme/header.php';
                 </form>
             </div>
             <div class="panel-footer">
-                <a href="<? echo HOST; ?>register">Rejestracja</a>
+                <a href="<?php echo HOST; ?>register">Rejestracja</a>
                 <a href="#" class="pull-right">Zapomniałem hasło</a>
             </div>
         </div>
@@ -77,6 +81,6 @@ require_once 'theme/header.php';
 <?php
 require_once 'theme/footer.php';
 ?>
-<script src="<? echo JS_PATH; ?>login.js" type="text/javascript"></script>
+<script src="<?php echo JS_PATH; ?>login.js" type="text/javascript"></script>
 
 

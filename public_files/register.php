@@ -69,7 +69,7 @@ require_once 'theme/header.php';
                 <div class="alert alert-danger" id="alert_register_fail"></div>
                 <div class="alert alert-success" id="alert_register_end">Rejestracja zakończona, możesz zalogować się korzystając z podanych wcześniej danych.</div>
                 <form id="register_form" role="form">
-                    <input type="hidden" id="host" value="<? echo HOST ?>">
+                    <input type="hidden" id="host" value="<?php echo HOST ?>">
                     <div class="form-group">
                         <div class="input-group">
                             <input name="login" type="text" class="form-control" placeholder="Nazwa użytkownika">
@@ -107,4 +107,4 @@ require_once 'theme/header.php';
 <?php
 require_once 'theme/footer.php';
 ?>
-<script src="<? echo JS_PATH; ?>register.js" type="text/javascript"></script>
+<script src="<?php echo JS_PATH; ?>register.js" type="text/javascript"></script>

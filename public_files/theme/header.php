@@ -21,12 +21,12 @@ function getCartItemsCount() {
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <title>ProSzius.pl - Strona główna</title> 
 
-        <script type="text/javascript" src="<? echo HOST ?>lib/jquery/jquery-1.10.2.min.js"></script> 
-        <link rel="stylesheet" href="<? echo HOST ?>lib/bootstrap/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="<? echo HOST ?>lib/bootstrap/css/bootstrap-theme.min.css" />
-        <link rel="stylesheet" href="<? echo HOST ?>public_files/theme/style.css" />
-        <script src="<? echo HOST ?>lib/bootstrap/js/bootstrap.min.js"></script>
-        <script src="<? echo HOST ?>public_files/js/search.js"></script>
+        <script type="text/javascript" src="<?php echo HOST ?>lib/jquery/jquery-1.10.2.min.js"></script> 
+        <link rel="stylesheet" href="<?php echo HOST ?>lib/bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="<?php echo HOST ?>lib/bootstrap/css/bootstrap-theme.min.css" />
+        <link rel="stylesheet" href="<?php echo HOST ?>public_files/theme/style.css" />
+        <script src="<?php echo HOST ?>lib/bootstrap/js/bootstrap.min.js"></script>
+        <script src="<?php echo HOST ?>public_files/js/search.js"></script>
     </head>
     <body>
         <div class="container">
@@ -34,15 +34,15 @@ function getCartItemsCount() {
                 <div class="container-fluid">
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="<? echo HOST; ?>home"><img src='<? echo THEME_PATH ?>logo.png' alt='ProSius.pl' class='img-responsive pull-left' style='height: 25px;' /> ProSius.pl</a>
+                        <a class="navbar-brand" href="<?php echo HOST; ?>home"><img src='<?php echo THEME_PATH ?>logo.png' alt='ProSius.pl' class='img-responsive pull-left' style='height: 25px;' /> ProSius.pl</a>
                     </div>
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="right-menu">
                         <div class="col-md-3 pull-right">
                             <div class="navbar-form navbar-right" role="search">
-                                <input type="hidden" id="search_host" value="<? echo HOST ?>">
+                                <input type="hidden" id="search_host" value="<?php echo HOST ?>">
                                     <div class="input-group">
-                                        <input value="<? echo ((isset($_GET['phrase']) ? $_GET['phrase'] : '' )); ?>" ID="search_phrase" type="text" class="form-control input-sm" placeholder="Szukaj w sklepie"> <span class="input-group-btn">
+                                        <input value="<?php echo ((isset($_GET['phrase']) ? $_GET['phrase'] : '' )); ?>" ID="search_phrase" type="text" class="form-control input-sm" placeholder="Szukaj w sklepie"> <span class="input-group-btn">
                                                 <button class="btn btn-primary btn-sm" type="button" id="search_button">
                                                     <span class="glyphicon glyphicon-search"></span>
                                                 </button>
@@ -51,17 +51,17 @@ function getCartItemsCount() {
                             </div>
                         </div>
                         <ul class="nav navbar-nav navbar-right">
-                            <? if(!isset($_SESSION['customer_id'])) { ?>
-                            <li><a href="<? echo HOST; ?>login" title="Zaloguj się">Zaloguj się</a></li>
-                            <li><a href="<? echo HOST; ?>register" title="Zarejestruj się">Rejestracja</a></li>
+                            <?php if(!isset($_SESSION['customer_id'])) { ?>
+                            <li><a href="<?php echo HOST; ?>login" title="Zaloguj się">Zaloguj się</a></li>
+                            <li><a href="<?php echo HOST; ?>register" title="Zarejestruj się">Rejestracja</a></li>
                             <li><a href="#">Kontakt</a></li>
                             <li><a href="#">Cennik</a></li>
-                            <? } else { ?>
-                            <li><a href="<? echo HOST; ?>cart"><span class="glyphicon glyphicon-shopping-cart"></span> Koszyk <span class="badge"><? echo getCartItemsCount(); ?></span></a></li>
-                            <li><a href="<? echo HOST; ?>settings"><span class="glyphicon glyphicon-cog"></span> Ustawienia</a></li>
-                            <li><a href="<? echo HOST; ?>transactions"><span class="glyphicon glyphicon-bookmark"></span> Moje zakupy</a></li>
-                            <li><a href="<? echo HOST; ?>logout">Wyloguj</a></li>
-                            <? } ?>
+                            <?php } else { ?>
+                            <li><a href="<?php echo HOST; ?>cart"><span class="glyphicon glyphicon-shopping-cart"></span> Koszyk <span class="badge"><?php echo getCartItemsCount(); ?></span></a></li>
+                            <li><a href="<?php echo HOST; ?>settings"><span class="glyphicon glyphicon-cog"></span> Ustawienia</a></li>
+                            <li><a href="<?php echo HOST; ?>transactions"><span class="glyphicon glyphicon-bookmark"></span> Moje zakupy</a></li>
+                            <li><a href="<?php echo HOST; ?>logout">Wyloguj</a></li>
+                            <?php } ?>
                         </ul>
                     </div>
                     <!-- /.navbar-collapse -->

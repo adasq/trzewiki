@@ -18,7 +18,7 @@ $(document).ready(function() {
                     $('#alert_login_failed').show();
                     $('#login_form').show();
                 } else {
-                    window.location.href = "http://" + data;
+                    window.location.href = data;
                 }
             }
         });

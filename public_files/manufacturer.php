@@ -7,7 +7,11 @@ if (isset($_GET['manufacturer_id'])) {
     $manufacturer_rec = Manufacturer::finder()->findByPK($_GET['manufacturer_id']);
 
     if ($manufacturer_rec !== null) {
-        $product_rec = Product::finder()->findAllByManufacturerID($_GET['manufacturer_id'], $_GET['sex']);
+        $order = "ASC";
+        if (isset($_POST['order'])) {
+            $order = $_POST['order'];
+        }
+        $product_rec = Product::finder()->findAllByManufacturerID($_GET['manufacturer_id'], $_GET['sex'], $order);
     } else {
         $product_rec = NULL;
     }
@@ -93,15 +97,15 @@ function renderPrices($product_id, $status) {
         <h2 class="page-header">
             Produkty marki <?php echo $manufacturer_rec->name; ?>
         </h2>
-        <form>
+        <form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="POST" role="form">
             <div class="input-group form-group">
                 <span class="input-group-addon">Sortuj według</span>
-                <select class="form-control">
-                    <option value="1">Cena (rosnąco)</option>
-                    <option value="2">Cena (malejąco)</option>
+                <select class="form-control" name="order">
+                    <option value="asc"<?php if (isset($_POST['order']) && isset($_POST['order']) == 'asc') echo ' selected'; ?>>Cena (rosnąco)</option>
+                    <option value="desc"<?php if (isset($_POST['order']) && isset($_POST['order']) == 'desc') echo ' selected'; ?>>Cena (malejąco)</option>
                 </select>
                 <div class="input-group-btn">
-                    <button class="btn btn-primary">Sortuj</button>
+                    <button class="btn btn-primary" type="submit" name="sort">Sortuj</button>
                 </div>
             </div>
         </form>

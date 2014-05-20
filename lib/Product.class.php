@@ -50,8 +50,8 @@ class Product extends Base {
         return new self ();
     }
 
-    public function findAllByManufacturerID($manufacturer_id, $sex) {
-        return parent::findBySql("SELECT * FROM products p JOIN items i ON p.product_id = i.product_id AND i.deleted = 0 JOIN sizes s ON s.size_id = i.size_id AND s.sex = :sex AND s.deleted = 0 WHERE p.manufacturer_id = :manufacturer_id AND p.deleted = 0 GROUP BY p.product_id ORDER BY COALESCE(i.price2, i.price) ASC", array(":manufacturer_id" => $manufacturer_id, ":sex" => $sex));
+    public function findAllByManufacturerID($manufacturer_id, $sex, $order = 'ASC') {
+        return parent::findBySql("SELECT * FROM products p JOIN items i ON p.product_id = i.product_id AND i.deleted = 0 JOIN sizes s ON s.size_id = i.size_id AND s.sex = :sex AND s.deleted = 0 WHERE p.manufacturer_id = :manufacturer_id AND p.deleted = 0 GROUP BY p.product_id ORDER BY COALESCE(i.price2, i.price) " .$order, array(":manufacturer_id" => $manufacturer_id, ":sex" => $sex));
     }
 
     public function findAllByName($name) {
