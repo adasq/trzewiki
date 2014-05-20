@@ -4,6 +4,7 @@ include('../lib/init.php');
 include(LIB_DIR.'Alert.class.php');
 include(LIB_DIR.'Product.class.php');
 include(LIB_DIR.'Item.class.php');
+include(LIB_DIR.'Validator.class.php');
 include(LIB_DIR.'Manufacturer.class.php');
 include(LIB_DIR.'Size.class.php');
 
@@ -69,14 +70,25 @@ function neww(){
 	$product = new Product();
 	$products= $product->getProducts();
 
+		$manufacturer = new Manufacturer();
+		$manufacturers= $manufacturer->getManufacturers();
+
 	$size= new Size();  
 	$sizes= $size->getSizes();
+
+	foreach ($sizes as $size) {		
+		foreach ($manufacturers as $manufacturer) {
+			if($size->manufacturer_id === $manufacturer->manufacturer_id){
+				$size->manufacturer =  $manufacturer->name;
+			}
+		}
+	}
    	
    	$item= new Item();  
 	
 			if( isset($_POST["item_id"]) ){
 			
-					$item->setData($_POST);	
+					$item->setData($_POST);						
 					$item->item_id=null;
 					$item->deleted=0;		 
 					$item->save();
@@ -87,10 +99,11 @@ function neww(){
 
 
 			}else{
+
 				 
 			}
 			
-			$template->assign('item', $item);
+			$template->assign('item', new Item());
 			$template->assign('products', $products);
 			$template->assign('sizes', $sizes);
 			$template->assign('CONTENT','admin/item');
@@ -122,7 +135,6 @@ function home(){
 			if($value->product_id === $pid){
 				$items2[] = $value;
 			}
-			//$items2[] = 
 		}
 
 	}
@@ -136,6 +148,43 @@ function home(){
 //=========================================================================================
 	global $template;
 	$template->assign("current", "items");
+
+	if(isset($_POST["price"])){
+		$price = $_POST["price"];
+		$price2 = $_POST["price2"];
+		
+		$price = Validator::parseNumber($price);
+		$price2 = Validator::parseNumber($price2);
+
+
+		if(!$price){
+			$template->assign('alert', new Alert("danger", "Dziwna cena. Kliknij <a href=\"".$template->getConfigVariable('BASE_URL')."/admin/items\">tutaj</a>,
+						 aby przejść do działu 'Buty'"));
+			$template->assign('CONTENT','admin/item');
+			$template->assign('PAGE_TITLE','admin');
+			$template->display('admin_template.tpl');
+			return;
+		}else{
+			if($_POST["price2"] == ""){
+				$price2 = 'null';
+			}else{
+				if(!$price2){
+					$template->assign('alert', new Alert("danger", "Dziwna cena. Kliknij <a href=\"".$template->getConfigVariable('BASE_URL')."/admin/items\">tutaj</a>,
+								 aby przejść do działu 'Buty'"));
+					$template->assign('CONTENT','admin/item');
+					$template->assign('PAGE_TITLE','admin');
+					$template->display('admin_template.tpl');
+					return;
+				}
+			}
+
+		}
+echo $price.' # '.$price2;
+		$_POST["price2"] = $price2;
+		$_POST["price"] = $price;
+	}
+
+
 	switch($_GET['action']){
 	case "edit":
 		edit();

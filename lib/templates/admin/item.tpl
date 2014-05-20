@@ -32,12 +32,14 @@
 <input type="hidden" name="item_id" value="{$item->item_id}">
   
  
-<!--   <div class="form-group">
+   <div class="form-group">
     <label>Rozmiar:</label>
 <select class="form-control"  value="{$item->size_id}" name="size_id" >
-  {foreach $sizes as $size}  
-      <option  {if $size->size_id eq $item->size_id} selected {/if}    value="{$size->size_id}">us: {$size->us}/uk: {$size->uk}</option>
-    
+  {foreach $sizes as $size}       
+  <option  {if $size->size_id eq $item->size_id} selected {/if}    value="{$size->size_id}">
+        ({$size->manufacturer}) us: {$size->us} /uk: {$size->uk} /cm: {$size->cm} /euro: {$size->euro}
+      </option>   
+
   {/foreach}
 </select>
   </div>
@@ -48,7 +50,7 @@
     <option  {if $product->product_id eq $item->product_id} selected {/if} value="{$product->product_id}">{$product->name}</option>
   {/foreach}
 </select>
-  </div> -->
+  </div> 
 
    <div class="form-group">
     <label>price</label>

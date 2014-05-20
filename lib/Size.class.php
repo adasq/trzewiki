@@ -26,6 +26,8 @@ class Size extends Base {
     public $sex;
     public $deleted;
 
+    public $manufacturer = null;
+
     public function getSizes() {
 
         return $this->get();

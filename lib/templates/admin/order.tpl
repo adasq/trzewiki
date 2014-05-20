@@ -115,7 +115,10 @@
 </div>
  </div> </div>
 {else}
-Zamówienie zostało pomyślnie zrealizowane
+Zamówienie zostało pomyślnie zrealizowane. 
+  <form method="GET" action="{#BASE_URL#}/admin/orders/vat/{$transaction->transaction_id}">  
+    <button type="submit " class="btn btn-success">Generuj fakturę</button>
+  </form>
 {/if}
 
 
