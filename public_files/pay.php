@@ -28,7 +28,7 @@ if (isset($_SESSION['customer_id'])) {
             $transaction_rec->payment_method = $_POST['payment_method'];
             $transaction_rec->status = Transaction::STATUS_IN_PROGRESS;
             $transaction_rec->start_date = date('Y-m-d H:i:s');
-            $transaction_rec->address = $_POST['first_name'] . ' ' . $_POST['last_name'] . ', ' . $_POST['street'] . ', ' . $_POST['zip'] . ' ' . $_POST['city'];
+            $transaction_rec->address = $_POST['first_name'] . ' ' . $_POST['last_name'] . ', ' . $_POST['street'] . ', ' . $_POST['zip_code'] . ' ' . $_POST['city'];
             $transaction_rec->saveRecord();
 
             $cart_rec = Cart::finder()->findCartByStatus($_SESSION['customer_id'], Cart::STATUS_NEW);

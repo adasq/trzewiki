@@ -6,7 +6,7 @@ function showAlert($mode, $text) {
 }
 
 function login($login, $password) {
-    $customer_rec = Customer::finder()->find("login = :login AND deleted = 0", array(":login" => $login));
+    $customer_rec = Customer::finder()->find("login = :login AND deleted = 0 AND status = 'ACTIVE'", array(":login" => $login));
     if ($customer_rec != null) {
         $password = hash('sha256', $password . $customer_rec->salt);
     } else {
