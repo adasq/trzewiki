@@ -13,7 +13,7 @@ if ($_SERVER['HTTP_HOST'] == 'localhost') {
 define('GATE', 'customer');
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
-define('DB_PASSWORD', '');
+define('DB_PASSWORD', 'root');
 define('DB_NAME', 'szmitas_trzewiki');
 define('DB_CHARSET', 'utf8');
 define('DB_COLLATE', 'utf8_polish_ci');

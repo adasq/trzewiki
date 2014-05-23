@@ -23,6 +23,10 @@ class Dict {
         Transaction::STATUS_FINISHED => 'zakończona',
         Transaction::STATUS_ABORTED => 'anulowana'
     );
+    static $ReceiptTypeArray = array(
+        Transaction::RECEIPT_TYPE_BILL => 'rachunek',
+        Transaction::RECEIPT_TYPE_INVOICE => 'faktura'
+    );
 
     static function getValue($key, $array) {
         return self::${$array}[$key];

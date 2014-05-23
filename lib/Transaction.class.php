@@ -12,6 +12,8 @@ class Transaction extends Base {
         "cart_id" => "int",
         "payment_method" => "string",
         "status" => "string",
+        "tkey" => "string",
+        "receipt_type" => "string",
         "address" => "string",
         "start_date" => "string",
         "end_date" => "string",
@@ -21,6 +23,8 @@ class Transaction extends Base {
     public $cart_id;
     public $payment_method;
     public $status;
+    public $tkey;
+    public $receipt_type;
     public $address;
     public $start_date;
     public $end_date;
@@ -29,27 +33,32 @@ class Transaction extends Base {
     const STATUS_IN_PROGRESS = 'in_progress';
     const STATUS_FINISHED = 'finished';
     const STATUS_ABORTED = 'aborted';
+    // RECEIPT_TYPE
+    const RECEIPT_TYPE_BILL = 'bill';
+    const RECEIPT_TYPE_INVOICE = 'invoice';
+    // PAYMENT_METHOD
+    const PAYMENT_METHOD_ONLINE = 'online';
+    const PAYMENT_METHOD_STANDARD = 'standard';
 
     public function __construct($obj = null) {
         parent::__construct($obj);
     }
 
     public function getTransactions() {
-       
+
         $transactions = $this->get();
         foreach ($transactions as $key => $value) {
             $transactions[$key]->start_date = formatDate($transactions[$key]->start_date);
         }
 
 
-        return  $transactions;
+        return $transactions;
     }
 
-    public function getTransactionById($id){
+    public function getTransactionById($id) {
 
-       return $this->getById($id);
+        return $this->getById($id);
     }
-
 
     /*     * **** Z POZDROWIENIAMI DLA ADAMA ***** */
 
