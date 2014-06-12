@@ -116,7 +116,7 @@ function remove(){
 				$_POST["deleted"]= intval($_POST["deleted"]);
 				if($_POST["deleted"] === 1 || $_POST["deleted"] === 0){
 				}else{
-					echo "ptaszek lub jego brak, innej mozliwosci niema!";		
+					echo "ptaszek lub jego brak, innej mozliwosci nie ma!";		
 					return;
 				}
 			}	

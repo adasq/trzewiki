@@ -53,7 +53,7 @@
   </div> 
 
    <div class="form-group">
-    <label>price</label>
+    <label>price</label> 
     <input  value="{$item->price}" name="price" type="text" class="form-control" placeholder="price">
   </div>
     <div class="form-group">

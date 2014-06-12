@@ -179,10 +179,51 @@ function home(){
 			}
 
 		}
-echo $price.' # '.$price2;
+
 		$_POST["price2"] = $price2;
 		$_POST["price"] = $price;
 	}
+
+
+// głęboka walidacja!!!!!!! ==================================================
+	if(sizeof($_POST) > 0){
+		
+		if(isset($_POST["item_id"]) && isset($_POST["price"]) && isset($_POST["price2"]) && isset($_POST["product_id"]) && isset($_POST["size_id"]) ){
+			 //deleted!
+			if(isset($_POST["deleted"])){
+				$_POST["deleted"]= intval($_POST["deleted"]);
+				if($_POST["deleted"] === 1 || $_POST["deleted"] === 0){
+				}else{
+					echo "ptaszek lub jego brak, innej mozliwosci nie ma!";		
+					return;
+				}
+			}			 
+			 $_POST["size_id"]= intval($_POST["size_id"]);
+			 $_POST["item_id"]= intval($_POST["item_id"]);			 
+			 $_POST["price"]= intval($_POST["price"]);
+			 $_POST["price2"]= (intval($_POST["price2"]) === 0)?'NULL':intval($_POST["price2"]);
+			 $_POST["product_id"]= intval($_POST["product_id"]); 
+
+					$product = new Product();
+					$product= $product->getProductById($_POST["product_id"]);
+					$size= new Size();  
+					$size= $size->getSizeById($_POST["size_id"]);
+				if(!$product || !$size){
+					return;
+				}		
+			if($_POST["price"] > 0) {				
+			}else{				
+				return;
+			}
+
+		}else{
+			echo ":(";
+			return;
+		}		
+	}
+// głęboka walidacja!!!!!!! ==================================================
+
+
 
 
 	switch($_GET['action']){
