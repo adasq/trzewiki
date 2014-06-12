@@ -22,7 +22,7 @@
     <input  value="{$customer->login}" name="login" type="text" class="form-control" placeholder="">
   </div>
 
-  <div class="form-group">
+  <div class="form-group"> 
     <label>Hasło:</label>
     <input value="{$customer->password}" name="password"  type="password" class="form-control" placeholder="">
   </div>
