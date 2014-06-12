@@ -108,6 +108,32 @@ function remove(){
 //=======================================================================================================
 	global $template;
 	$template->assign("current", "types");
+	// głęboka walidacja!!!!!!! ==================================================
+	if(sizeof($_POST) > 0){		
+		if(isset($_POST["type_name"])){
+			 //deleted!			
+			if(isset($_POST["deleted"])){
+				$_POST["deleted"]= intval($_POST["deleted"]);
+				if($_POST["deleted"] === 1 || $_POST["deleted"] === 0){
+				}else{
+					echo "ptaszek lub jego brak, innej mozliwosci niema!";		
+					return;
+				}
+			}	
+			if(strlen($_POST["type_name"]) > 0){
+
+			}else{
+				echo "nazwe ustaw";
+				return;
+			}
+			$_POST["type_id"]= intval($_POST["type_id"]);
+		}else{
+			echo ":(";
+			return;
+		}		
+	}
+// głęboka walidacja!!!!!!! ==================================================
+
 	switch($_GET['action']){
 	case "edit":
 		edit();

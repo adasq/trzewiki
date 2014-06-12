@@ -76,7 +76,7 @@ function home(){
 // głęboka walidacja!!!!!!! ==================================================
 	if(sizeof($_POST) > 0){		
 		if(isset($_POST["content_value"]) && isset($_POST["content_key"])){
-			 //deleted!
+			 //deleted!			
 			if(isset($_POST["deleted"])){
 				$_POST["deleted"]= intval($_POST["deleted"]);
 				if($_POST["deleted"] === 1 || $_POST["deleted"] === 0){
@@ -91,6 +91,7 @@ function home(){
 				echo "Oba pola wymagane";
 				return;
 			}
+			$_POST["content_id"]= intval($_POST["content_id"]);
 		}else{
 			echo ":(";
 			return;
