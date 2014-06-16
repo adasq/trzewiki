@@ -7,11 +7,13 @@ if ($_SERVER['HTTP_HOST'] == 'localhost') {
     ini_set('display_errors', 1);
     define('DB_USER', 'root');
     define('DB_PASSWORD', 'root');
+    define('HOST', 'http://localhost/trzewiki/');
 } else {
     error_reporting(0);
     ini_set('display_errors', 0);
     define('DB_USER', 'szmitas_trzewiki');
     define('DB_PASSWORD', 'trzewiki123');
+    define('HOST', 'http://www.trzewiki.ubuntu-pomoc.org/');
 }
 
 define('GATE', 'customer');
@@ -20,7 +22,6 @@ define('DB_NAME', 'szmitas_trzewiki');
 define('DB_CHARSET', 'utf8');
 define('DB_COLLATE', 'utf8_polish_ci');
 
-define('HOST', 'http://localhost/trzewiki/');
 define('IMAGES_PATH', HOST . 'public_files/images/products/');
 define('THEME_PATH', HOST . 'public_files/theme/images/');
 define('JS_PATH', HOST . 'public_files/js/');
