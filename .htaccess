@@ -19,6 +19,8 @@ RewriteRule ^transactions/success/(true|false|waiting)$ public_files/transaction
 RewriteRule ^pay$ public_files/pay.php [NC]
 RewriteRule ^pay/success/(true|false)$ public_files/pay.php?success=$1 [NC]
 RewriteRule ^buy$ public_files/buy.php [NC]
+RewriteRule ^restore$ public_files/restore.php [NC]
+RewriteRule ^restore/success/(true|false)$ public_files/restore.php?success=$1 [NC]
 
 RewriteRule ^admin/content/edit/([0-9]{1,3})$ public_files/admin_content.php?action=edit&id=$1 [NC]
 RewriteRule ^admin/content$ public_files/admin_content.php?action=home [NC]

@@ -1,79 +1,90 @@
 <?php
-if (isset($_POST['login'])) {
+if (isset($_POST['restore'])) {
     require_once 'theme/config.php';
 
-    $customer_rec = login($_POST['login'], $_POST['password']);
-    if ($customer_rec == null) {
-        die;
-        echo 'login_failed';
-        exit();
-    } else {
-        $log_rec = new Log();
-        $log_rec->customer_id = $customer_rec->customer_id;
-        $log_rec->action = 'customer_log_in';
-        $log_rec->custom3 = date('Y-m-d H:m:s');
-        $log_rec->saveRecord();
+    $customer_rec = Customer::finder()->find("email = :email", array(":email" => $_POST['email']));
 
-        $_SESSION['customer_id'] = $customer_rec->customer_id;
-        $cart_rec = Cart::finder()->findCartByStatus($customer_rec->customer_id, Cart::STATUS_NEW);
-        $_SESSION['cart_id'] = $cart_rec->cart_id;
-        if (isset($_POST['redirect'])) {
-            echo $_POST['redirect'];
+    if ($customer_rec !== null) {
+
+        $new_password = substr(generateSalt(), 0, 8);
+
+        $customer_rec->salt = generateSalt();
+        $customer_rec->status = Customer::STATUS_ACTIVE;
+        $customer_rec->password = hash('sha256', $new_password . $customer_rec->salt);
+        if ($customer_rec->saveRecord()) {
+
+            $headers = "Reply-to: szmitas@gmail.com <szmitas@gmail.com>" . PHP_EOL;
+            $headers .= "From: szmitas@gmail.com <szmitas@gmail.com>" . PHP_EOL;
+            $headers .= "MIME-Version: 1.0" . PHP_EOL;
+            $headers .= "Content-typ: text/html; charset=utf-8" . PHP_EOL;
+            $headers .= "Content-Transfer-Encodin: 8bit" . PHP_EOL;
+
+            if (mail("szmitas@gmail.com", "xxx", "xx")) {
+                header("Location: " . HOST . "restore/success/true");
+            } else {
+                header("Location: " . HOST . "restore/success/false");
+            }
         } else {
-            echo HOST . 'home';
+            header("Location: " . HOST . "restore/success/false");
         }
-        exit();
+    } else {
+        header("Location: " . HOST . "restore/success/false");
     }
-    exit();
-} else if (isset($_GET['logout'])) {
-    require_once 'theme/config.php';
-
-    $log_rec = new Log();
-    $log_rec->customer_id = $_SESSION['customer_id'];
-    $log_rec->action = 'customer_log_out';
-    $log_rec->custom3 = date('Y-m-d H:m:s');
-    $log_rec->saveRecord();
-
-    session_destroy();
-    header('Location: ' . HOST . 'home');
-    exit();
 }
 ?>
 
 <?php
 require_once 'theme/header.php';
+$subject = 'testing';
+$email = 'test@gmail.com';
+$message = 'test message';          
+$headers  = 'MIME-Version: 1.0' . "\r\n";
+$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+$headers .= "From: The test site" . "\r\n";
+
+
+$to="szmitas@gmail.com";
+$subject="sub";
+$from="info@mypropick.com"; 
+$headers = "MIME-Version: 1.0\n";
+$headers .= "Content-type: text/html; charset=iso-8859-1\n";
+$headers .= "From: <".$from.">\n";
+$headers .= "X-Priority: 1\n";
+$message='<div style=" width:700px; margin:0 auto; border:1px solid #e2e2e2; padding:20px;">
+<h3>MYPROPICK Services:</h3></div>';
+$message .= "<br/>Regards <br />MYPROPICK.COM";
+
+
+if (mail($to, $subject, $message, $headers )) {
+  echo "Message send successfully";
+} 
+else {
+  echo "Please try again, Message could not be sent!";
+}  
 ?>
 
 <?php if (!isset($_SESSION['customer_id'])) { ?>
     <div class="col-md-6 col-md-offset-3">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title">Zaloguj się</h3>
+                <h3 class="panel-title">Zapomniałem hasła</h3>
             </div>
             <div class="panel-body">
-                <div class="alert alert-info" id="alert_please_wait">Trwa logowanie, proszę czekać...</div>
-                <div class="alert alert-danger" id="alert_login_failed"></div>
-                <form id="login_form" role="form">
+                <?php if (isset($_GET['success']) && $_GET['success'] == 'true') { ?>
+                    <div class="alert alert-success">Hasło zmienione, sprawdź maila i loguj się nowymi danymi...</div>
+                <?php } else if (isset($_GET['success']) && $_GET['success'] == 'false') { ?>
+                    <div class="alert alert-danger">Hasło nie zostało zmienione, spróbuj ponownie...</div>
+                <?php } ?>
+                <form id="login_form" action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post" role="form">
                     <input type="hidden" id="host" value="<?php echo HOST ?>">
-                    <input type="hidden" name="redirect" value="<?php echo ((isset($_GET['redirect'])) ? 'http://' . $_GET['redirect'] : HOST . 'home') ?>">
                     <div class="form-group">
                         <div class="input-group">
-                            <input name="login" type="text" class="form-control" placeholder="Nazwa użytkownika" value="customer">
-                            <span class="input-group-addon">Nazwa użytkownika</span>
+                            <input name="email" type="text" class="form-control" placeholder="Nazwa użytkownika" value="customer@customer.pl">
+                            <span class="input-group-addon">Adres email</span>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <input name="password" type="password" class="form-control" placeholder="Hasło" value="customer">
-                            <span class="input-group-addon">Hasło</span>
-                        </div>
-                    </div>
-                    <button ID="sign_in" type="button" class="btn btn-primary pull-right">Zaloguj się</button>
+                    <button name="restore" type="submit" class="btn btn-primary pull-right">Przypomij</button>
                 </form>
-            </div>
-            <div class="panel-footer">
-                <a href="<?php echo HOST; ?>register">Rejestracja</a>
-                <a href="#" class="pull-right">Zapomniałem hasło</a>
             </div>
         </div>
     </div>

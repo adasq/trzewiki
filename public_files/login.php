@@ -73,7 +73,7 @@ require_once 'theme/header.php';
             </div>
             <div class="panel-footer">
                 <a href="<?php echo HOST; ?>register">Rejestracja</a>
-                <a href="#" class="pull-right">Zapomniałem hasło</a>
+                <a href="<?php echo HOST; ?>restore" class="pull-right">Zapomniałem hasło</a>
             </div>
         </div>
     </div>

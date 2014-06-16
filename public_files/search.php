@@ -5,7 +5,11 @@ require_once 'theme/header.php';
 <?php
 if (isset($_GET['phrase'])) {
     if (strlen($_GET['phrase']) > 3) {
-        $product_rec = Product::finder()->findAllByName($_GET['phrase']);
+        $order = "ASC";
+        if (isset($_POST['order'])) {
+            $order = $_POST['order'];
+        }
+        $product_rec = Product::finder()->findAllByName($_GET['phrase'], $order);
         $to_short = false;
     } else {
         $product_rec = null;
@@ -93,15 +97,15 @@ function renderPrices($product_id, $status) {
         <h2 class="page-header">
             Wyniki wyszukiwania dla frazy <i><?php echo $_GET['phrase']; ?></i>
         </h2>
-        <form>
+        <form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="POST" role="form">
             <div class="input-group form-group">
                 <span class="input-group-addon">Sortuj według</span>
-                <select class="form-control">
-                    <option value="1">Cena (rosnąco)</option>
-                    <option value="2">Cena (malejąco)</option>
+                <select class="form-control" name="order">
+                    <option value="asc"<?php if (isset($_POST['order']) && isset($_POST['order']) == 'asc') echo ' selected'; ?>>Cena (rosnąco)</option>
+                    <option value="desc"<?php if (isset($_POST['order']) && isset($_POST['order']) == 'desc') echo ' selected'; ?>>Cena (malejąco)</option>
                 </select>
                 <div class="input-group-btn">
-                    <button class="btn btn-primary">Sortuj</button>
+                    <button class="btn btn-primary" type="submit" name="sort">Sortuj</button>
                 </div>
             </div>
         </form>
@@ -113,7 +117,7 @@ function renderPrices($product_id, $status) {
 <?php
 require_once 'theme/footer.php';
 ?>
-<link rel="stylesheet" href="http://localhost/trzewiki/public_files/js/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
-<script src="http://localhost/trzewiki/public_files/js/product.js" type="text/javascript"></script>
-<script src="http://localhost/trzewiki/public_files/js/fancybox/jquery.fancybox.pack.js?v=2.1.5" type="text/javascript" ></script>
+<link rel="stylesheet" href="<?php echo JS_PATH; ?>fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script src="<?php echo JS_PATH; ?>product.js" type="text/javascript"></script>
+<script src="<?php echo JS_PATH; ?>fancybox/jquery.fancybox.pack.js?v=2.1.5" type="text/javascript" ></script>
 

@@ -54,8 +54,6 @@ function getCartItemsCount() {
                             <?php if(!isset($_SESSION['customer_id'])) { ?>
                             <li><a href="<?php echo HOST; ?>login" title="Zaloguj się">Zaloguj się</a></li>
                             <li><a href="<?php echo HOST; ?>register" title="Zarejestruj się">Rejestracja</a></li>
-                            <li><a href="#">Kontakt</a></li>
-                            <li><a href="#">Cennik</a></li>
                             <?php } else { ?>
                             <li><a href="<?php echo HOST; ?>cart"><span class="glyphicon glyphicon-shopping-cart"></span> Koszyk <span class="badge"><?php echo getCartItemsCount(); ?></span></a></li>
                             <li><a href="<?php echo HOST; ?>settings"><span class="glyphicon glyphicon-cog"></span> Ustawienia</a></li>
