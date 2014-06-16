@@ -13,13 +13,13 @@ if (isset($_POST['restore'])) {
         $customer_rec->password = hash('sha256', $new_password . $customer_rec->salt);
         if ($customer_rec->saveRecord()) {
 
-            $headers = "Reply-to: szmitas@gmail.com <szmitas@gmail.com>" . PHP_EOL;
-            $headers .= "From: szmitas@gmail.com <szmitas@gmail.com>" . PHP_EOL;
+            $headers = "Reply-to: kontakt@trzwiki.pl <kontakt@trzwiki.pl>" . PHP_EOL;
+            $headers .= "From: kontakt@trzwiki.pl <kontakt@trzwiki.pl>" . PHP_EOL;
             $headers .= "MIME-Version: 1.0" . PHP_EOL;
             $headers .= "Content-typ: text/html; charset=utf-8" . PHP_EOL;
             $headers .= "Content-Transfer-Encodin: 8bit" . PHP_EOL;
 
-            if (mail("szmitas@gmail.com", "xxx", "xx")) {
+            if (mail($customer_rec->email, "Nowe haslo", $customer_rec->password, $headers)) {
                 header("Location: " . HOST . "restore/success/true");
             } else {
                 header("Location: " . HOST . "restore/success/false");
@@ -35,32 +35,6 @@ if (isset($_POST['restore'])) {
 
 <?php
 require_once 'theme/header.php';
-$subject = 'testing';
-$email = 'test@gmail.com';
-$message = 'test message';          
-$headers  = 'MIME-Version: 1.0' . "\r\n";
-$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-$headers .= "From: The test site" . "\r\n";
-
-
-$to="szmitas@gmail.com";
-$subject="sub";
-$from="info@mypropick.com"; 
-$headers = "MIME-Version: 1.0\n";
-$headers .= "Content-type: text/html; charset=iso-8859-1\n";
-$headers .= "From: <".$from.">\n";
-$headers .= "X-Priority: 1\n";
-$message='<div style=" width:700px; margin:0 auto; border:1px solid #e2e2e2; padding:20px;">
-<h3>MYPROPICK Services:</h3></div>';
-$message .= "<br/>Regards <br />MYPROPICK.COM";
-
-
-if (mail($to, $subject, $message, $headers )) {
-  echo "Message send successfully";
-} 
-else {
-  echo "Please try again, Message could not be sent!";
-}  
 ?>
 
 <?php if (!isset($_SESSION['customer_id'])) { ?>
