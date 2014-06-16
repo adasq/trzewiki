@@ -102,7 +102,7 @@ if(isset($_GET['manu'])){
 		//echo $manufacturer2->toString();
 		$template->assign('currentManufacturer', $manufacturer2);
 	}else{
-		echo 'Brak producenta';
+	
 	}	
 }else{
 	$template->assign('currentManufacturer', null);
@@ -140,6 +140,7 @@ if(isset($_GET['manu'])){
 				if(!$manufacturer){
 					return;
 				}
+				
 
 			if( !($_POST["sex"] === "male" || $_POST["sex"] === "female")) {
 				echo "szkoda ze w podanym zakresie nie ma Twojej plci... :(";		

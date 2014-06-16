@@ -60,8 +60,7 @@ deleted -->
 
 
 <div class="row">
-
-{if $currentManufacturer}
+{if isset($currentManufacturer)}
 <div class="col-sm-6">
 
 <div class="panel panel-default">
@@ -126,8 +125,9 @@ deleted -->
 
 
 {else}
-
-
+<div class="col-sm-6">
+<h3> <small> ;'(</small></h3>
+</div>
 
  {/if}  
 
@@ -149,6 +149,6 @@ deleted -->
 
 <script>
 function test(){
-	$('.filter_form').attr("action", "http://localhost/trzewiki/admin/sizes/manufacturer/"+$('.filter_form select').val());
+	$('.filter_form').attr("action", "{#BASE_URL#}/admin/sizes/manufacturer/"+$('.filter_form select').val());
 }
 </script>

@@ -39,11 +39,9 @@
 
 <script>
 function test(){
-  $('.filter_form').attr("action", "http://localhost/trzewiki/admin/items/product/"+$('.product').val());
+  $('.filter_form').attr("action", "{#BASE_URL#}/admin/items/product/"+$('.product').val());
 }
 </script>
-
-
  
 
 <div class="row">
