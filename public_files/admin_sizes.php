@@ -52,7 +52,7 @@ global $template, $DB;
 
 	$manufacturer = new Manufacturer();
 	$manufacturers= $manufacturer->getManufacturers();
-  
+  	
 			$size= new Size();   
 	
 			if( isset($_POST["size_id"]) ){
@@ -102,7 +102,7 @@ if(isset($_GET['manu'])){
 		//echo $manufacturer2->toString();
 		$template->assign('currentManufacturer', $manufacturer2);
 	}else{
-		echo 'Brak producenta';
+	
 	}	
 }else{
 	$template->assign('currentManufacturer', null);
@@ -115,6 +115,48 @@ if(isset($_GET['manu'])){
 	global $template;
 	$template->assign("current", "sizes");
 
+// głęboka walidacja!!!!!!! ==================================================
+	if(sizeof($_POST) > 0){
+		
+		if(isset($_POST["size_id"]) && isset($_POST["us"]) && isset($_POST["uk"]) && isset($_POST["cm"]) && isset($_POST["euro"]) && isset($_POST["sex"])){
+			 //deleted!
+			if(isset($_POST["deleted"])){
+				$_POST["deleted"]= intval($_POST["deleted"]);
+				if($_POST["deleted"] === 1 || $_POST["deleted"] === 0){
+				}else{
+					echo "ptaszek lub jego brak, innej mozliwosci nie ma!";		
+					return;
+				}
+			}			 
+			 $_POST["size_id"]= intval($_POST["size_id"]);
+			 $_POST["manufacturer_id"]= intval($_POST["manufacturer_id"]);			 
+			 $_POST["us"]= intval($_POST["us"]);
+			 $_POST["uk"]= intval($_POST["uk"]);
+			 $_POST["cm"]= intval($_POST["cm"]);
+			 $_POST["euro"]= intval($_POST["euro"]);
+
+				$manufacturer = new Manufacturer();
+				$manufacturer= $manufacturer->getManufacturerById($_POST["manufacturer_id"]);
+				if(!$manufacturer){
+					return;
+				}
+				
+
+			if( !($_POST["sex"] === "male" || $_POST["sex"] === "female")) {
+				echo "szkoda ze w podanym zakresie nie ma Twojej plci... :(";		
+				return;
+			}
+			if($_POST["manufacturer_id"] > 0 && $_POST["us"] > 0 && $_POST["uk"] > 0 && $_POST["cm"] > 0 && $_POST["euro"] > 0) {				
+			}else{				
+				return;
+			}
+
+		}else{
+			echo ":(";
+			return;
+		}		
+	}
+// głęboka walidacja!!!!!!! ==================================================
 
 	switch($_GET['action']){
 	case "edit":

@@ -143,6 +143,48 @@ function home(){
 //=========================================================================================
 	global $template;
 	$template->assign("current", "products");
+
+
+//====================================================================================================================================================
+	if(sizeof($_POST) > 0){
+		//name product_no description manufacturer_id product_id
+		if(isset($_POST["name"]) && isset($_POST["product_no"]) && isset($_POST["description"]) && isset($_POST["manufacturer_id"]) && isset($_POST["product_id"]) ){
+			 //deleted!
+			if(isset($_POST["deleted"])){
+				$_POST["deleted"]= intval($_POST["deleted"]);
+				if($_POST["deleted"] === 1 || $_POST["deleted"] === 0){
+				}else{
+					echo "ptaszek lub jego brak, innej mozliwosci niema!";		
+					return;
+				}
+			}			 
+			 $_POST["manufacturer_id"]= intval($_POST["manufacturer_id"]);	
+			 $_POST["product_id"]= intval($_POST["product_id"]);			 
+			
+
+				$manufacturer = new Manufacturer();
+				$manufacturer= $manufacturer->getManufacturerById($_POST["manufacturer_id"]);
+				if(!$manufacturer){
+					echo "producent taki nie istnieje!";
+					return;
+				}
+
+		 
+			if(strlen($_POST["product_no"]) > 0 && strlen($_POST["name"]) > 0 && strlen($_POST["description"]) > 0){	
+			}else{				
+				return;
+			}
+
+
+		}else{
+			echo ":(";
+			return;
+		}		
+	}
+//====================================================================================================================================================
+
+
+
 	switch($_GET['action']){
 	case "edit":
 		edit();

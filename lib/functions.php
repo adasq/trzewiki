@@ -68,7 +68,6 @@ function authorize() {
 
 function getUser($withSmarty = true) {
     global $template, $DB;
-
     if (isset($_SESSION['access']) && isset($_SESSION['userId'])) {
 
         $user = new Admin();

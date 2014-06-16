@@ -76,6 +76,34 @@ function home(){
 //=======================================================================================================
 	global $template;
 	$template->assign("current", "manufacturers");
+
+// głęboka walidacja!!!!!!! ==================================================
+	if(sizeof($_POST) > 0){		
+		if(isset($_POST["manufacturer_id"]) && isset($_POST["name"])){
+			 //deleted!			
+			if(isset($_POST["deleted"])){
+				$_POST["deleted"]= intval($_POST["deleted"]);
+				if($_POST["deleted"] === 1 || $_POST["deleted"] === 0){
+				}else{
+					echo "ptaszek lub jego brak, innej mozliwosci nie ma!";		
+					return;
+				}
+			}	
+			if(strlen($_POST["name"]) > 0){
+
+			}else{
+				echo "nazwe ustaw";
+				return;
+			}
+			 
+		}else{
+			echo ":(";
+			return;
+		}		
+	}
+// głęboka walidacja!!!!!!! ==================================================
+
+
 	switch($_GET['action']){
 	case "edit":
 		edit();

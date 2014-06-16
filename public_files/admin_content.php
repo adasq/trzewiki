@@ -71,6 +71,35 @@ function home(){
 //=========================================================================================
 	global $template;
 	$template->assign("current", "content");
+
+
+// głęboka walidacja!!!!!!! ==================================================
+	if(sizeof($_POST) > 0){		
+		if(isset($_POST["content_value"]) && isset($_POST["content_key"])){
+			 //deleted!			
+			if(isset($_POST["deleted"])){
+				$_POST["deleted"]= intval($_POST["deleted"]);
+				if($_POST["deleted"] === 1 || $_POST["deleted"] === 0){
+				}else{
+					echo "ptaszek lub jego brak, innej mozliwosci nie ma!";		
+					return;
+				}
+			}	
+			if(strlen($_POST["content_value"]) > 0 && strlen($_POST["content_value"]) > 0){
+
+			}else{
+				echo "Oba pola wymagane";
+				return;
+			}
+			$_POST["content_id"]= intval($_POST["content_id"]);
+		}else{
+			echo ":(";
+			return;
+		}		
+	}
+// głęboka walidacja!!!!!!! ==================================================
+
+
 	switch($_GET['action']){
 	case "edit":
 		edit();
